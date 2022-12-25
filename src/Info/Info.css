@@ -1,0 +1,27 @@
+.info {
+    width: 30%;
+}
+
+
+.gainers {
+    padding: 2rem;
+    border: 1px solid lightgray;
+    border-top: none;
+    border-left: none;
+}
+
+.losers {
+    padding: 2rem;
+    border: 1px solid lightgray;
+    border-top: none;
+    border-left: none;
+}
+
+
+.coin_info_cont td {
+    text-align: end;
+    line-height: 12px;
+}
+.coin_info_num p {
+    margin-top: 15px;
+}
