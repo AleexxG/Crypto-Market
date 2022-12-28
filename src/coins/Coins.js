@@ -1,8 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import './Coins.css';
-import logo from '../img/btc.png';
 
 export default function Coins() {
+    const [coins, setCoins] = useState([]);
+
+    const fetchData = async () => {
+        const endpoint = new URL("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false");
+
+        const response = await fetch(endpoint);
+        return response.json();
+    }
+
+    useEffect(() => {
+        fetchData()
+            .then((res) => {
+                setCoins(res)
+            })
+    }, [])
+
+    const displayCoins = coins.map(coin => {
+        return (
+            <tr className="coin_cont" key={coin.id}>
+                <th className="coin_text" scope="row">
+                    <img alt="Coin Logo" src={coin.image}></img>
+                    <div className="crypto_text">
+                        <b className="coin_name">{coin.name}</b>
+                        <p className="coin_name_short">{coin.symbol}</p>
+                    </div>
+                </th>
+                <td className="coin_price">${coin.current_price}</td>
+                <td className="coin_change">{coin.price_change_percentage_24h}</td>
+                <td className="coin_mc">{coin.market_cap}</td>
+                <td className="coin_volume">${coin.volume}</td>
+                <td className="coin_supply">{coin.total_supply}</td>
+            </tr>
+        )
+    })
+
     return (
         <main className="main">
             <h3 className="main_title">Crypto prices <span>9999 assets</span> </h3>
@@ -20,48 +54,7 @@ export default function Coins() {
                 </thead>
 
                 <tbody className="coin_list">
-                    <tr className="coin_cont">
-                        <th className="coin_text" scope="row">
-                            <img alt="Coin Logo" src={logo}></img>
-                            <div className="crypto_text">
-                                <b className="coin_name">Bitcoin</b>
-                                <p className="coin_name_short">BTC</p>
-                            </div>
-                        </th>
-                        <td className="coin_price">$10,000.00</td>
-                        <td className="coin_change">3.35%</td>
-                        <td className="coin_mc">200.0B</td>
-                        <td className="coin_volume">$5.9B</td>
-                        <td className="coin_supply">3.2M</td>
-                    </tr>
-                    <tr className="coin_cont">
-                        <th className="coin_text" scope="row">
-                            <img alt="Coin Logo" src={logo}></img>
-                            <div className="crypto_text">
-                                <b className="coin_name">Bitcoin</b>
-                                <p className="coin_name_short">BTC</p>
-                            </div>
-                        </th>
-                        <td className="coin_price">$10,000.00</td>
-                        <td className="coin_change">3.35%</td>
-                        <td className="coin_mc">200.0B</td>
-                        <td className="coin_volume">$5.9B</td>
-                        <td className="coin_supply">3.2M</td>
-                    </tr>
-                    <tr className="coin_cont">
-                        <th className="coin_text" scope="row">
-                            <img alt="Coin Logo" src={logo}></img>
-                            <div className="crypto_text">
-                                <b className="coin_name">Bitcoin</b>
-                                <p className="coin_name_short">BTC</p>
-                            </div>
-                        </th>
-                        <td className="coin_price">$10,000.00</td>
-                        <td className="coin_change">3.35%</td>
-                        <td className="coin_mc">200.0B</td>
-                        <td className="coin_volume">$5.9B</td>
-                        <td className="coin_supply">3.2M</td>
-                    </tr>
+                    {displayCoins}
                 </tbody>
             </table>
         </main>

@@ -23,6 +23,58 @@ export default function Info() {
                                 <p className="coin_change">3.35%</p>
                             </td>
                         </tr>
+                        <tr className="coin_info_cont">
+                            <th className="coin_text" scope="row">
+                                <img alt="Coin Logo" src={logo}></img>
+                                <div className="crypto_text">
+                                    <b className="coin_name">Bitcoin</b>
+                                    <p className="coin_name_short">BTC</p>
+                                </div>
+                            </th>
+                            <td className="coin_info_num">
+                                <p className="coin_price">$10,000.00</p>
+                                <p className="coin_change">3.35%</p>
+                            </td>
+                        </tr>
+                        <tr className="coin_info_cont">
+                            <th className="coin_text" scope="row">
+                                <img alt="Coin Logo" src={logo}></img>
+                                <div className="crypto_text">
+                                    <b className="coin_name">Bitcoin</b>
+                                    <p className="coin_name_short">BTC</p>
+                                </div>
+                            </th>
+                            <td className="coin_info_num">
+                                <p className="coin_price">$10,000.00</p>
+                                <p className="coin_change">3.35%</p>
+                            </td>
+                        </tr>
+                        <tr className="coin_info_cont">
+                            <th className="coin_text" scope="row">
+                                <img alt="Coin Logo" src={logo}></img>
+                                <div className="crypto_text">
+                                    <b className="coin_name">Bitcoin</b>
+                                    <p className="coin_name_short">BTC</p>
+                                </div>
+                            </th>
+                            <td className="coin_info_num">
+                                <p className="coin_price">$10,000.00</p>
+                                <p className="coin_change">3.35%</p>
+                            </td>
+                        </tr>
+                        <tr className="coin_info_cont">
+                            <th className="coin_text" scope="row">
+                                <img alt="Coin Logo" src={logo}></img>
+                                <div className="crypto_text">
+                                    <b className="coin_name">Bitcoin</b>
+                                    <p className="coin_name_short">BTC</p>
+                                </div>
+                            </th>
+                            <td className="coin_info_num">
+                                <p className="coin_price">$10,000.00</p>
+                                <p className="coin_change">3.35%</p>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </aside>
@@ -32,6 +84,58 @@ export default function Info() {
 
                 <table className="table table-hover table-borderless">
                     <tbody className="coin_info">
+                        <tr className="coin_info_cont">
+                            <th className="coin_text" scope="row">
+                                <img alt="Coin Logo" src={logo}></img>
+                                <div className="crypto_text">
+                                    <b className="coin_name">Bitcoin</b>
+                                    <p className="coin_name_short">BTC</p>
+                                </div>
+                            </th>
+                            <td className="coin_info_num">
+                                <p className="coin_price">$10,000.00</p>
+                                <p className="coin_change">3.35%</p>
+                            </td>
+                        </tr>
+                        <tr className="coin_info_cont">
+                            <th className="coin_text" scope="row">
+                                <img alt="Coin Logo" src={logo}></img>
+                                <div className="crypto_text">
+                                    <b className="coin_name">Bitcoin</b>
+                                    <p className="coin_name_short">BTC</p>
+                                </div>
+                            </th>
+                            <td className="coin_info_num">
+                                <p className="coin_price">$10,000.00</p>
+                                <p className="coin_change">3.35%</p>
+                            </td>
+                        </tr>
+                        <tr className="coin_info_cont">
+                            <th className="coin_text" scope="row">
+                                <img alt="Coin Logo" src={logo}></img>
+                                <div className="crypto_text">
+                                    <b className="coin_name">Bitcoin</b>
+                                    <p className="coin_name_short">BTC</p>
+                                </div>
+                            </th>
+                            <td className="coin_info_num">
+                                <p className="coin_price">$10,000.00</p>
+                                <p className="coin_change">3.35%</p>
+                            </td>
+                        </tr>
+                        <tr className="coin_info_cont">
+                            <th className="coin_text" scope="row">
+                                <img alt="Coin Logo" src={logo}></img>
+                                <div className="crypto_text">
+                                    <b className="coin_name">Bitcoin</b>
+                                    <p className="coin_name_short">BTC</p>
+                                </div>
+                            </th>
+                            <td className="coin_info_num">
+                                <p className="coin_price">$10,000.00</p>
+                                <p className="coin_change">3.35%</p>
+                            </td>
+                        </tr>
                         <tr className="coin_info_cont">
                             <th className="coin_text" scope="row">
                                 <img alt="Coin Logo" src={logo}></img>

@@ -9,7 +9,7 @@ export default function Search() {
                 <div className="search_bar">
                     <input className="search_input" type="text" placeholder="Search for an asset"></input>
                     <button className="search_btn">
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i className="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </div>
             </div>
