@@ -4,18 +4,15 @@ import './Coins.css';
 export default function Coins() {
     const [coins, setCoins] = useState([]);
 
-    const fetchData = async () => {
-        const endpoint = new URL("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false");
-
-        const response = await fetch(endpoint);
-        return response.json();
-    }
-
     useEffect(() => {
-        fetchData()
-            .then((res) => {
-                setCoins(res)
-            })
+        (async () => {
+            const endpoint = new URL("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false");
+
+            const response = await fetch(endpoint);
+            const data = await response.json();
+
+            setCoins(data);
+        })();
     }, [])
 
     const displayCoins = coins.map(coin => {
@@ -31,7 +28,7 @@ export default function Coins() {
                 <td className="coin_price">${coin.current_price}</td>
                 <td className="coin_change">{coin.price_change_percentage_24h}</td>
                 <td className="coin_mc">{coin.market_cap}</td>
-                <td className="coin_volume">${coin.volume}</td>
+                <td className="coin_volume">${coin.total_volume}</td>
                 <td className="coin_supply">{coin.total_supply}</td>
             </tr>
         )
