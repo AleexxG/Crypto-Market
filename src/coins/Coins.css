@@ -1,12 +1,4 @@
 /* Title */
-
-.main {
-    width: 70%;
-    padding: 2rem;
-    border: 1px solid lightgray;
-    border-top: none;
-}
-
 .main_title span {
     font-size: 17px;
     font-weight: 400;
