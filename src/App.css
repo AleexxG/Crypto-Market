@@ -6,15 +6,3 @@
 .content {
     display: flex;
 }
-
-.main {
-    width: 70%;
-    padding: 2rem;
-    border: 1px solid lightgray;
-    border-top: none;
-}
-
-.info {
-    width: 30%;
-}
-
