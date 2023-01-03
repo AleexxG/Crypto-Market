@@ -20,24 +20,6 @@ export default function Info() {
         })();
     }, [])
 
-    const trendingCoins = coinsInfo.map(coin => {
-        return (
-            <tr className="coin_info_cont" key={coin.id}>
-                <th className="coin_text" scope="row">
-                    <img alt="Coin Logo" src={coin.image}></img>
-                    <div className="crypto_text">
-                        <b className="coin_name">{coin.name}</b>
-                        <p className="coin_name_short">{coin.symbol}</p>
-                    </div>
-                </th>
-                <td className="coin_info_num">
-                    <p className="coin_price">${coin.current_price}</p>
-                    <p className="coin_change">{coin.price_change_percentage_24h}</p>
-                </td>
-            </tr>
-        )
-    })
-
     coins.sort((a, b) => b.price_change_percentage_24h - a.price_change_percentage_24h);
     const gainers = coins.slice(0, 5);
     const topGainers = gainers.map(coin => {
@@ -51,8 +33,13 @@ export default function Info() {
                     </div>
                 </th>
                 <td className="coin_info_num">
-                    <p className="coin_price">${coin.current_price}</p>
-                    <p className="coin_change">{coin.price_change_percentage_24h}</p>
+                    <p className="coin_price">${(coin.current_price).toLocaleString(undefined, { minimumFractionDigits: 2 })}</p>
+                    {coin.price_change_percentage_24h < 0 ? (
+                        <p className="coin_change text-danger">{coin.price_change_percentage_24h.toFixed(2)} %</p>
+                        ) : (
+                            <p className="coin_change text-success">+{coin.price_change_percentage_24h.toFixed(2)} %</p>
+                        )
+                    }
                 </td>
             </tr>
         )
@@ -71,8 +58,36 @@ export default function Info() {
                     </div>
                 </th>
                 <td className="coin_info_num">
-                    <p className="coin_price">${coin.current_price}</p>
-                    <p className="coin_change">{coin.price_change_percentage_24h}</p>
+                    <p className="coin_price">${(coin.current_price).toLocaleString(undefined, { minimumFractionDigits: 2 })}</p>
+                    {coin.price_change_percentage_24h < 0 ? (
+                        <p className="coin_change text-danger">{coin.price_change_percentage_24h.toFixed(2)} %</p>
+                        ) : (
+                            <p className="coin_change text-success">+{coin.price_change_percentage_24h.toFixed(2)} %</p>
+                        )
+                    }
+                </td>
+            </tr>
+        )
+    })
+
+    const trendingCoins = coinsInfo.map(coin => {
+        return (
+            <tr className="coin_info_cont" key={coin.id}>
+                <th className="coin_text" scope="row">
+                    <img alt="Coin Logo" src={coin.image}></img>
+                    <div className="crypto_text">
+                        <b className="coin_name">{coin.name}</b>
+                        <p className="coin_name_short">{coin.symbol}</p>
+                    </div>
+                </th>
+                <td className="coin_info_num">
+                    <p className="coin_price">${(coin.current_price).toLocaleString(undefined, { minimumFractionDigits: 2 })}</p>
+                    {coin.price_change_percentage_24h < 0 ? (
+                        <p className="coin_change text-danger">{coin.price_change_percentage_24h.toFixed(2)} %</p>
+                        ) : (
+                            <p className="coin_change text-success">+{coin.price_change_percentage_24h.toFixed(2)} %</p>
+                        )
+                    }
                 </td>
             </tr>
         )

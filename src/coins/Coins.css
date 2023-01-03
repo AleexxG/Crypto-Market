@@ -15,6 +15,9 @@
 
 
 /* Parameters */
+.form-select {
+    width: 10%;
+}
 
 .parameters {
     color: gray;
@@ -50,8 +53,13 @@
 .coin_name_short {
     font-weight: 400;
     color: grey;
+    text-transform: uppercase;
 }
 
 .coin_cont td {
     padding-top: 30px;
+}
+
+.coin_change {
+    font-weight: 500;
 }
