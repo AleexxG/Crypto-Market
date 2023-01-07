@@ -1,7 +1,7 @@
 import React from "react";
 import './Search.css';
 
-export default function Search() {
+function Search() {
     return (
         <header className="header_cont">
             <div className="search_cont">
@@ -16,3 +16,5 @@ export default function Search() {
         </header>
     )
 }
+
+export default Search;

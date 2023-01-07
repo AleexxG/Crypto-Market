@@ -1,17 +1,13 @@
 import React from 'react';
 import './App.css';
 import Search from './search/Search';
-import Coins from './coins/Coins';
-import Info from  './Info/Info';
+import Coins from './Coins';
 
 function App() {
   return (
     <div className="App">
       <Search />
-      <div className="content">
-        <Coins />
-        <Info />
-      </div>
+      <Coins />
     </div>
   );
 }

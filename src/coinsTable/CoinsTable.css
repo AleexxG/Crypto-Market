@@ -1,6 +1,6 @@
 /* Title */
 
-.main {
+.section_table {
     width: 70%;
     padding: 2rem;
     border: 1px solid lightgray;
@@ -62,4 +62,22 @@
 
 .coin_change {
     font-weight: 500;
+}
+
+
+/* Pagination */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;   
+}
+
+.page-link {
+    border: none;
+    font-size: 16px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    color: black;
+    border-radius: 50%;
 }

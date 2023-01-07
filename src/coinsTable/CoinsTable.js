@@ -1,21 +1,16 @@
-import React, { useState, useEffect } from "react";
-import './Coins.css';
+import React, { useState } from "react";
+import './CoinsTable.css';
+import Pagination from "./Pagination";
 
-export default function Coins() {
-    const [coins, setCoins] = useState([]);
+function CoinsTable(props) {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [coinsPerPage] = useState(20);
 
-    useEffect(() => {
-        (async () => {
-            const endpoint = new URL('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=17&page=1&sparkline=false');
+    const indexOfLastCoin = currentPage * coinsPerPage;
+    const indexOfFirstCoin = indexOfLastCoin - coinsPerPage;
+    const currentCoins = props.coins.slice(indexOfFirstCoin, indexOfLastCoin);
 
-            const response = await fetch(endpoint);
-            const data = await response.json();
-
-            setCoins(data);
-        })();
-    }, [])
-
-    const displayCoins = coins.map(coin => {
+    const displayCoinsTable = currentCoins.map(coin => {
         return (
             <tr className="coin_cont" key={coin.id}>
                 <th className="coin_text" scope="row">
@@ -38,8 +33,10 @@ export default function Coins() {
         )
     })
 
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
     return (
-        <main className="main">
+        <section className="section_table">
             <h3 className="main_title">Crypto prices <span>9999 assets</span> </h3>
 
             <table className="table table-hover table-borderless mt-3">
@@ -54,9 +51,17 @@ export default function Coins() {
                 </thead>
 
                 <tbody className="coin_list">
-                    {displayCoins}
+                    {displayCoinsTable}
                 </tbody>
             </table>
-        </main>
+
+            <Pagination 
+                coinsPerPage={coinsPerPage}
+                totalCoins={props.coins.length}
+                paginate={paginate}
+            />
+        </section>
     )
 }
+
+export default CoinsTable;
