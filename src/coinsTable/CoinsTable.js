@@ -6,9 +6,11 @@ function CoinsTable(props) {
     const [currentPage, setCurrentPage] = useState(1);
     const [coinsPerPage] = useState(20);
 
+    const sortCoins = props.coins.sort((a, b) => a.market_cap_rank - b.market_cap_rank);
+
     const indexOfLastCoin = currentPage * coinsPerPage;
     const indexOfFirstCoin = indexOfLastCoin - coinsPerPage;
-    const currentCoins = props.coins.slice(indexOfFirstCoin, indexOfLastCoin);
+    const currentCoins = sortCoins.slice(indexOfFirstCoin, indexOfLastCoin);
 
     const displayCoinsTable = currentCoins.map(coin => {
         return (
