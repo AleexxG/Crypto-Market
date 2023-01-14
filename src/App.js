@@ -1,14 +1,16 @@
 import React from 'react';
 import './App.css';
-import Search from './search/Search';
-import Coins from './Coins';
+import { Route, Routes } from 'react-router-dom';
+import HomePage from './Pages/HomePage';
+import CoinPage from './Pages/CoinPage';
 
 function App() {
   return (
-    <div className="App">
-      <Search />
-      <Coins />
-    </div>
+    <Routes>
+      <Route path='/' element={<HomePage />} />
+      <Route path='/!' element={<HomePage />} />
+      <Route path='/coins' element={<CoinPage />} />
+    </Routes>
   );
 }
 
