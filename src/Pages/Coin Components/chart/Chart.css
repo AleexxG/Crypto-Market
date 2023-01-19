@@ -1,0 +1,11 @@
+.coin_name {
+    display: flex;
+    align-items: center;
+    width: 70%;
+    float: left;
+}
+
+.search_cont {
+    width: 30%;
+    float: right;
+}

@@ -1,0 +1,14 @@
+.title {
+    border-top: 1px solid lightgray;
+}
+
+.market_cont {
+    border: 1px solid lightgray;
+    border-left: none;
+    border-right: none;
+}
+
+.market_stats{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}

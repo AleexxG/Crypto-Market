@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Search from '../search/Search';
-import CoinsTable from '../coinsTable/CoinsTable';
-import Info from '../Info/Info';
+import Search from './Home Components/search/Search';
+import CoinsTable from './Home Components/coinsTable/CoinsTable';
+import Info from './Home Components/info/Info';
+import '../App.css';
 
 function HomePage() {
   const [coins, setCoins] = useState([]);
