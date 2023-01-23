@@ -22,7 +22,7 @@ function CoinsTable(props) {
                         <p className="coin_name_short">{coin.symbol}</p>
                     </div>
                 </th>
-                <td className="coin_price">${(coin.current_price).toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
+                <td className="coin_price">{props.symbol}{(coin.current_price).toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
                 {coin.price_change_percentage_24h < 0 ? (
                     <td className="coin_change text-danger">{coin.price_change_percentage_24h.toFixed(2)} %</td>
                     ) : (
@@ -39,7 +39,14 @@ function CoinsTable(props) {
 
     return (
         <section className="section_table">
-            <h3 className="main_title">Crypto prices <span>9999 assets</span> </h3>
+            <div className="d-flex">
+                <h3 className="main_title">Crypto prices <span>9999 assets</span> </h3>
+                <select className="form-select ms-auto" value={props.currency} onChange={(e) => props.setCurrency(e.target.value)}>
+                    <option value={"USD"}>USD</option>
+                    <option value={"EUR"}>EUR</option>
+                </select>
+            </div>
+
 
             <table className="table table-hover table-borderless mt-3">
                 <thead className="parameters">

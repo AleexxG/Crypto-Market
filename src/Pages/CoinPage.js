@@ -1,6 +1,6 @@
 import React from 'react';
-import Chart from './Coin Components/chart/Chart';
-import Market from './Coin Components/market/Market';
+import Chart from '../Coin Components/Chart';
+import Market from '../Coin Components/Market';
 import '../App.css';
 
 function CoinPage() {

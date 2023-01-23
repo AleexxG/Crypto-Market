@@ -1,8 +1,8 @@
 import React from "react";
 import './Info.css';
-import Gainers from './compInfo/Gainers';
-import Losers from './compInfo/Losers';
-import Trending from './compInfo/Trending';
+import Gainers from './com ing/Gainers';
+import Losers from './com ing/Losers';
+import Trending from './com ing/Trending';
 
 function Info(props) {
 

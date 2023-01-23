@@ -1,5 +1,5 @@
 import React from 'react';
-import '../chart/Chart.css'
+import './Chart.css'
 
 function Chart() {
   return (

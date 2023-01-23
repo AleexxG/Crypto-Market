@@ -1,5 +1,5 @@
 import React from 'react';
-import '../market/Market.css'
+import './Market.css'
 
 function Market() {
   return (
