@@ -13,7 +13,7 @@ function Trending(props) {
                     </div>
                 </th>
                 <td className="coin_info_num">
-                    <p className="coin_price">${(coin.current_price).toLocaleString(undefined, { minimumFractionDigits: 2 })}</p>
+                    <p className="coin_price">{props.symbol}{(coin.current_price).toLocaleString(undefined, { minimumFractionDigits: 2 })}</p>
                     {coin.price_change_percentage_24h < 0 ? (
                         <p className="coin_change text-danger">{coin.price_change_percentage_24h.toFixed(2)} %</p>
                         ) : (

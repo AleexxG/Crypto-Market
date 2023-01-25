@@ -9,7 +9,7 @@ function HomePage() {
   const [coinsInfo, setCoinsInfo] = useState([]);
 
   const [currency, setCurrency] = useState("USD");
-    const [symbol, setSymbol] = useState("$");
+  const [symbol, setSymbol] = useState("$");
     useEffect(() => {
         if (currency === "USD") setSymbol("$");
         else if (currency === "EUR") setSymbol("€");
@@ -17,8 +17,8 @@ function HomePage() {
 
   useEffect(() => {
       (async () => {
-          const endpoint1 = new URL('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false');
-          const endpoint2 = new URL('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=gecko_desc&per_page=5&page=1&sparkline=false&price_change_percentage=24h');
+          const endpoint1 = new URL(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false`);
+          const endpoint2 = new URL(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=gecko_desc&per_page=5&page=1&sparkline=false&price_change_percentage=24h`);
 
           const response = await Promise.all([fetch(endpoint1), fetch(endpoint2)]);
 
@@ -28,7 +28,7 @@ function HomePage() {
           setCoins(data1);
           setCoinsInfo(data2);
       })();
-  }, [])
+  }, [currency])
 
   return (
     <div className="App">
@@ -43,6 +43,7 @@ function HomePage() {
             <Info
                 coins={coins}
                 coinsInfo={coinsInfo}
+                symbol={symbol}
             />
         </main>
     </div>

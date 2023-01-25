@@ -29,8 +29,8 @@ function CoinsTable(props) {
                         <td className="coin_change text-success">+{coin.price_change_percentage_24h.toFixed(2)} %</td>
                     )
                 }
-                <td className="coin_mc">${(coin.market_cap).toLocaleString(undefined)}</td>
-                <td className="coin_volume">${(coin.total_volume).toLocaleString(undefined)}</td>
+                <td className="coin_mc">{props.symbol}{(coin.market_cap).toLocaleString(undefined)}</td>
+                <td className="coin_volume">{props.symbol}{(coin.total_volume).toLocaleString(undefined)}</td>
             </tr>
         )
     })

@@ -10,12 +10,15 @@ function Info(props) {
         <section className="section_info">
             <Gainers 
                 coins={props.coins}
+                symbol={props.symbol}
             />
             <Losers 
                 coins={props.coins}
+                symbol={props.symbol}
             />
             <Trending 
                 coinsInfo={props.coinsInfo}
+                symbol={props.symbol}
             />
         </section>
     )
