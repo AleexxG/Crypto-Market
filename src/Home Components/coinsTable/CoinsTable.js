@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import './CoinsTable.css';
 import Pagination from "./Pagination";
 
 function CoinsTable(props) {
+    const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
     const [coinsPerPage] = useState(20);
 
@@ -14,8 +16,11 @@ function CoinsTable(props) {
 
     const displayCoinsTable = currentCoins.map(coin => {
         return (
-            <tr className="coin_cont" key={coin.id}>
-                <th className="coin_text" scope="row">
+            <tr className="coin_cont" 
+                key={coin.id} 
+                onClick={() => navigate(`/coins/${coin.id}`,{state:{id:coin.id}})}>
+
+                <th className="coin_text" scope="row" >
                     <img alt="Coin Logo" src={coin.image}></img>
                     <div className="crypto_text">
                         <b className="coin_name">{coin.name}</b>
