@@ -18,7 +18,13 @@ function CoinsTable(props) {
         return (
             <tr className="coin_cont" 
                 key={coin.id} 
-                onClick={() => navigate(`/coins/${coin.id}`,{state:{id:coin.id}})}>
+                onClick={() => navigate(`/coins/${coin.id}`, {
+                    state:{
+                        id: coin.id, 
+                        currency: props.currency,
+                        symbol: props.symbol
+                    }
+                })}>
 
                 <th className="coin_text" scope="row" >
                     <img alt="Coin Logo" src={coin.image}></img>
@@ -47,8 +53,8 @@ function CoinsTable(props) {
             <div className="d-flex">
                 <h3 className="main_title">Crypto prices <span>9999 assets</span> </h3>
                 <select className="form-select ms-auto" value={props.currency} onChange={(e) => props.setCurrency(e.target.value)}>
-                    <option value={"USD"}>USD</option>
-                    <option value={"EUR"}>EUR</option>
+                    <option value={"usd"}>USD</option>
+                    <option value={"eur"}>EUR</option>
                 </select>
             </div>
 
@@ -60,7 +66,7 @@ function CoinsTable(props) {
                         <th className="par_price" scope="col">Price</th>
                         <th className="par_change" scope="col">Change</th>
                         <th className="par_mc" scope="col">Market cap</th>
-                        <th className="par_volume" scope="col">Volume 24h</th>
+                        <th className="par_volume" scope="col">Volume (24h)</th>
                     </tr>
                 </thead>
 

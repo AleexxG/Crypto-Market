@@ -8,11 +8,11 @@ function HomePage() {
   const [coins, setCoins] = useState([]);
   const [coinsInfo, setCoinsInfo] = useState([]);
 
-  const [currency, setCurrency] = useState("USD");
+  const [currency, setCurrency] = useState("usd");
   const [symbol, setSymbol] = useState("$");
     useEffect(() => {
-        if (currency === "USD") setSymbol("$");
-        else if (currency === "EUR") setSymbol("€");
+        if (currency === "usd") setSymbol("$");
+        else if (currency === "eur") setSymbol("€");
     }, [currency]);
 
   useEffect(() => {

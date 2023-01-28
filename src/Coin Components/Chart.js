@@ -2,12 +2,13 @@ import React from 'react';
 import './Chart.css';
 
 function Chart(props) {
+
     return (
         <main className='p-5'>
             <header className='d-flex mt-5'>
                 <div className='coin_name'>
-                    <i>O</i>
-                    <h1>{props.coin} <span>BTC</span> </h1>
+                    <img src={props.coin?.image?.small} alt='Coin'></img>
+                    <h1>{props.coin.name} <span>{props.coin.symbol}</span> </h1>
                 </div>
 
                 <div className="search_cont">
