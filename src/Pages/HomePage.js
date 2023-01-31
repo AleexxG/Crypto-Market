@@ -32,7 +32,10 @@ function HomePage() {
 
   return (
     <div className="App">
-      <Search />
+      <Search 
+        currency={currency}
+        symbol={symbol}
+      />
       <main className="content">
             <CoinsTable
                 coins={coins}

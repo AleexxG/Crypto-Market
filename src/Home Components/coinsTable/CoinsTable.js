@@ -24,7 +24,8 @@ function CoinsTable(props) {
                         currency: props.currency,
                         symbol: props.symbol
                     }
-                })}>
+                })}
+            >
 
                 <th className="coin_text" scope="row" >
                     <img alt="Coin Logo" src={coin.image}></img>
