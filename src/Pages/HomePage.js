@@ -10,10 +10,10 @@ function HomePage() {
 
   const [currency, setCurrency] = useState("usd");
   const [symbol, setSymbol] = useState("$");
-    useEffect(() => {
-        if (currency === "usd") setSymbol("$");
-        else if (currency === "eur") setSymbol("€");
-    }, [currency]);
+  useEffect(() => {
+      if (currency === "usd") setSymbol("$");
+      else if (currency === "eur") setSymbol("€");
+  }, [currency]);
 
   useEffect(() => {
       (async () => {

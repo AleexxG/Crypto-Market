@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './Chart.css';
+import { Chart, registerables} from 'chart.js';
+import { Line } from "react-chartjs-2";
+import './CoinChart.css';
 
-function Chart(props) {
+Chart.register(...registerables);
+
+function CoinChart(props) {
     const navigate = useNavigate();
     const [search, setSearch] = useState("");
 
@@ -41,10 +45,36 @@ function Chart(props) {
             </header>
             
             <div>
-                Chart Here
+                <Line 
+                    data={{
+                        labels: props.chart.map((coin) => {
+                          let date = new Date(coin[0]);
+                          let time =
+                            date.getHours() > 12
+                              ? `${date.getHours() - 12}:${date.getMinutes()} PM`
+                              : `${date.getHours()}:${date.getMinutes()} AM`;
+                          return props.days === 1 ? time : date.toLocaleDateString();
+                        }),
+        
+                        datasets: [
+                          {
+                            data: props.chart.map((coin) => coin[1]),
+                            label: `Price ( Past ${props.days} Days ) in ${props.currency}`,
+                            borderColor: "#344afb",
+                          },
+                        ],
+                      }}
+                      options={{
+                        elements: {
+                          point: {
+                            radius: 1,
+                          },
+                        },
+                      }}
+                    />
             </div>
         </main>
   )
 }
 
-export default Chart;
+export default CoinChart;
