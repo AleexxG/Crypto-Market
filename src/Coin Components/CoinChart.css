@@ -9,3 +9,12 @@
     width: 30%;
     float: right;
 }
+
+.coin_price {
+    width: 50%;
+    float: left;
+}
+.day_select {
+    width: 50%;
+    text-align: end;
+}

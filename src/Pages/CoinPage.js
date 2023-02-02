@@ -34,7 +34,8 @@ function CoinPage() {
         currency={location.state.currency}
         symbol={location.state.symbol}
         chart = {chart}
-        days = {setDays}
+        days = {days}
+        setDays = {setDays}
       />
       <Market 
         coin={coin}
