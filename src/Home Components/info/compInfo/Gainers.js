@@ -1,12 +1,24 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 
 function Gainers(props) {
 
+    const navigate = useNavigate();
     props.coins.sort((a, b) => b.price_change_percentage_24h - a.price_change_percentage_24h);
     const gainers = props.coins.slice(0, 5);
     const topGainers = gainers.map(coin => {
         return (
-            <tr className="coin_info_cont" key={coin.id}>
+            <tr 
+                className="coin_info_cont" 
+                key={coin.id}
+                onClick={() => navigate(`/coins/${coin.id}`, {
+                    state:{
+                        id: coin.id, 
+                        currency: props.currency,
+                        symbol: props.symbol
+                    }
+                })}
+            >
                 <th className="coin_text" scope="row">
                     <img alt="Coin Logo" src={coin.image}></img>
                     <div className="crypto_text">

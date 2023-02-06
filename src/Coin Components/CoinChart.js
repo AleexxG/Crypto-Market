@@ -47,7 +47,7 @@ function CoinChart(props) {
             <div className="mt-5">
 
               <div className="d-flex align-items-center mb-3">
-                <h1 className="coin_price">{props.symbol} {props.coin?.market_data?.current_price[props.currency]}</h1>
+                <h1 className="coin_of_price">{props.symbol} {props.coin?.market_data?.current_price[props.currency]}</h1>
                 <aside className="day_select">
                   <button className="btn btn-light ms-2" value={1} onClick={(e) => props.setDays(e.target.value)}>1D</button>
                   <button className="btn btn-light ms-2" value={7} onClick={(e) => props.setDays(e.target.value)}>1W</button>

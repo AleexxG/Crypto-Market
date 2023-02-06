@@ -1,8 +1,8 @@
 import React from "react";
 import './Info.css';
-import Gainers from './com ing/Gainers';
-import Losers from './com ing/Losers';
-import Trending from './com ing/Trending';
+import Gainers from './compInfo/Gainers';
+import Losers from './compInfo/Losers';
+import Trending from './compInfo/Trending';
 
 function Info(props) {
 
@@ -10,14 +10,17 @@ function Info(props) {
         <section className="section_info">
             <Gainers 
                 coins={props.coins}
+                currency={props.currency}
                 symbol={props.symbol}
             />
             <Losers 
                 coins={props.coins}
+                currency={props.currency}
                 symbol={props.symbol}
             />
             <Trending 
                 coinsInfo={props.coinsInfo}
+                currency={props.currency}
                 symbol={props.symbol}
             />
         </section>

@@ -46,6 +46,7 @@ function HomePage() {
             <Info
                 coins={coins}
                 coinsInfo={coinsInfo}
+                currency={currency}
                 symbol={symbol}
             />
         </main>

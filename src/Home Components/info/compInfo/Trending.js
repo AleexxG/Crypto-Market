@@ -1,12 +1,22 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 
-function Losers(props) {
+function Trending(props) {
 
-    props.coins.sort((a, b) => a.price_change_percentage_24h - b.price_change_percentage_24h);
-    const losers = props.coins.slice(0, 5);
-    const topLosers = losers.map(coin => {
+    const navigate = useNavigate();
+    const trendingCoins = props.coinsInfo.map(coin => {
         return (
-            <tr className="coin_info_cont" key={coin.id}>
+            <tr 
+                className="coin_info_cont" 
+                key={coin.id}
+                onClick={() => navigate(`/coins/${coin.id}`, {
+                    state:{
+                        id: coin.id, 
+                        currency: props.currency,
+                        symbol: props.symbol
+                    }
+                })}
+            >
                 <th className="coin_text" scope="row">
                     <img alt="Coin Logo" src={coin.image}></img>
                     <div className="crypto_text">
@@ -27,17 +37,18 @@ function Losers(props) {
         )
     })
 
+
     return (
         <aside className="info_coins">
-            <h3>Biggest Losers <span>24h</span> </h3>
+            <h3>Trending <span>24h</span> </h3>
 
             <table className="table table-hover table-borderless">
                 <tbody className="coin_info">
-                    {topLosers}
+                    {trendingCoins}
                 </tbody>
             </table>
         </aside>
     )
 }
 
-export default Losers;
+export default Trending;
