@@ -1,16 +1,21 @@
 import React from 'react';
-import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import HomePage from './Pages/HomePage';
-import CoinPage from './Pages/CoinPage';
+import Navbar from './components/Navbar';
+import All_coins from './routes/All_coins';
+import Coin from './routes/Coin';
+import Footer from './components/Footer';
 
 function App() {
   return (
-    <Routes>
-      <Route path='/' element={<HomePage />} />
-      <Route path='/!' element={<HomePage />} />
-      <Route path='/coins/:id' element={<CoinPage />} />
-    </Routes>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<All_coins />} />
+        <Route path='/!' element={<All_coins />} />
+        <Route path='/coins/:id' element={<Coin />} />
+      </Routes>
+      <Footer />
+    </>
   );
 }
 
