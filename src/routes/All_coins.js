@@ -36,6 +36,7 @@ function All_coins() {
                 <td scope="col">Name</td>
                 <td scope="col">Price</td>
                 <td scope="col">Market Cap</td>
+                <td scope="col">Supply</td>
                 <td scope="col">Volume (24Hr)</td>
                 <td scope="col">Change (24Hr)</td>
               </tr>
