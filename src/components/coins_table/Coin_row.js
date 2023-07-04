@@ -1,7 +1,8 @@
-import React from 'react'
+import { useState } from 'react'
 
 function Coins_table(props) {
 
+// === Formating data ===
     const format_number = (value, options) => {
         const format = new Intl.NumberFormat(undefined, options);
         return format.format(value);
@@ -11,7 +12,7 @@ function Coins_table(props) {
         currency:'usd',
         style: 'currency',
         maximumFractionDigits: 2,
-    }
+    };
 
     const symbol = props.coin.symbol.toUpperCase();
 
@@ -43,9 +44,7 @@ function Coins_table(props) {
 
     return (
         <tr>
-            <td scope="row">
-                {props.coin.market_cap_rank}
-            </td>
+            <td scope="row">{props.coin.market_cap_rank}</td>
 
             <td className='d-flex align-items-center gap-3'>
                 <img 
@@ -64,7 +63,11 @@ function Coins_table(props) {
             <td>{market_cap_format}</td>
             <td>{supply_format}</td>
             <td>{volume_format}</td>
-            <td>{change_format}%</td>
+            {change < 0 ?
+                (<td className='text-danger'>{change_format}%</td>)
+            :
+                (<td className='text-success'>{change_format}%</td>)
+            }
         </tr>
     )
 }

@@ -17,8 +17,15 @@ html {
 }
 
 ::-webkit-scrollbar {
-    display: none;
+    width: 6px;
 }
+::-webkit-scrollbar-thumb {
+    background: #ffffff2f; 
+    border-radius:10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #ffffff46; 
+} 
 
 body {
     background: var(--color-bg);
