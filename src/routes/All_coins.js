@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
-import '../components/coins_table/coins_table.css';
-import Top_coins from "../components/coins_table/Top_coins";
-import Coin_row from "../components/coins_table/Coin_row";
+import '../components/all_coins/coins_table.css';
+import Market from "../components/all_coins/Market";
+import Coins_table from "../components/all_coins/Coins_table";
 
-function Coins_table() {
+function All_coins() {
   const [coins, set_coins] = useState([]);
-  //const [exchanges, set_exchanges] = useState([]);
-
-  //const exchanges = `https://api.coingecko.com/api/v3/exchanges`;
 
   useEffect(() => {
     const all_coins = async () => {
@@ -37,17 +34,17 @@ function Coins_table() {
     const new_page_coins = await fetch_coins(current_page);
 
     set_coins(new_page_coins);
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   };
 
   return (
-    <main className="position-relative">
+    <main>
 
-      <Top_coins />
+      <Market />
       
-      <section className='table_section'>
-        <div className="container table-responsive shadow p-3 mb-5 rounded color_bg">
-          <table class="coins_table">
+      <section className='table_section container'>
+        <div className="table-responsive shadow p-3 mb-5 rounded color_bg">
+          <table className="coins_table">
             <thead>
               <tr>
                 <td scope="col">#</td>
@@ -63,7 +60,8 @@ function Coins_table() {
             <tbody>
               {coins.map(coin => {
                 return (
-                  <Coin_row 
+                  <Coins_table 
+                    key = {coin.id}
                     coin = {coin}
                   />
                 )
@@ -74,23 +72,23 @@ function Coins_table() {
 
         <div className="container">
           <ReactPaginate
-            previousLabel={'<'}
-            nextLabel={'>'}
-            breakLabel={'...'}
-            pageCount={92}
-            marginPagesDisplayed={1}
-            pageRangeDisplayed={3}
-            onPageChange={handle_page_click}
-            className={'pagination justify-content-center mb-5 gap-sm-4 gap-2 fw-bold'}
-            pageClassName={'page-item'}
-            pageLinkClassName={'page-link bg-transparent border-0 text-white shadow-none'}
-            previousClassName={'page-item'}
-            previousLinkClassName={'page-link bg-transparent border-0 text-white shadow-none'}
-            nextClassName={'page-item'}
-            nextLinkClassName={'page-link bg-transparent border-0 text-white shadow-none'}
-            breakClassName={'page-item'}
-            breakLinkClassName={'page-link bg-transparent border-0 text-white shadow-none'}
-            activeClassName={'active color_primary rounded-2'}
+            previousLabel = {'<'}
+            nextLabel = {'>'}
+            breakLabel = {'...'}
+            pageCount = {92}
+            marginPagesDisplayed = {1}
+            pageRangeDisplayed = {3}
+            onPageChange = {handle_page_click}
+            className = {'pagination justify-content-center mb-5 gap-sm-4 gap-2 fw-bold'}
+            pageClassName = {'page-item'}
+            pageLinkClassName = {'page-link bg-transparent border-0 text-white shadow-none'}
+            previousClassName = {'page-item'}
+            previousLinkClassName = {'page-link bg-transparent border-0 text-white shadow-none'}
+            nextClassName = {'page-item'}
+            nextLinkClassName = {'page-link bg-transparent border-0 text-white shadow-none'}
+            breakClassName = {'page-item'}
+            breakLinkClassName = {'page-link bg-transparent border-0 text-white shadow-none'}
+            activeClassName = {'active color_primary rounded-2'}
             activeLinkClassName = {'text-white shadow-none'}
           />
         </div>
@@ -100,4 +98,4 @@ function Coins_table() {
   )
 }
 
-export default Coins_table;
+export default All_coins;

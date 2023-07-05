@@ -1,7 +1,5 @@
 .table_section {
-    padding-top: 6rem;
-    position: relative;
-    z-index: 2;
+    margin-top: -50px;
 }
 
 
@@ -18,12 +16,10 @@
   
 .coins_table thead td {
     border-top: none;
-    font-size: 0.9rem;
 }
   
 .coins_table tbody tr td {
     cursor: pointer;
-    font-size: 0.9rem;
 }
 
 .coins_table tbody tr:hover {

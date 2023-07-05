@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Coins_table from './routes/Coins_table';
+import All_coins from './routes/All_coins';
 import Coin from './routes/Coin';
 import Footer from './components/Footer';
 
@@ -10,8 +10,8 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path='/' element={<Coins_table />} />
-        <Route path='/!' element={<Coins_table />} />
+        <Route path='/' element={<All_coins />} />
+        <Route path='/!' element={<All_coins />} />
         <Route path='/coins/:id' element={<Coin />} />
       </Routes>
       <Footer />

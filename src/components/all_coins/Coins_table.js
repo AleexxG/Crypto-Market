@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React from 'react'
 
 function Coins_table(props) {
 
@@ -54,8 +54,8 @@ function Coins_table(props) {
                 />
 
                 <div>
-                    <p style={{fontSize: '0.9rem'}}>{props.coin.name}</p>
-                    <p style={{fontSize: '0.9rem'}}>{symbol}</p>
+                    <p>{props.coin.name}</p>
+                    <p>{symbol}</p>
                 </div>
             </td>
 
