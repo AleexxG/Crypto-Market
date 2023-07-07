@@ -10,7 +10,7 @@ function Navbar() {
                        href='/'>
                         <img src={coinpulse_logo} 
                              alt='CoinPulse logo'   
-                             style={{width: '20%'}}>
+                             style={{width: '15%'}}>
                         </img>
                         <h3 className='ms-3 text-white'>CoinPulse</h3>
                     </a>

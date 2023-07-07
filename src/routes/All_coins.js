@@ -1,31 +1,66 @@
 import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import '../components/all_coins/coins_table.css';
+import Error from "../components/Error";
+import Loading from "../components/Loading";
 import Market from "../components/all_coins/Market";
 import Coins_table from "../components/all_coins/Coins_table";
 
-function All_coins() {
+function All_coins({error, set_error, is_loading, set_is_loading}) {
   const [coins, set_coins] = useState([]);
 
   useEffect(() => {
-    const all_coins = async () => {
-      const response = await fetch(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false`
-      );
-      const data = await response.json();
+    const all_coins = async () => 
+    {
+      try {
+        set_is_loading(true);
 
-      set_coins(data);
+        const response = await fetch(
+          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false`
+        );
+
+        if (!response.ok)
+        {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        set_coins(data);
+        set_is_loading(false);
+      }
+      catch (error)
+      {
+        set_error(error);
+        set_is_loading(false);
+      }
     };
-
     all_coins();
   }, []);
 
   const fetch_coins = async (page_number) => {
-    const response = await fetch(
-      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=${page_number}&sparkline=false`
-    );
-    const data = await response.json();
-    return data;
+    try 
+    {
+      set_is_loading(true);
+
+      const response = await fetch(
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=${page_number}&sparkline=false`
+      );
+
+      if (!response.ok)
+      {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      set_is_loading(false);
+      return data;
+    }
+    catch (error)
+    {
+      set_error(error);
+      set_is_loading(false);
+      return [];
+    }
   };
 
   const handle_page_click = async (data) => {
@@ -68,6 +103,11 @@ function All_coins() {
               })}
             </tbody>
           </table>
+
+          {error && <Error error = {error}/>}
+          
+          {is_loading && <Loading />}
+          
         </div>
 
         <div className="container">
