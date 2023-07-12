@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Coins_table({coin}) {
+function Coins_table({ coin }) {
 
 // === Formating data ===
     const format_number = (value, options) => 

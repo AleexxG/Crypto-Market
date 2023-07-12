@@ -6,7 +6,7 @@ import Market from "../components/all_coins/Market";
 import Coins_table from "../components/all_coins/Coins_table";
 import Pagination from "../components/all_coins/Pagination";
 
-function All_coins({error, set_error, is_loading, set_is_loading}) {
+function All_coins({ status, set_status }) {
   const [coins, set_coins] = useState([]);
   const [current_page, set_current_page] = useState(1);
 
@@ -15,7 +15,11 @@ function All_coins({error, set_error, is_loading, set_is_loading}) {
     {
       try 
       {
-        set_is_loading(true);
+        set_status(
+          {
+            is_loading: true,
+          }
+        );
 
         const response = await fetch
         (
@@ -29,13 +33,21 @@ function All_coins({error, set_error, is_loading, set_is_loading}) {
 
         const data = await response.json();
         set_coins(data);
-        set_error(null);
-        set_is_loading(false);
+        set_status(
+          {
+            is_loading: false,
+            error: null,
+          }
+        );
       }
       catch (error)
       {
-        set_error(error);
-        set_is_loading(false);
+        set_status(
+          {
+            is_loading: false,
+            error: error,
+          }
+        );
         set_coins([]);
       }
     };
@@ -84,9 +96,9 @@ function All_coins({error, set_error, is_loading, set_is_loading}) {
             </tbody>
           </table>
 
-          {error && <Error error = {error}/>}
+          {status.error && <Error error = {status.error}/>}
           
-          {is_loading && <Loading />}
+          {status.is_loading && <Loading />}
           
         </div>
 
