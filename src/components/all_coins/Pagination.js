@@ -116,7 +116,7 @@ function Pagination({current_page, handle_click}) {
                         className={`page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white shadow-none bg-transparent
                         ${current_page == 1 ? `disabled` : ``}`} 
                         href="/">
-                        <i class="fa-solid fa-chevron-left"></i>
+                        <i className="fa-solid fa-chevron-left"></i>
                     </a>          
                 </li>
 
@@ -127,7 +127,7 @@ function Pagination({current_page, handle_click}) {
                         className={`page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white shadow-none bg-transparent
                         ${current_page == total_pages ? `disabled` : ``}`} 
                         href="/">
-                        <i class="fa-solid fa-chevron-right"></i>
+                        <i className="fa-solid fa-chevron-right"></i>
                     </a>          
                 </li>
             </ul>

@@ -1,33 +1,30 @@
-import {useState} from 'react';
-import Navbar from './components/Navbar';
+import React from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Root_layout from './routes/Root_layout';
 import All_coins from './routes/All_coins';
 import Coin from './routes/Coin';
-import Footer from './components/Footer';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Root_layout />,
+    children: [
+      {
+        path: '',
+        element: <All_coins />,
+      },
+
+      {
+        path: 'coin',
+        element: <Coin />,
+      }
+    ]
+  },
+])
 
 function App() {
-  const [status, set_status] = useState(
-    {
-      is_loading: false,
-      error: null,
-    }
-  )
-
   return (
-    <>
-      <Navbar />
-      
-        <All_coins 
-          status = {status}
-          set_status = {set_status}
-        />
-        
-        <Coin 
-          status = {status}
-          set_status = {set_status}
-        />
-        
-      <Footer />
-    </>
+    <RouterProvider router={router} />
   );
 }
 

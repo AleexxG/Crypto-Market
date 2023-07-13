@@ -6,9 +6,15 @@ import Market from "../components/all_coins/Market";
 import Coins_table from "../components/all_coins/Coins_table";
 import Pagination from "../components/all_coins/Pagination";
 
-function All_coins({ status, set_status }) {
+function All_coins() {
   const [coins, set_coins] = useState([]);
   const [current_page, set_current_page] = useState(1);
+  const [status, set_status] = useState(
+    {
+      is_loading: false,
+      error: null,
+    }
+  )
 
   useEffect(() => {
     const all_coins = async () => 
@@ -64,8 +70,7 @@ function All_coins({ status, set_status }) {
   }
 
   return (
-    <main>
-
+    <>
       <Market />
       
       <section className='table_section container'>
@@ -108,8 +113,7 @@ function All_coins({ status, set_status }) {
         />
         
       </section>
-
-    </main>
+    </>
   )
 }
 

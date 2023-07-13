@@ -1,14 +1,10 @@
 import React from 'react'
-import Newsletter from './Newsletter';
 import google_play from '../assets/google_play.svg';
 import app_store from '../assets/app_store.svg';
 
 function Footer() {
     return (
         <footer>
-
-            <Newsletter />
-
             <section className="gradient">
                 <div className='container py-5 d-flex justify-content-between flex-md-row text-md-start flex-column align-items-md-start align-items-center text-center gap-5'>
                     
