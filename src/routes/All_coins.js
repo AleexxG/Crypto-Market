@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from 'react-router-dom';
 import '../components/all_coins/coins_table.css';
 import Error from "../components/Error";
 import Loading from "../components/Loading";
@@ -15,8 +16,16 @@ function All_coins() {
       error: null,
     }
   )
+  const navigate = useNavigate();
+  const { page } = useParams();
+  const parsed_page = parseInt(page, 10);
 
   useEffect(() => {
+
+    if (!isNaN(parsed_page)) {
+      set_current_page(parsed_page);
+    }
+
     const all_coins = async () => 
     {
       try 
@@ -58,13 +67,15 @@ function All_coins() {
       }
     };
     all_coins();
-  }, [current_page]);
+  }, [current_page, page]);
 
   const handle_page_click = (e, page) => 
   {
     e.preventDefault();
 
     set_current_page(page);
+
+    navigate(`/page/${page}`);
 
     window.scrollTo(0, 0);
   }
