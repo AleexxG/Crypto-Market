@@ -10,79 +10,57 @@ import Pagination from "../components/all_coins/Pagination";
 function All_coins() {
   const [coins, set_coins] = useState([]);
   const [current_page, set_current_page] = useState(1);
-  const [status, set_status] = useState(
-    {
-      is_loading: false,
-      error: null,
-    }
-  )
   const navigate = useNavigate();
   const { page } = useParams();
   const parsed_page = parseInt(page, 10);
+  const [status, set_status] = useState({
+      is_loading: false,
+      error: null,
+  })
 
   useEffect(() => {
-
     if (!isNaN(parsed_page)) {
       set_current_page(parsed_page);
     }
 
-    const all_coins = async () => 
-    {
-      try 
-      {
-        set_status(
-          {
-            is_loading: true,
-          }
-        );
+    const fetch_coins = async () => {
+      try {
+        set_status({ is_loading: true });
 
-        const response = await fetch
-        (
+        const response = await fetch (
           `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=${current_page}&sparkline=false`
         );
 
-        if (!response.ok)
-        {
+        if (!response.ok) {
           throw new Error('Network response was not ok');
         }
 
         const data = await response.json();
         set_coins(data);
-        set_status(
-          {
-            is_loading: false,
-            error: null,
-          }
-        );
+        set_status({ is_loading: false, error: null });
       }
-      catch (error)
-      {
-        set_status(
-          {
-            is_loading: false,
-            error: error,
-          }
-        );
+      catch (error) {
+        set_status({ is_loading: false, error: error });
         set_coins([]);
       }
     };
-    all_coins();
-  }, [current_page, page]);
 
-  const handle_page_click = (e, page) => 
-  {
+    fetch_coins();
+  }, [current_page]);
+
+  const handle_page_click = (e, page) => {
     e.preventDefault();
-
     set_current_page(page);
-
     navigate(`/page/${page}`);
-
     window.scrollTo(0, 0);
-  }
+  };
 
   return (
     <>
-      <Market />
+      <Market 
+        status = {status}
+        set_status = {set_status}
+      />
       
       <section className='table_section container'>
         <div className="table-responsive shadow p-3 mb-5 rounded color_bg">

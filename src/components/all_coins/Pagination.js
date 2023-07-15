@@ -6,8 +6,7 @@ function Pagination({current_page, handle_click}) {
     const total_pages = 92;
 
     const display_pagination = (current_page) => {
-        if (current_page < 5)
-        {
+        if (current_page < 5) {
             page_numbers = [1,2,3,4,5];
             return (
                 <div className='d-flex gap-2'>
@@ -36,8 +35,7 @@ function Pagination({current_page, handle_click}) {
             )
         }
 
-        if (current_page >= 3 && current_page < total_pages - 3)
-        {
+        else if (current_page >= 3 && current_page < total_pages - 3) {
             page_numbers = [current_page - 1, current_page, current_page + 1];
             return (
                 <div className='d-flex gap-2'>
@@ -77,8 +75,7 @@ function Pagination({current_page, handle_click}) {
             )
         }
 
-        if (current_page >= total_pages - 3)
-        {
+        else {
             page_numbers = [total_pages - 4, total_pages - 3, total_pages - 2, total_pages - 1, total_pages];
             return (
                 <div className='d-flex gap-2'>
@@ -106,7 +103,7 @@ function Pagination({current_page, handle_click}) {
                 </div>
             )
         }
-    }
+    };
 
     return (
         <div className='d-flex justify-content-center mb-5'>

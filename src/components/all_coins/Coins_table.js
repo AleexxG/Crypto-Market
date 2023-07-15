@@ -3,14 +3,12 @@ import React from 'react'
 function Coins_table({ coin }) {
 
 // === Formating data ===
-    const format_number = (value, options) => 
-    {
+    const format_number = (value, options) => {
         const format = new Intl.NumberFormat(undefined, options);
         return format.format(value);
-    }
+    };
 
-    const currency_format_options = 
-    {
+    const currency_format_options = {
         currency:'usd',
         style: 'currency',
         maximumFractionDigits: 2,
@@ -22,29 +20,25 @@ function Coins_table({ coin }) {
     const price_format = format_number(price, currency_format_options);
 
     const market_cap = coin.market_cap;
-    const market_cap_format = format_number(market_cap, 
-    {
+    const market_cap_format = format_number(market_cap, {
         ...currency_format_options, 
         notation: 'compact',
     });
 
     const supply = coin.circulating_supply;
-    const supply_format = format_number(supply, 
-    {
+    const supply_format = format_number(supply, {
         maximumFractionDigits: 2,
         notation: 'compact',
     });
 
     const volume = coin.total_volume;
-    const volume_format = format_number(volume, 
-    {
+    const volume_format = format_number(volume, {
         ...currency_format_options,
         notation: 'compact',
     });
 
     const change = coin.price_change_percentage_24h;
-    const change_format = format_number(change, 
-    {
+    const change_format = format_number(change, {
         maximumFractionDigits: 2,
     });
 
