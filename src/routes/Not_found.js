@@ -8,7 +8,10 @@ export default function Not_found() {
              style={{height: '100vh'}}>
 
             <a className='fs-6 text-secondary' href="https://storyset.com/web">Web illustrations by Storyset</a>
-            <img src={not_found_img} className='w-75' style={{minWidth: '200px', maxWidth: '500px'}}/>
+            <img src={not_found_img} 
+                 alt='Robot trying to fix the error 404 - page not found'
+                 className='w-75' style={{minWidth: '200px', maxWidth: '500px'}}
+            />
             
             <h3>Something went wrong</h3>
             <p>Sorry, we couldn't find your page</p>

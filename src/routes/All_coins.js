@@ -90,9 +90,9 @@ function All_coins() {
             </tbody>
           </table>
 
-          {status.error && <Error error = {status.error}/>}
-          
           {status.is_loading && <Loading />}
+
+          {status.error && <Error error = {status.error}/>}
           
         </div>
 

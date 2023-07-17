@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import Error from '../../Error';
+import Loading from '../../Loading';
 
 function Market_data({ status, set_status }) {
     const [market_data, set_market_data] = useState([]);
@@ -43,22 +45,27 @@ function Market_data({ status, set_status }) {
     return (
         <article className='color_bg w-100 rounded-2 px-4 py-3'>
             <h5 className='border-bottom pb-3'>📊 Today's Market</h5>
+
+            {status.is_loading && <Loading />}
+
+            {status.error && <Error error = {status.error}/>}
+
             <ul className='list-unstyled'>
-                <li className='mt-4 d-flex justify-content-between align-items-center'>
+                <li className='mt-4 py-1 d-flex justify-content-between align-items-center'>
                     <p>Market cap change</p>
                     <p className={text_color(market_data.mcap_change)}>
                         {market_data.mcap_change}%
                     </p>
                 </li>
 
-                <li className='mt-4 d-flex justify-content-between align-items-center'>
+                <li className='mt-4 py-1 d-flex justify-content-between align-items-center'>
                     <p>Volume change</p>
                     <p className={text_color(market_data.volume_change)}>
                         {market_data.volume_change}%
                     </p>
                 </li>
 
-                <li className='mt-4 d-flex justify-content-between align-items-center'>
+                <li className='mt-4 py-1 d-flex justify-content-between align-items-center'>
                     <p>Bitcoin dominance</p>
                     <p>{market_data.btc_d}%</p>
                 </li>
