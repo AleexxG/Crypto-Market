@@ -64,9 +64,8 @@ function Coins_table({ coin }) {
             <td>{supply_format}</td>
             <td>{volume_format}</td>
             {
-            change < 0 ?
-                (<td className='text-danger'>{change_format}%</td>)
-            :
+                change < 0 ?
+                (<td className='text-danger'>{change_format}%</td>) :
                 (<td className='text-success'>{change_format}%</td>)
             }
         </tr>

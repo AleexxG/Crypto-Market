@@ -1,9 +1,7 @@
 import React from 'react'
 
-function Pagination({current_page, handle_click}) {
+function Pagination({current_page, total_pages, handle_click}) {
     let page_numbers = [];
-    
-    const total_pages = 92;
 
     const display_pagination = (current_page) => {
         if (current_page < 5) {

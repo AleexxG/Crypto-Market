@@ -10,6 +10,7 @@ import Pagination from "../components/all_coins/Pagination";
 function All_coins() {
   const [coins, set_coins] = useState([]);
   const [current_page, set_current_page] = useState(1);
+  const total_pages = 92;
   const navigate = useNavigate();
   const { page } = useParams();
   const parsed_page = parseInt(page, 10);
@@ -20,6 +21,8 @@ function All_coins() {
 
   useEffect(() => {
     if (!isNaN(parsed_page)) {
+      parsed_page > total_pages ? 
+      navigate('/') :
       set_current_page(parsed_page);
     }
 
@@ -98,6 +101,7 @@ function All_coins() {
 
         <Pagination 
           current_page = {current_page}
+          total_pages = {total_pages}
           handle_click = {handle_page_click}
         />
         
