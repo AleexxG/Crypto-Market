@@ -12,18 +12,18 @@ function All_coins() {
   const [current_page, set_current_page] = useState(1);
   const total_pages = 92;
   const navigate = useNavigate();
-  const { page } = useParams();
-  const parsed_page = parseInt(page, 10);
+  const { page_number } = useParams();
+  const parsed_page_number = parseInt(page_number, 10);
   const [status, set_status] = useState({
       is_loading: false,
       error: null,
   })
 
   useEffect(() => {
-    if (!isNaN(parsed_page)) {
-      parsed_page > total_pages ? 
+    if (!isNaN(parsed_page_number)) {
+      parsed_page_number > total_pages ? 
       navigate('/') :
-      set_current_page(parsed_page);
+      set_current_page(parsed_page_number);
     }
 
     const fetch_coins = async () => {

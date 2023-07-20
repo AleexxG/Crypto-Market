@@ -17,8 +17,8 @@ const router = createBrowserRouter(
     <>
       <Route path='/' element={<Root_layout />}>
         <Route index element={<All_coins />} />
-        <Route path='page/:page' element={<All_coins />} />
-        <Route path='coin' element={<Coin />} />
+        <Route path='page/:page_number' element={<All_coins />} />
+        <Route path='coins/:coin' element={<Coin />} />
       </Route>
 
       <Route path='*' element={<Not_found />} />

@@ -52,21 +52,30 @@ function Market_data({ status, set_status }) {
 
             <ul className='list-unstyled'>
                 <li className='mt-4 py-1 d-flex justify-content-between align-items-center'>
-                    <p>Market cap change</p>
+                    <div className='d-flex align-items-center'>
+                        <i className="fa-solid fa-coins me-3" style={{fontSize: '1.05rem'}}></i>
+                        <p>Market cap change</p>
+                    </div>
                     <p className={text_color(market_data.mcap_change)}>
                         {market_data.mcap_change}%
                     </p>
                 </li>
 
                 <li className='mt-4 py-1 d-flex justify-content-between align-items-center'>
-                    <p>Volume change</p>
+                    <div className='d-flex align-items-center'>
+                        <i className="fa-solid fa-chart-simple me-3" style={{fontSize: '1.05rem'}}></i>
+                        <p>Volume change</p>
+                    </div>
                     <p className={text_color(market_data.volume_change)}>
                         {market_data.volume_change}%
                     </p>
                 </li>
 
                 <li className='mt-4 py-1 d-flex justify-content-between align-items-center'>
-                    <p>Bitcoin dominance</p>
+                    <div className='d-flex align-items-center'>
+                        <i className="fa-brands fa-bitcoin me-3" style={{fontSize: '1.05rem'}}></i>
+                        <p>Bitcoin dominance</p>
+                    </div>
                     <p>{market_data.btc_d}%</p>
                 </li>
             </ul>

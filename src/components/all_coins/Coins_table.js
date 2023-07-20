@@ -1,6 +1,21 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 function Coins_table({ coin }) {
+    const navigate = useNavigate();
+
+    const {
+        id,
+        symbol,
+        name,
+        image,
+        current_price: price,
+        market_cap,
+        market_cap_rank,
+        total_volume: volume,
+        price_change_percentage_24h: price_change,
+        circulating_supply: supply,
+    } = coin;
 
 // === Formating data ===
     const format_number = (value, options) => {
@@ -14,48 +29,41 @@ function Coins_table({ coin }) {
         maximumFractionDigits: 2,
     };
 
-    const symbol = coin.symbol.toUpperCase();
-
-    const price = coin.current_price;
     const price_format = format_number(price, currency_format_options);
 
-    const market_cap = coin.market_cap;
     const market_cap_format = format_number(market_cap, {
         ...currency_format_options, 
         notation: 'compact',
     });
 
-    const supply = coin.circulating_supply;
     const supply_format = format_number(supply, {
         maximumFractionDigits: 2,
         notation: 'compact',
     });
 
-    const volume = coin.total_volume;
     const volume_format = format_number(volume, {
         ...currency_format_options,
         notation: 'compact',
     });
 
-    const change = coin.price_change_percentage_24h;
-    const change_format = format_number(change, {
+    const price_change_format = format_number(price_change, {
         maximumFractionDigits: 2,
     });
 
     return (
-        <tr>
-            <td scope="row">{coin.market_cap_rank}</td>
+        <tr onClick={() => navigate(`/coins/${id}`)}>
+            <td scope="row">{market_cap_rank}</td>
 
             <td className='d-flex align-items-center gap-3'>
                 <img 
-                    src={coin.image} 
-                    alt={`${coin.name} logo`}
+                    src={image} 
+                    alt={`${name} logo`}
                     style={{width: '30px', height: '30px'}}
                 />
 
                 <div>
-                    <p>{coin.name}</p>
-                    <p>{symbol}</p>
+                    <p>{name}</p>
+                    <p>{symbol.toUpperCase()}</p>
                 </div>
             </td>
 
@@ -64,9 +72,9 @@ function Coins_table({ coin }) {
             <td>{supply_format}</td>
             <td>{volume_format}</td>
             {
-                change < 0 ?
-                (<td className='text-danger'>{change_format}%</td>) :
-                (<td className='text-success'>{change_format}%</td>)
+                price_change < 0 ?
+                (<td className='text-danger'>{price_change_format}%</td>) :
+                (<td className='text-success'>{price_change_format}%</td>)
             }
         </tr>
     )
