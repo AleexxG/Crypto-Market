@@ -1,8 +1,8 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import Newsletter from '../components/Newsletter';
-import Footer from '../components/Footer';
+import Navbar from './Navbar';
+import Newsletter from './Newsletter';
+import Footer from './Footer';
 
 function Root_layout() {
     return (

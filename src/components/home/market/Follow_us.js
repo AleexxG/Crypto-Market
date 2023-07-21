@@ -12,7 +12,7 @@ function Follow_us() {
                     </p>
                     <a href='https://www.twitter.com/'
                        target='_blank' 
-                       className='btn btn-outline-light fw-bold py-1 px-4'>
+                       className='btn btn-outline-light py-1 px-4'>
                         + Follow
                     </a>
                 </li>
@@ -24,7 +24,7 @@ function Follow_us() {
                     </p>
                     <a href='https://www.facebook.com/'
                        target='_blank' 
-                       className='btn btn-outline-light fw-bold py-1 px-4'>
+                       className='btn btn-outline-light py-1 px-4'>
                         + Follow
                     </a>
                 </li>
@@ -36,7 +36,7 @@ function Follow_us() {
                     </p>
                     <a href='https://www.instagram.com/'
                        target='_blank' 
-                       className='btn btn-outline-light fw-bold py-1 px-4'>
+                       className='btn btn-outline-light py-1 px-4'>
                         + Follow
                     </a>
                 </li>

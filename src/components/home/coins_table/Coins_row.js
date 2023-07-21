@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
-function Coins_table({ coin }) {
+function Coins_row({ coin }) {
     const navigate = useNavigate();
 
     const {
@@ -80,4 +80,4 @@ function Coins_table({ coin }) {
     )
 }
 
-export default Coins_table
+export default Coins_row

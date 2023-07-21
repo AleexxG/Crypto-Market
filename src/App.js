@@ -7,8 +7,8 @@ import {
   RouterProvider, 
 } from 'react-router-dom';
 
-import Root_layout from './routes/Root_layout';
-import All_coins from './routes/All_coins';
+import Root_layout from './components/Root_layout';
+import Home from './routes/Home';
 import Coin from './routes/Coin';
 import Not_found from './routes/Not_found';
 
@@ -16,9 +16,9 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path='/' element={<Root_layout />}>
-        <Route index element={<All_coins />} />
-        <Route path='page/:page_number' element={<All_coins />} />
-        <Route path='coins/:coin' element={<Coin />} />
+        <Route index element={<Home />} />
+        <Route path='page/:page_number' element={<Home />} />
+        <Route path='coins/:coin_id' element={<Coin />} />
       </Route>
 
       <Route path='*' element={<Not_found />} />

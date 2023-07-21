@@ -13,7 +13,7 @@ function Exchanges() {
                     </p>
                     <a href='https://www.binance.com/'
                        target='_blank' 
-                       className='btn btn-outline-light fw-bold py-1 px-4'>
+                       className='btn btn-outline-light py-1 px-4'>
                         Visit
                     </a>
                 </li>
@@ -25,7 +25,7 @@ function Exchanges() {
                     </p>
                     <a href='https://www.coinbase.com/'
                        target='_blank' 
-                       className='btn btn-outline-light fw-bold py-1 px-4'>
+                       className='btn btn-outline-light py-1 px-4'>
                         Visit
                     </a>
                 </li>
@@ -37,7 +37,7 @@ function Exchanges() {
                     </p>
                     <a href='https://www.kraken.com/'
                        target='_blank' 
-                       className='btn btn-outline-light fw-bold py-1 px-4'>
+                       className='btn btn-outline-light py-1 px-4'>
                         Visit
                     </a>
                 </li>
