@@ -9,14 +9,12 @@ function Coin() {
   const [coin, set_coin] = useState([]);
   const { coin_id } = useParams();
   const navigate = useNavigate();
-  const [status, set_status] = useState({
-    is_loading: false,
-  })
+  const [is_loading, set_is_loading] = useState(false);
 
   useEffect(() => {
     const fetch_coin = async () => {
       try {
-        set_status({ is_loading: true })
+        set_is_loading(true)
 
         const response = await fetch(
           `https://api.coingecko.com/api/v3/coins/${coin_id}`
@@ -28,10 +26,10 @@ function Coin() {
 
         const data = await response.json();
         set_coin(data);
-        set_status({ is_loading: false });
+        set_is_loading(false);
       }
       catch (error) {
-        set_status({ is_loading: false });
+        set_is_loading(false);
         set_coin([]);
         navigate('*');
       }
@@ -40,14 +38,36 @@ function Coin() {
     fetch_coin();
   }, [coin_id]);
 
+  const format_number = (value, options) => {
+    const format = new Intl.NumberFormat(undefined, options);
+    return format.format(value);
+  };
+
+  const currency_format_options = {
+      currency:'usd',
+      style: 'currency',
+      maximumFractionDigits: 2,
+  };
+
+  console.log(coin);
+
   return (
     <main>
 
-      {status.is_loading && <Loading />}
+      {is_loading ? <Loading /> :
+        <>
+          <Coin_info 
+            coin = {coin}
+            format_number = {format_number}
+            currency_format_options = {currency_format_options}
+          />
+          
+          <Chart />
 
-      <Coin_info />
-      <Chart />
-      <Market_status />
+          <Market_status />
+        </>
+      }
+
     </main>
   )
 }

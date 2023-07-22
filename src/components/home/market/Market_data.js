@@ -1,36 +1,8 @@
-import { useState, useEffect } from 'react'
+import React from 'react'
 import Error from '../../Error';
 import Loading from '../../Loading';
 
-function Market_data({ status, set_status }) {
-    const [market_data, set_market_data] = useState([]);
-
-    useEffect(() => {
-        const fetch_market_data = async () => {
-            try {
-                set_status({ is_loading: true })
-
-                const response = await fetch(
-                    'https://api.coinlore.net/api/global/'
-                );
-
-                if (!response.ok) {
-                    throw new Error('Network response was not ok')
-                }
-
-                const data = await response.json();
-                set_market_data(data[0]);
-                set_status({ is_loading: false, error: null });
-            }
-            catch (error) {
-                set_status({ is_loading: false, error: error });
-                set_market_data([]);
-            }
-        };
-
-        fetch_market_data();
-    }, []);
-
+function Market_data({ market_data, status }) {
     const text_color = (data) => {
         let color = ''
 
@@ -50,35 +22,37 @@ function Market_data({ status, set_status }) {
 
             {status.error && <Error error = {status.error}/>}
 
-            <ul className='list-unstyled'>
-                <li className='mt-4 py-1 d-flex justify-content-between align-items-center'>
-                    <div className='d-flex align-items-center'>
-                        <i className="fa-solid fa-coins me-3" style={{fontSize: '1.05rem'}}></i>
-                        <p>Market cap change</p>
-                    </div>
-                    <p className={text_color(market_data.mcap_change)}>
-                        {market_data.mcap_change}%
-                    </p>
-                </li>
+            {!status.is_loading && !status.error && (
+                <ul className='list-unstyled'>
+                    <li className='mt-4 py-1 d-flex justify-content-between align-items-center'>
+                        <div className='d-flex align-items-center'>
+                            <i className="fa-solid fa-coins me-3" style={{fontSize: '1.05rem'}}></i>
+                            <p>Market cap change</p>
+                        </div>
+                        <p className={text_color(market_data.mcap_change)}>
+                            {market_data.mcap_change}%
+                        </p>
+                    </li>
 
-                <li className='mt-4 py-1 d-flex justify-content-between align-items-center'>
-                    <div className='d-flex align-items-center'>
-                        <i className="fa-solid fa-chart-simple me-3" style={{fontSize: '1.05rem'}}></i>
-                        <p>Volume change</p>
-                    </div>
-                    <p className={text_color(market_data.volume_change)}>
-                        {market_data.volume_change}%
-                    </p>
-                </li>
+                    <li className='mt-4 py-1 d-flex justify-content-between align-items-center'>
+                        <div className='d-flex align-items-center'>
+                            <i className="fa-solid fa-chart-simple me-3" style={{fontSize: '1.05rem'}}></i>
+                            <p>Volume change</p>
+                        </div>
+                        <p className={text_color(market_data.volume_change)}>
+                            {market_data.volume_change}%
+                        </p>
+                    </li>
 
-                <li className='mt-4 py-1 d-flex justify-content-between align-items-center'>
-                    <div className='d-flex align-items-center'>
-                        <i className="fa-brands fa-bitcoin me-3" style={{fontSize: '1.05rem'}}></i>
-                        <p>Bitcoin dominance</p>
-                    </div>
-                    <p>{market_data.btc_d}%</p>
-                </li>
-            </ul>
+                    <li className='mt-4 py-1 d-flex justify-content-between align-items-center'>
+                        <div className='d-flex align-items-center'>
+                            <i className="fa-brands fa-bitcoin me-3" style={{fontSize: '1.05rem'}}></i>
+                            <p>Bitcoin dominance</p>
+                        </div>
+                        <p>{market_data.btc_d}%</p>
+                    </li>
+                </ul>
+            )}
         </article>
     )
 }
