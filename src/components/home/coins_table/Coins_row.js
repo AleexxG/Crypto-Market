@@ -50,8 +50,13 @@ function Coins_row({ coin }) {
         maximumFractionDigits: 2,
     });
 
+    const handle_click = () => {
+        navigate(`/coins/${id}`);
+        window.scrollTo(0, 0);
+    };
+
     return (
-        <tr onClick={() => navigate(`/coins/${id}`)}>
+        <tr onClick={() => handle_click()}>
             <td scope="row">{market_cap_rank}</td>
 
             <td className='d-flex align-items-center gap-3'>

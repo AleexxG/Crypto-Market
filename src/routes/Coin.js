@@ -64,7 +64,11 @@ function Coin() {
           
           <Chart />
 
-          <Market_status />
+          <Market_status 
+            coin = {coin}
+            format_number = {format_number}
+            currency_format_options = {currency_format_options}
+          />
         </>
       }
 
