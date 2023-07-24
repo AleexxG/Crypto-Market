@@ -1,10 +1,9 @@
-import React from 'react'
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 import Newsletter from './Newsletter';
 import Footer from './Footer';
 
-function Root_layout() {
+function RootLayout() {
     return (
         <>
             <Navbar />
@@ -19,4 +18,4 @@ function Root_layout() {
     )
 }
 
-export default Root_layout
+export default RootLayout;

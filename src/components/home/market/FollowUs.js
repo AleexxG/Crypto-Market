@@ -1,6 +1,4 @@
-import React from 'react'
-
-function Follow_us() {
+function FollowUs() {
     return (
         <article className='color_bg w-100 rounded-2 px-4 py-3 d-lg-block d-none'>
             <h5 className='border-bottom pb-3'>📢 Follow Us</h5>
@@ -11,7 +9,8 @@ function Follow_us() {
                         Twitter 
                     </p>
                     <a href='https://www.twitter.com/'
-                       target='_blank' 
+                       target='_blank'
+                       rel="noreferrer" 
                        className='btn btn-outline-light py-1 px-4'>
                         + Follow
                     </a>
@@ -23,7 +22,8 @@ function Follow_us() {
                         Facebook 
                     </p>
                     <a href='https://www.facebook.com/'
-                       target='_blank' 
+                       target='_blank'
+                       rel="noreferrer" 
                        className='btn btn-outline-light py-1 px-4'>
                         + Follow
                     </a>
@@ -35,7 +35,8 @@ function Follow_us() {
                         Instagram 
                     </p>
                     <a href='https://www.instagram.com/'
-                       target='_blank' 
+                       target='_blank'
+                       rel="noreferrer" 
                        className='btn btn-outline-light py-1 px-4'>
                         + Follow
                     </a>
@@ -45,4 +46,4 @@ function Follow_us() {
     )
 }
 
-export default Follow_us
+export default FollowUs;

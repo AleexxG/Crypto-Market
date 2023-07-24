@@ -1,18 +1,9 @@
-import React from 'react'
 import Error from '../../Error';
 import Loading from '../../Loading';
+import ColorChange from '../../../helpers/ColorChange';
 
-function Market_data({ market_data, status }) {
-    const text_color = (data) => {
-        let color = ''
-
-        if (data < 0) {
-            return color = 'text-danger';
-        }
-        else {
-            return color = 'text-success';
-        }
-    };
+function MarketData({ market_data, status }) {
+    const textColor = new ColorChange;
 
     return (
         <article className='color_bg w-100 rounded-2 px-4 py-3'>
@@ -29,7 +20,7 @@ function Market_data({ market_data, status }) {
                             <i className="fa-solid fa-coins me-3" style={{fontSize: '1.05rem'}}></i>
                             <p>Market cap change</p>
                         </div>
-                        <p className={text_color(market_data.mcap_change)}>
+                        <p className={textColor.colorChange(market_data.mcap_change)}>
                             {market_data.mcap_change}%
                         </p>
                     </li>
@@ -39,7 +30,7 @@ function Market_data({ market_data, status }) {
                             <i className="fa-solid fa-chart-simple me-3" style={{fontSize: '1.05rem'}}></i>
                             <p>Volume change</p>
                         </div>
-                        <p className={text_color(market_data.volume_change)}>
+                        <p className={textColor.colorChange(market_data.volume_change)}>
                             {market_data.volume_change}%
                         </p>
                     </li>
@@ -57,4 +48,4 @@ function Market_data({ market_data, status }) {
     )
 }
 
-export default Market_data
+export default MarketData;

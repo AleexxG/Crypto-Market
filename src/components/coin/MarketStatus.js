@@ -1,30 +1,28 @@
-import React from 'react'
+import NumberFormatter from '../../helpers/NumberFormatter.js';
+import ColorChange from '../../helpers/ColorChange.js';
 
-function Market_status({ coin, format_number, currency_format_options }) {
-    const all_time_high_format = format_number(
+function MarketStatus({ coin }) {
+    const formatter = new NumberFormatter('usd');
+    const textColor = new ColorChange;
+
+    const all_time_high_format = formatter.format(
         coin.market_data?.ath.usd, 
-        currency_format_options
+        formatter.priceOptions()
     );
 
-    const market_cap_format = format_number(
-        coin.market_data?.market_cap.usd, {
-            ...currency_format_options,
-            notation: 'compact',
-        }
+    const market_cap_format = formatter.format(
+        coin.market_data?.market_cap.usd,
+        formatter.bigPriceOptions()
     );
 
-    const volume_format = format_number(
-        coin.market_data?.total_volume.usd, {
-            ...currency_format_options,
-            notation: 'compact',
-        }
+    const volume_format = formatter.format(
+        coin.market_data?.total_volume.usd, 
+        formatter.bigPriceOptions()
     );
 
-    const supply_format = format_number(
-        coin.market_data?.total_supply, {
-            maximumFractionDigits: 2,
-            notation: 'compact',
-        }
+    const supply_format = formatter.format(
+        coin.market_data?.total_supply, 
+        formatter.bigNumberOptions()
     );
 
     const text_color = (data) => {
@@ -71,10 +69,10 @@ function Market_status({ coin, format_number, currency_format_options }) {
 
                     <article>
                         <p className='text-uppercase text-secondary'>price change (24H)</p>
-                        <p className={`${text_color(coin.market_data?.price_change_percentage_24h)} fs-5`}>{
-                            format_number(
+                        <p className={`${textColor.colorChange(coin.market_data?.price_change_percentage_24h)} fs-5`}>{
+                            formatter.format(
                                     coin.market_data?.price_change_percentage_24h, 
-                                    {maximumFractionDigits: 2}
+                                    { maximumFractionDigits: 2 }
                                 )
                             }%
                         </p>
@@ -82,10 +80,10 @@ function Market_status({ coin, format_number, currency_format_options }) {
 
                     <article>
                         <p className='text-uppercase text-secondary'>price change (7D)</p>
-                        <p className={`${text_color(coin.market_data?.price_change_percentage_7d)} fs-5`}>{
-                            format_number(
+                        <p className={`${textColor.colorChange(coin.market_data?.price_change_percentage_7d)} fs-5`}>{
+                            formatter.format(
                                     coin.market_data?.price_change_percentage_7d, 
-                                    {maximumFractionDigits: 2}
+                                    { maximumFractionDigits: 2 }
                                 )
                             }%
                         </p>
@@ -93,10 +91,10 @@ function Market_status({ coin, format_number, currency_format_options }) {
 
                     <article>
                         <p className='text-uppercase text-secondary'>price change (30D)</p>
-                        <p className={`${text_color(coin.market_data?.price_change_percentage_30d)} fs-5`}>{
-                            format_number(
+                        <p className={`${textColor.colorChange(coin.market_data?.price_change_percentage_30d)} fs-5`}>{
+                            formatter.format(
                                     coin.market_data?.price_change_percentage_30d, 
-                                    {maximumFractionDigits: 2}
+                                    { maximumFractionDigits: 2 }
                                 )
                             }%
                         </p>
@@ -107,4 +105,4 @@ function Market_status({ coin, format_number, currency_format_options }) {
     )
 }
 
-export default Market_status
+export default MarketStatus;

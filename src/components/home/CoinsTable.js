@@ -1,11 +1,10 @@
-import React from "react";
-import './coins_table.css';
+import './coinsTable.css';
 import Error from "../Error";
 import Loading from "../Loading";
-import Coins_row from "./coins_table/Coins_row";
+import CoinsRow from "./coins_table/CoinsRow";
 import Pagination from "./coins_table/Pagination";
 
-function Coins_table({
+function CoinsTable({
     coins,
     current_page,
     set_current_page,
@@ -24,7 +23,7 @@ function Coins_table({
     return (
         <section className='table_section container'>
             <div className="table-responsive shadow p-3 mb-5 rounded color_bg">
-                <table className="coins_table">
+                <table className="coinsTable">
                     <thead>
                         <tr>
                             <td scope="col">#</td>
@@ -41,7 +40,7 @@ function Coins_table({
                         {coins.map(coin => 
                         {
                             return (
-                            <Coins_row
+                            <CoinsRow
                                 key = {coin.id}
                                 coin = {coin}
                             />
@@ -66,4 +65,4 @@ function Coins_table({
     )
 }
 
-export default Coins_table;
+export default CoinsTable;

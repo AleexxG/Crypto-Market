@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Loading from '../components/Loading';
-import Coin_info from '../components/coin/Coin_info';
+import CoinInfo from '../components/coin/CoinInfo';
 import Chart from '../components/coin/Chart';
-import Market_status from '../components/coin/Market_status';
+import MarketStatus from '../components/coin/MarketStatus';
 
 function Coin() {
   const [coin, set_coin] = useState([]);
@@ -38,36 +38,21 @@ function Coin() {
     fetch_coin();
   }, [coin_id]);
 
-  const format_number = (value, options) => {
-    const format = new Intl.NumberFormat(undefined, options);
-    return format.format(value);
-  };
-
-  const currency_format_options = {
-      currency:'usd',
-      style: 'currency',
-      maximumFractionDigits: 2,
-  };
-
   return (
     <main>
 
       {is_loading ? <Loading /> :
         <>
-          <Coin_info 
+          <CoinInfo 
             coin = {coin}
-            format_number = {format_number}
-            currency_format_options = {currency_format_options}
           />
           
           <Chart 
             coin_id = {coin_id}
           />
 
-          <Market_status 
+          <MarketStatus 
             coin = {coin}
-            format_number = {format_number}
-            currency_format_options = {currency_format_options}
           />
         </>
       }

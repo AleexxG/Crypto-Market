@@ -12,7 +12,8 @@ function Exchanges() {
                         Binance
                     </p>
                     <a href='https://www.binance.com/'
-                       target='_blank' 
+                       target='_blank'
+                       rel="noreferrer" 
                        className='btn btn-outline-light py-1 px-4'>
                         Visit
                     </a>
@@ -24,7 +25,8 @@ function Exchanges() {
                         Coinbase
                     </p>
                     <a href='https://www.coinbase.com/'
-                       target='_blank' 
+                       target='_blank'
+                       rel="noreferrer" 
                        className='btn btn-outline-light py-1 px-4'>
                         Visit
                     </a>
@@ -36,7 +38,8 @@ function Exchanges() {
                         Kraken
                     </p>
                     <a href='https://www.kraken.com/'
-                       target='_blank' 
+                       target='_blank'
+                       rel="noreferrer" 
                        className='btn btn-outline-light py-1 px-4'>
                         Visit
                     </a>

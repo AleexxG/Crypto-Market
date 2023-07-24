@@ -1,23 +1,21 @@
-import React from 'react'
+import NumberFormatter from '../../helpers/NumberFormatter.js';
 
-function Coin_info({ coin, format_number, currency_format_options }) {
-    const price_format = format_number(
-        coin.market_data?.current_price.usd, 
-        currency_format_options
+function CoinInfo({ coin }) {
+    const formatter = new NumberFormatter('usd');
+
+    const price_format = formatter.format(
+        coin.market_data?.current_price.usd,
+        formatter.priceOptions()
     );
 
-    const market_cap_format = format_number(
-        coin.market_data?.market_cap.usd, {
-            ...currency_format_options,
-            notation: 'compact',
-        }
+    const market_cap_format = formatter.format(
+        coin.market_data?.market_cap.usd,
+        formatter.bigPriceOptions()
     );
 
-    const volume_format = format_number(
-        coin.market_data?.total_volume.usd, {
-            ...currency_format_options,
-            notation: 'compact',
-        }
+    const volume_format = formatter.format(
+        coin.market_data?.total_volume.usd, 
+        formatter.bigPriceOptions()
     );
 
     return (
@@ -51,4 +49,4 @@ function Coin_info({ coin, format_number, currency_format_options }) {
     )
 }
 
-export default Coin_info
+export default CoinInfo;

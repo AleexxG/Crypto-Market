@@ -34,14 +34,16 @@ function Footer() {
                         <li className="mb-2">
                             <a className="text-white"
                                href="https://www.facebook.com"
-                               target="_blank">
+                               target="_blank"
+                               rel="noreferrer">
                                 Facebook
                             </a>
                         </li>
                         <li>
                             <a className="text-white"
                                href="https://www.twitter.com"
-                               target="_blank">
+                               target="_blank"
+                               rel="noreferrer">
                                 Twitter
                             </a>
                         </li>
@@ -53,7 +55,8 @@ function Footer() {
                             <h5 className='fw-bold'>COINPULSE APP AVAILABLE ON</h5>
                         </li>
                         <li>
-                            <a target='_blank' 
+                            <a target='_blank'
+                               rel="noreferrer" 
                                href='https://play.google.com/store/games?device=windows&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
                                 <img className='w-25' 
                                      style={{minWidth: '150px'}} 
@@ -63,7 +66,8 @@ function Footer() {
                             </a>
                         </li>
                         <li>
-                            <a target='_blank' 
+                            <a target='_blank'
+                               rel="noreferrer" 
                                href="https://www.apple.com/app-store/">
                                 <img className='w-25' 
                                      style={{minWidth: '150px'}} 

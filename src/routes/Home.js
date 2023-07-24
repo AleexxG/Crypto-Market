@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import Market from '../components/home/Market';
-import Coins_table from '../components/home/Coins_table';
+import CoinsTable from '../components/home/CoinsTable';
 
 function Home() {
 	const [coins, set_coins] = useState([]);
@@ -51,7 +51,7 @@ function Home() {
 		<>
 			<Market />
 
-			<Coins_table 
+			<CoinsTable 
 				coins = {coins}
 				current_page = {current_page}
 				set_current_page = {set_current_page}

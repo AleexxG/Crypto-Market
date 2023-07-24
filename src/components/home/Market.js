@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import Market_data from './market/Market_data'
+import MarketData from './market/MarketData'
 import Exchanges from './market/Exchanges'
-import Follow_us from './market/Follow_us'
+import FollowUs from './market/FollowUs'
 
 function Market() {
     const [market_data, set_market_data] = useState([]);
@@ -40,14 +40,14 @@ function Market() {
         <section className='gradient pt-md-4 pt-3 pb-5'>
             <div className='container py-4 d-flex flex-md-row flex-column justify-content-between gap-3'>
                 
-                <Market_data 
+                <MarketData 
                     market_data = {market_data}
                     status = {status}
                 />
 
                 <Exchanges />
                 
-                <Follow_us />
+                <FollowUs />
 
             </div>
         </section>

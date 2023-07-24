@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Line_chart from './Line_chart';
+import LineChart from './LineChart';
 
 function Chart({ coin_id }) {
     const [chart, set_chart] = useState([]);
@@ -38,7 +38,7 @@ function Chart({ coin_id }) {
     return (
         <section className='container'>
 
-            <Line_chart 
+            <LineChart 
                 chart = {chart}
                 days = {days}
             />
@@ -47,4 +47,4 @@ function Chart({ coin_id }) {
     )
 }
 
-export default Chart
+export default Chart;

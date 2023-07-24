@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { 
   createBrowserRouter, 
   createRoutesFromElements,
@@ -7,21 +5,21 @@ import {
   RouterProvider, 
 } from 'react-router-dom';
 
-import Root_layout from './components/Root_layout';
+import RootLayout from './components/RootLayout';
 import Home from './routes/Home';
 import Coin from './routes/Coin';
-import Not_found from './routes/Not_found';
+import NotFound from './routes/NotFound';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path='/' element={<Root_layout />}>
+      <Route path='/' element={<RootLayout />}>
         <Route index element={<Home />} />
         <Route path='page/:page_number' element={<Home />} />
         <Route path='coins/:coin_id' element={<Coin />} />
       </Route>
 
-      <Route path='*' element={<Not_found />} />
+      <Route path='*' element={<NotFound />} />
     </>
 ));
 
