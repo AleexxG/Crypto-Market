@@ -49,8 +49,6 @@ function Coin() {
       maximumFractionDigits: 2,
   };
 
-  console.log(coin);
-
   return (
     <main>
 
@@ -62,7 +60,9 @@ function Coin() {
             currency_format_options = {currency_format_options}
           />
           
-          <Chart />
+          <Chart 
+            coin_id = {coin_id}
+          />
 
           <Market_status 
             coin = {coin}
