@@ -1,20 +1,18 @@
-import React from 'react'
+function Pagination({currentPage, totalPages, pageClick}) {
+    let pages = [];
 
-function Pagination({current_page, total_pages, handle_click}) {
-    let page_numbers = [];
-
-    const display_pagination = (current_page) => {
-        if (current_page < 5) {
-            page_numbers = [1,2,3,4,5];
+    const displayPagination = (currentPage) => {
+        if (currentPage < 5) {
+            pages = [1,2,3,4,5];
             return (
                 <div className='d-flex gap-2'>
-                    {page_numbers.map(number => (
-                        <li key={number}>
-                            <a onClick={(e) => handle_click(e, number)} 
+                    {pages.map(page => (
+                        <li key={page}>
+                            <a onClick={(e) => pageClick(e, page)} 
                                 className={`page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white shadow-none
-                                ${current_page == number ? `bg-danger` : `bg-transparent`}`} 
+                                ${currentPage === page ? `bg-danger` : `bg-transparent`}`} 
                                 href="/">
-                                {number}
+                                {page}
                             </a>
                         </li>
                     ))}
@@ -23,22 +21,22 @@ function Pagination({current_page, total_pages, handle_click}) {
                         <p className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent">...</p>
                     </li>
                     <li>
-                        <a onClick={(e) => handle_click(e, total_pages)} 
+                        <a onClick={(e) => pageClick(e, totalPages)} 
                            className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent" 
                            href="/">
-                            {total_pages}
+                            {totalPages}
                         </a>
                     </li> 
                 </div>
             )
         }
 
-        else if (current_page >= 3 && current_page < total_pages - 3) {
-            page_numbers = [current_page - 1, current_page, current_page + 1];
+        else if (currentPage >= 3 && currentPage < totalPages - 3) {
+            pages = [currentPage - 1, currentPage, currentPage + 1];
             return (
                 <div className='d-flex gap-2'>
                     <li>
-                        <a onClick={(e) => handle_click(e, 1)} 
+                        <a onClick={(e) => pageClick(e, 1)} 
                            className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent" 
                            href="/">
                             1
@@ -48,13 +46,13 @@ function Pagination({current_page, total_pages, handle_click}) {
                         <p className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent">...</p>
                     </li>
 
-                    {page_numbers.map(number => (
-                        <li key={number}>
-                            <a onClick={(e) => handle_click(e, number)} 
+                    {pages.map(page => (
+                        <li key={page}>
+                            <a onClick={(e) => pageClick(e, page)} 
                                 className={`page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white shadow-none
-                                ${current_page == number ? `bg-danger` : `bg-transparent`}`} 
+                                ${currentPage === page ? `bg-danger` : `bg-transparent`}`} 
                                 href="/">
-                                {number}
+                                {page}
                             </a>          
                         </li>
                     ))}
@@ -63,10 +61,10 @@ function Pagination({current_page, total_pages, handle_click}) {
                         <p className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent">...</p>
                     </li>
                     <li>
-                        <a onClick={(e) => handle_click(e, total_pages)} 
+                        <a onClick={(e) => pageClick(e, totalPages)} 
                            className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent" 
                            href="/">
-                            {total_pages}
+                            {totalPages}
                         </a>
                     </li> 
                 </div>
@@ -74,11 +72,11 @@ function Pagination({current_page, total_pages, handle_click}) {
         }
 
         else {
-            page_numbers = [total_pages - 4, total_pages - 3, total_pages - 2, total_pages - 1, total_pages];
+            pages = [totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
             return (
                 <div className='d-flex gap-2'>
                     <li>
-                        <a onClick={(e) => handle_click(e, 1)} 
+                        <a onClick={(e) => pageClick(e, 1)} 
                            className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent" 
                            href="/">
                             1
@@ -88,13 +86,13 @@ function Pagination({current_page, total_pages, handle_click}) {
                         <p className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent">...</p>
                     </li>
 
-                    {page_numbers.map(number => (
-                        <li key={number}>
-                            <a onClick={(e) => handle_click(e, number)} 
+                    {pages.map(page => (
+                        <li key={page}>
+                            <a onClick={(e) => pageClick(e, page)} 
                                 className={`page-link px-sm-3 px-2 rounded-2 rounded-2 border-0 fw-bold text-white shadow-none
-                                ${current_page == number ? `bg-danger` : `bg-transparent`}`} 
+                                ${currentPage === page ? `bg-danger` : `bg-transparent`}`} 
                                 href="/">
-                                {number}
+                                {page}
                             </a>
                         </li>
                     ))}
@@ -107,20 +105,20 @@ function Pagination({current_page, total_pages, handle_click}) {
         <div className='d-flex justify-content-center mb-5'>
             <ul className="pagination mb-0">
                 <li>
-                    <a onClick={(e) => handle_click(e, current_page - 1)} 
+                    <a onClick={(e) => pageClick(e, currentPage - 1)} 
                         className={`page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white shadow-none bg-transparent
-                        ${current_page == 1 ? `disabled` : ``}`} 
+                        ${currentPage === 1 ? `disabled` : ``}`} 
                         href="/">
                         <i className="fa-solid fa-chevron-left"></i>
                     </a>          
                 </li>
 
-                {display_pagination(current_page)}
+                {displayPagination(currentPage)}
 
                 <li>
-                    <a onClick={(e) => handle_click(e, current_page + 1)} 
+                    <a onClick={(e) => pageClick(e, currentPage + 1)} 
                         className={`page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white shadow-none bg-transparent
-                        ${current_page == total_pages ? `disabled` : ``}`} 
+                        ${currentPage === totalPages ? `disabled` : ``}`} 
                         href="/">
                         <i className="fa-solid fa-chevron-right"></i>
                     </a>          
@@ -130,4 +128,4 @@ function Pagination({current_page, total_pages, handle_click}) {
     )
 }
 
-export default Pagination
+export default Pagination;

@@ -3,38 +3,27 @@ import ColorChange from '../../helpers/ColorChange.js';
 
 function MarketStatus({ coin }) {
     const formatter = new NumberFormatter('usd');
-    const textColor = new ColorChange;
+    const textColor = new ColorChange();
 
-    const all_time_high_format = formatter.format(
+    const athPriceFormat = formatter.format(
         coin.market_data?.ath.usd, 
         formatter.priceOptions()
     );
 
-    const market_cap_format = formatter.format(
+    const marketCapFormat = formatter.format(
         coin.market_data?.market_cap.usd,
         formatter.bigPriceOptions()
     );
 
-    const volume_format = formatter.format(
+    const volumeFormat = formatter.format(
         coin.market_data?.total_volume.usd, 
         formatter.bigPriceOptions()
     );
 
-    const supply_format = formatter.format(
+    const supplyFormat = formatter.format(
         coin.market_data?.total_supply, 
         formatter.bigNumberOptions()
     );
-
-    const text_color = (data) => {
-        let color = '';
-
-        if (data > 0) {
-            return color = 'text-success';
-        }
-        else {
-            return color = 'text-danger';
-        }
-    };
 
     return (
         <section className='my-5'>
@@ -44,17 +33,17 @@ function MarketStatus({ coin }) {
                 <div className='row row-cols-md-4 row-cols-sm-3 row-cols-2 g-5 mt-1'>
                     <article>
                         <p className='text-uppercase text-secondary'>market cap</p>
-                        <p className='fs-5'>{market_cap_format}</p>
+                        <p className='fs-5'>{marketCapFormat}</p>
                     </article>
 
                     <article>
                         <p className='text-uppercase text-secondary'>volume</p>
-                        <p className='fs-5'>{volume_format}</p>
+                        <p className='fs-5'>{volumeFormat}</p>
                     </article>
 
                     <article>
                         <p className='text-uppercase text-secondary'>supply</p>
-                        <p className='fs-5'>{supply_format}</p>
+                        <p className='fs-5'>{supplyFormat}</p>
                     </article>
 
                     <article>
@@ -64,7 +53,7 @@ function MarketStatus({ coin }) {
 
                     <article>
                         <p className='text-uppercase text-secondary'>all time high</p>
-                        <p className='fs-5'>{all_time_high_format}</p>
+                        <p className='fs-5'>{athPriceFormat}</p>
                     </article>
 
                     <article>

@@ -6,18 +6,18 @@ import Chart from '../components/coin/Chart';
 import MarketStatus from '../components/coin/MarketStatus';
 
 function Coin() {
-  const [coin, set_coin] = useState([]);
-  const { coin_id } = useParams();
+  const [coin, setCoin] = useState([]);
+  const { coinId } = useParams();
   const navigate = useNavigate();
-  const [is_loading, set_is_loading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetch_coin = async () => {
+    const fetchCoin = async () => {
       try {
-        set_is_loading(true)
+        setLoading(true);
 
         const response = await fetch(
-          `https://api.coingecko.com/api/v3/coins/${coin_id}`
+          `https://api.coingecko.com/api/v3/coins/${coinId}`
         );
 
         if (!response.ok) {
@@ -25,30 +25,30 @@ function Coin() {
         }
 
         const data = await response.json();
-        set_coin(data);
-        set_is_loading(false);
+        setCoin(data);
+        setLoading(false);
       }
       catch (error) {
-        set_is_loading(false);
-        set_coin([]);
+        setLoading(false);
+        setCoin([]);
         navigate('*');
       }
     };
 
-    fetch_coin();
-  }, [coin_id]);
+    fetchCoin();
+  }, [coinId, navigate]);
 
   return (
     <main>
 
-      {is_loading ? <Loading /> :
+      {loading ? <Loading /> :
         <>
           <CoinInfo 
             coin = {coin}
           />
           
           <Chart 
-            coin_id = {coin_id}
+            coinId = {coinId}
           />
 
           <MarketStatus 

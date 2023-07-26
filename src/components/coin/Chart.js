@@ -1,21 +1,23 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import LineChart from './LineChart';
+import Loading from '../Loading';
+import Error from '../Error';
 
-function Chart({ coin_id }) {
-    const [chart, set_chart] = useState([]);
-    const [days, set_days] = useState(7);
-    const [status, set_status] = useState({
-        is_loading: false,
+function Chart({ coinId }) {
+    const [chart, setChart] = useState([]);
+    const [days, setDays] = useState(7);
+    const [status, setStatus] = useState({
+        loading: false,
         error: null,
-    })
+    });
 
     useEffect(() => {
-        const fetch_chart = async () => {
+        const fetchChart = async () => {
             try {
-                set_status({ is_loading: true });
+                setStatus({ loading: true });
 
                 const response = await fetch(
-                    `https://api.coingecko.com/api/v3/coins/${coin_id}/market_chart?vs_currency=usd&days=${days}`
+                    `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${days}`
                 );
 
                 if (!response.ok) {
@@ -23,25 +25,30 @@ function Chart({ coin_id }) {
                 }
 
                 const data = await response.json();
-                set_chart(data.prices);
-                set_status({ is_loading: false, error: null });
+                setChart(data.prices);
+                setStatus({ loading: false, error: null });
             }
             catch (error) {
-                set_status({ is_loading: false, error: error })
-                set_chart([]);
+                setStatus({ loading: false, error: error });
+                setChart([]);
             }
         };
 
-        fetch_chart();
-    }, []);
+        fetchChart();
+    }, [coinId, days]);
 
     return (
         <section className='container'>
 
-            <LineChart 
-                chart = {chart}
-                days = {days}
-            />
+            {status.loading && <Loading />}
+            {status.error && <Error />}
+
+            {!status.loading && !status.error && (
+                <LineChart 
+                    chart = {chart}
+                    days = {days}
+                />
+            )}
 
         </section>
     )

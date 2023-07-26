@@ -1,33 +1,36 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Market from '../components/home/Market';
 import CoinsTable from '../components/home/CoinsTable';
 
 function Home() {
-	const [coins, set_coins] = useState([]);
-    const [current_page, set_current_page] = useState(1);
-    const total_pages = 92;
+	const [coins, setCoins] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const totalPages = 92;
     const navigate = useNavigate();
-    const { page_number } = useParams();
-    const parsed_page_number = parseInt(page_number, 10);
-    const [status, set_status] = useState({
-        is_loading: false,
+    const { pageNumber } = useParams();
+    const parsedPageNumber = parseInt(pageNumber, 10);
+    const [status, setStatus] = useState({
+        loading: false,
         error: null,
-    })
+    });
 
     useEffect(() => {
-        if (!isNaN(parsed_page_number)) {
-            parsed_page_number > total_pages ? 
+        if (!isNaN(parsedPageNumber)) {
+            parsedPageNumber > totalPages ? 
             navigate('/') :
-            set_current_page(parsed_page_number);
+            setCurrentPage(parsedPageNumber);
+        }
+        else {
+            setCurrentPage(1);
         }
 
-        const fetch_coins = async () => {
+        const fetchCoins = async () => {
             try {
-                set_status({ is_loading: true });
+                setStatus({ loading: true });
 
                 const response = await fetch (
-                    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=${current_page}&sparkline=false`
+                    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=${currentPage}&sparkline=false`
                 );
 
                 if (!response.ok) {
@@ -35,17 +38,17 @@ function Home() {
                 }
 
                 const data = await response.json();
-                set_coins(data);
-                set_status({ is_loading: false, error: null });
+                setCoins(data);
+                setStatus({ loading: false, error: null });
             }
             catch (error) {
-                set_status({ is_loading: false, error: error });
-                set_coins([]);
+                setStatus({ loading: false, error: error });
+                setCoins([]);
             }
         };
 
-        fetch_coins();
-    }, [current_page]);
+        fetchCoins();
+    }, [currentPage, parsedPageNumber, navigate]);
 
 	return (
 		<>
@@ -53,9 +56,9 @@ function Home() {
 
 			<CoinsTable 
 				coins = {coins}
-				current_page = {current_page}
-				set_current_page = {set_current_page}
-				total_pages = {total_pages}
+				currentPage = {currentPage}
+				setCurrentPage = {setCurrentPage}
+				totalPages = {totalPages}
 				navigate = {navigate}
 				status = {status}
 			/>
@@ -63,4 +66,4 @@ function Home() {
 	)
 }
 
-export default Home
+export default Home;

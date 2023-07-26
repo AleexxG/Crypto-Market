@@ -1,5 +1,4 @@
-import React from 'react'
-import coinpulse_logo from '../assets/coinpulse_logo.png';
+import coinpulseLogo from '../assets/coinpulse_logo.png';
 
 function Navbar() {
     return (
@@ -8,7 +7,7 @@ function Navbar() {
                 <div className="container-fluid">
                     <a className="navbar-brand d-flex align-items-center" 
                        href='/'>
-                        <img src={coinpulse_logo} 
+                        <img src={coinpulseLogo} 
                              alt='CoinPulse logo'   
                              style={{width: '15%'}}>
                         </img>
@@ -58,4 +57,4 @@ function Navbar() {
     )
 }
 
-export default Navbar
+export default Navbar;

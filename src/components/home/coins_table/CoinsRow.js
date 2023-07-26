@@ -9,52 +9,52 @@ function CoinsRow({ coin }) {
         name,
         image,
         current_price: price,
-        market_cap,
-        market_cap_rank,
+        market_cap: marketCap,
+        market_cap_rank: marketCapRank,
         total_volume: volume,
-        price_change_percentage_24h: price_change,
+        price_change_percentage_24h: priceChange,
         circulating_supply: supply,
     } = coin;
 
     const navigate = useNavigate();
-    const textColor = new ColorChange;
+    const textColor = new ColorChange();
 
 // === Formating data ===
     const formatter = new NumberFormatter('usd');
 
-    const price_format = formatter.format(
+    const priceFormat = formatter.format(
         price, 
         formatter.priceOptions()
     );
 
-    const market_cap_format = formatter.format(
-        market_cap, 
+    const marketCapFormat = formatter.format(
+        marketCap, 
         formatter.bigPriceOptions()
     );
 
-    const supply_format = formatter.format(
+    const supplyFormat = formatter.format(
         supply,
         formatter.bigNumberOptions()    
     );
 
-    const volume_format = formatter.format(
+    const volumeFormat = formatter.format(
         volume, 
         formatter.bigPriceOptions()
     );
 
-    const price_change_format = formatter.format(
-        price_change, 
+    const priceChangeFormat = formatter.format(
+        priceChange, 
         { maximumFractionDigits: 2 }
     );
 
-    const handle_click = () => {
+    const coinClick = () => {
         navigate(`/coins/${id}`);
         window.scrollTo(0, 0);
     };
 
     return (
-        <tr onClick={() => handle_click()}>
-            <td scope="row">{market_cap_rank}</td>
+        <tr onClick={() => coinClick()}>
+            <td>{marketCapRank}</td>
 
             <td className='d-flex align-items-center gap-3'>
                 <img 
@@ -69,15 +69,15 @@ function CoinsRow({ coin }) {
                 </div>
             </td>
 
-            <td>{price_format}</td>
-            <td>{market_cap_format}</td>
-            <td>{supply_format}</td>
-            <td>{volume_format}</td>
-            <td className={textColor.colorChange(price_change_format)}>
-                {price_change_format}%
+            <td>{priceFormat}</td>
+            <td>{marketCapFormat}</td>
+            <td>{supplyFormat}</td>
+            <td>{volumeFormat}</td>
+            <td className={textColor.colorChange(priceChangeFormat)}>
+                {priceChangeFormat}%
             </td>
         </tr>
     )
 }
 
-export default CoinsRow
+export default CoinsRow;

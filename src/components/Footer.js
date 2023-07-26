@@ -1,6 +1,5 @@
-import React from 'react'
-import google_play from '../assets/google_play.svg';
-import app_store from '../assets/app_store.svg';
+import googlePlay from '../assets/google_play.svg';
+import appStore from '../assets/app_store.svg';
 
 function Footer() {
     return (
@@ -61,7 +60,7 @@ function Footer() {
                                 <img className='w-25' 
                                      style={{minWidth: '150px'}} 
                                      alt='Get it on Google Play' 
-                                     src={google_play}
+                                     src={googlePlay}
                                 />
                             </a>
                         </li>
@@ -72,7 +71,7 @@ function Footer() {
                                 <img className='w-25' 
                                      style={{minWidth: '150px'}} 
                                      alt="Download on the App Store" 
-                                     src={app_store}
+                                     src={appStore}
                                 />
                             </a>
                         </li>
@@ -89,4 +88,4 @@ function Footer() {
     )
 }
 
-export default Footer
+export default Footer;

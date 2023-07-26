@@ -11,11 +11,11 @@ import {
 import NumberFormatter from '../../helpers/NumberFormatter.js';
 
 
-const map_chart_data = (time, price_at_time, days) => {
+const mapChartData = (time, priceAtTime, days) => {
     const formatter = new NumberFormatter('usd');
     
-    const price_format = formatter.format(
-        price_at_time, 
+    const priceFormat = formatter.format(
+        priceAtTime, 
         formatter.priceOptions()
     );
 
@@ -25,27 +25,27 @@ const map_chart_data = (time, price_at_time, days) => {
     if (days === 1) {
         return {
             Time: hours,
-            Price: price_at_time,
-            Formated_price: price_format,
+            Price: priceAtTime,
+            Formated_price: priceFormat,
         };
     }
     else if (days === 365) {
         return {
             Time: date.toLocaleString('default', { month: 'short' }),
-            Price: price_at_time,
-            Formated_price: price_format,
+            Price: priceAtTime,
+            Formated_price: priceFormat,
         };
     }
     else {
         return {
             Time: `${date.getMonth() + 1}/${date.getDate()}`,
-            Price: price_at_time,
-            Formated_price: price_format,
+            Price: priceAtTime,
+            Formated_price: priceFormat,
         };
     }   
 };
 
-const get_number_of_ticks = (days) => {
+const getTicks = (days) => {
     switch (days) {
         case 1:
             return 8;
@@ -56,7 +56,7 @@ const get_number_of_ticks = (days) => {
     }
 };
 
-const Custom_tooltip = ({ active, payload, days }) => {
+const CustomTooltip = ({ active, payload, days }) => {
     if (active && payload && payload.length) {
         const data = payload[0].payload;
         return (
@@ -71,20 +71,20 @@ const Custom_tooltip = ({ active, payload, days }) => {
 
 
 function LineChart({ chart, days }) {
-    const chart_data = chart.map(([time, price_at_time]) => map_chart_data(time, price_at_time, days));
+    const chartData = chart.map(([time, priceAtTime]) => mapChartData(time, priceAtTime, days));
 
-    const min_price = Math.min(...chart.map((data) => data.Price));
-    const max_price = Math.max(...chart.map((data) => data.Price));
-    const y_domain = [Math.floor(min_price), Math.ceil(max_price)];
+    const minPrice = Math.min(...chart.map((data) => data.Price));
+    const maxPrice = Math.max(...chart.map((data) => data.Price));
+    const yDomain = [Math.floor(minPrice), Math.ceil(maxPrice)];
 
-    const number_of_ticks = get_number_of_ticks(days)
-    const tick_interval = Math.ceil(chart_data.length / number_of_ticks);
+    const numberOfTicks = getTicks(days)
+    const tickInterval = Math.ceil(chartData.length / numberOfTicks);
 
     return (
         <div style={{ width: '100%', height: 380 }}>
             <ResponsiveContainer>
                 <AreaChart
-                    data={chart_data}
+                    data={chartData}
                     margin={{
                         top: 50,
                         right: 0,
@@ -93,9 +93,9 @@ function LineChart({ chart, days }) {
                     }}
                 >
                     <CartesianGrid stroke="#ffffff12" />
-                    <XAxis dataKey="Time" interval={tick_interval} />
-                    <YAxis domain={y_domain} orientation="right" />
-                    <Tooltip content={<Custom_tooltip days = {days} />} />
+                    <XAxis dataKey="Time" interval={tickInterval} />
+                    <YAxis domain={yDomain} orientation="right" />
+                    <Tooltip content={<CustomTooltip days = {days} />} />
                     <Area type="monotone" dataKey="Price" stroke="#45b0a9" fill="#96fff810" />
                 </AreaChart>
             </ResponsiveContainer>

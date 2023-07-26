@@ -1,6 +1,5 @@
-import React from 'react'
 import Lottie from 'lottie-react';
-import crypto_news from '../assets/crypto_news.json';
+import cryptoNews from '../assets/crypto_news.json';
 
 function Newsletter() {
     return (
@@ -18,7 +17,7 @@ function Newsletter() {
                 </article>
 
                 <Lottie 
-                    animationData={crypto_news}
+                    animationData={cryptoNews}
                     className='col-md-3 col-sm-6 col-9'
                 />
 
@@ -29,4 +28,4 @@ function Newsletter() {
     )
 }
 
-export default Newsletter
+export default Newsletter;

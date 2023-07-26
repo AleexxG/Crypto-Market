@@ -1,9 +1,7 @@
-import React from 'react'
-
 function Exchanges() {
 
     return (
-        <article className='color_bg w-100 rounded-2 px-4 py-3 d-md-block d-none'>
+        <article className='color_bg_tr w-100 rounded-2 px-4 py-3 d-md-block d-none'>
             <h5 className='border-bottom pb-3'>⭐ Top Exchanges</h5>
             <ol className='list-unstyled'>
                 <li className='mt-4 d-flex justify-content-between align-items-center'>
@@ -49,4 +47,4 @@ function Exchanges() {
         )
 }
 
-export default Exchanges
+export default Exchanges;

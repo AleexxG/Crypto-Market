@@ -1,5 +1,3 @@
-import React from 'react'
-
 function Error({ error }) {
     return (
         <div className='d-flex flex-column align-items-center m-5'>
@@ -9,4 +7,4 @@ function Error({ error }) {
     )
 }
 
-export default Error
+export default Error;
