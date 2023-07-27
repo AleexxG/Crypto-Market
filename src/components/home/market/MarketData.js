@@ -6,7 +6,7 @@ function MarketData({ marketData, status }) {
     const textColor = new ColorChange();
 
     return (
-        <article className='color_bg_tr w-100 rounded-2 px-4 py-3'>
+        <article className='bg-black bg-opacity-25 w-100 rounded-2 px-4 py-3'>
             <h5 className='border-bottom pb-3'>📊 Today's Market</h5>
 
             {status.loading && <Loading />}

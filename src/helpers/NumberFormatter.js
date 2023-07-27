@@ -17,6 +17,14 @@ class NumberFormatter {
         };
     }
   
+    smallPriceOptions() {
+        return {
+            currency: this.currency,
+            style: 'currency',
+            maximumFractionDigits: 5,
+        };
+    }
+
     bigPriceOptions() {
         return {
             currency: this.currency,

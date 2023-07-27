@@ -1,6 +1,15 @@
 function Pagination({currentPage, totalPages, pageClick}) {
     let pages = [];
 
+    const markCurrentPage = (currentPage, page) => {
+        if (currentPage === page) {
+            return 'bg-danger';
+        }
+        else {
+            return 'bg-transparent';
+        }
+    };
+
     const displayPagination = (currentPage) => {
         if (currentPage < 5) {
             pages = [1,2,3,4,5];
@@ -10,7 +19,7 @@ function Pagination({currentPage, totalPages, pageClick}) {
                         <li key={page}>
                             <a onClick={(e) => pageClick(e, page)} 
                                 className={`page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white shadow-none
-                                ${currentPage === page ? `bg-danger` : `bg-transparent`}`} 
+                                ${markCurrentPage(currentPage, page)}`} 
                                 href="/">
                                 {page}
                             </a>
@@ -50,7 +59,7 @@ function Pagination({currentPage, totalPages, pageClick}) {
                         <li key={page}>
                             <a onClick={(e) => pageClick(e, page)} 
                                 className={`page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white shadow-none
-                                ${currentPage === page ? `bg-danger` : `bg-transparent`}`} 
+                                ${markCurrentPage(currentPage, page)}`} 
                                 href="/">
                                 {page}
                             </a>          
@@ -90,7 +99,7 @@ function Pagination({currentPage, totalPages, pageClick}) {
                         <li key={page}>
                             <a onClick={(e) => pageClick(e, page)} 
                                 className={`page-link px-sm-3 px-2 rounded-2 rounded-2 border-0 fw-bold text-white shadow-none
-                                ${currentPage === page ? `bg-danger` : `bg-transparent`}`} 
+                                ${markCurrentPage(currentPage, page)}`} 
                                 href="/">
                                 {page}
                             </a>

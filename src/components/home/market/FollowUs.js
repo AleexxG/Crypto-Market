@@ -1,6 +1,6 @@
 function FollowUs() {
     return (
-        <article className='color_bg_tr w-100 rounded-2 px-4 py-3 d-lg-block d-none'>
+        <article className='bg-black bg-opacity-25 w-100 rounded-2 px-4 py-3 d-lg-block d-none'>
             <h5 className='border-bottom pb-3'>📢 Follow Us</h5>
             <ul className='list-unstyled'>
                 <li className='mt-4 d-flex justify-content-between align-items-center'>

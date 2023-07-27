@@ -39,7 +39,7 @@ function Coin() {
   }, [coinId, navigate]);
 
   return (
-    <main>
+    <>
 
       {loading ? <Loading /> :
         <>
@@ -57,7 +57,7 @@ function Coin() {
         </>
       }
 
-    </main>
+    </>
   )
 }
 
