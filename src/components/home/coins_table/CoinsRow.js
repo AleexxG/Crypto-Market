@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import NumberFormatter from '../../../helpers/NumberFormatter';
 import ColorChange from '../../../helpers/ColorChange';
 
-function CoinsRow({ coin }) {
+function CoinsRow({ currency, coin }) {
     const {
         id,
         symbol,
@@ -20,7 +20,7 @@ function CoinsRow({ coin }) {
     const textColor = new ColorChange();
 
 // === Formating data ===
-    const formatter = new NumberFormatter('usd');
+    const formatter = new NumberFormatter(currency);
 
     const priceFormat = formatter.format(
         price, 

@@ -5,6 +5,7 @@ import CoinsRow from "./coins_table/CoinsRow";
 import Pagination from "./coins_table/Pagination";
 
 function CoinsTable({
+    currency,
     coins,
     currentPage,
     setCurrentPage,
@@ -42,6 +43,7 @@ function CoinsTable({
                             return (
                             <CoinsRow
                                 key = {coin.id}
+                                currency = {currency}
                                 coin = {coin}
                             />
                             )

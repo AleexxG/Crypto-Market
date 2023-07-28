@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Market from '../components/home/Market';
 import CoinsTable from '../components/home/CoinsTable';
 
-function Home() {
+function Home({ currency }) {
 	const [coins, setCoins] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const totalPages = 92;
@@ -30,7 +30,7 @@ function Home() {
                 setStatus({ loading: true });
 
                 const response = await fetch (
-                    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=${currentPage}&sparkline=false`
+                    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=20&page=${currentPage}&sparkline=false`
                 );
 
                 if (!response.ok) {
@@ -48,13 +48,14 @@ function Home() {
         };
 
         fetchCoins();
-    }, [currentPage, parsedPageNumber, navigate]);
+    }, [currentPage, parsedPageNumber, navigate, currency]);
 
 	return (
 		<>
 			<Market />
 
-			<CoinsTable 
+			<CoinsTable
+                currency = {currency}
 				coins = {coins}
 				currentPage = {currentPage}
 				setCurrentPage = {setCurrentPage}
