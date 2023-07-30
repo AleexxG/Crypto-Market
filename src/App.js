@@ -19,8 +19,8 @@ function App() {
     createRoutesFromElements(
       <>
         <Route path='/' element={<RootLayout />}>
-          <Route index element={<Home currency = {currency}/>} />
-          <Route path='page/:pageNumber' element={<Home />} />
+          <Route index element={<Home currency = {currency} />} />
+          <Route path='page/:pageNumber' element={<Home currency = {currency} />} />
           <Route path='coins/:coinId' element={<Coin currency = {currency} />} />
         </Route>
   
