@@ -13,7 +13,7 @@ import Coin from './routes/Coin';
 import NotFound from './routes/NotFound';
 
 function App() {
-  const [currency, setCurrency] = useState('php');
+  const [currency, setCurrency] = useState('rub');
   
   const router = createBrowserRouter(
     createRoutesFromElements(

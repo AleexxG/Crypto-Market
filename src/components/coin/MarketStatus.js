@@ -1,22 +1,22 @@
 import NumberFormatter from '../../helpers/NumberFormatter.js';
 import ColorChange from '../../helpers/ColorChange.js';
 
-function MarketStatus({ coin }) {
-    const formatter = new NumberFormatter('usd');
+function MarketStatus({ currency, coin }) {
+    const formatter = new NumberFormatter(currency);
     const textColor = new ColorChange();
 
     const athPriceFormat = formatter.format(
-        coin.market_data?.ath.usd, 
+        coin.market_data?.ath[currency], 
         formatter.priceOptions()
     );
 
     const marketCapFormat = formatter.format(
-        coin.market_data?.market_cap.usd,
+        coin.market_data?.market_cap[currency],
         formatter.bigPriceOptions()
     );
 
     const volumeFormat = formatter.format(
-        coin.market_data?.total_volume.usd, 
+        coin.market_data?.total_volume[currency], 
         formatter.bigPriceOptions()
     );
 

@@ -84,7 +84,7 @@ option {
 }
 
 .color_primary {
-    background: #ef2d3a;
+    background: #dc3545;
 }
 
 .btn_primary:hover {
@@ -94,6 +94,10 @@ option {
 
 .gradient {
     background: linear-gradient(90deg, #ef2d3a, #4585b0, #45b0a9);
+}
+
+.text-success {
+    color: #2ab62a !important;
 }
 
 

@@ -28,7 +28,7 @@ function Navbar({ currency, setCurrency }) {
                     
                     <div className="collapse navbar-collapse d-lg-flex justify-content-end" 
                          id="navbarSupportedContent">
-                        <div className='d-flex flex-lg-row flex-column gap-lg-5 gap-3 my-lg-0 my-4'>
+                        <div className='d-flex flex-lg-row flex-column col-lg-8 gap-lg-5 gap-3 my-lg-0 my-4'>
                             
                             <Currency 
                                 currency = {currency}

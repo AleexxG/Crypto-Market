@@ -11,47 +11,6 @@ import {
 import NumberFormatter from '../../../helpers/NumberFormatter.js';
 
 
-const formatter = new NumberFormatter('usd');
-
-const mapChartData = (time, priceAtTime, days) => {
-    let priceFormat = formatter.format(
-        priceAtTime, 
-        formatter.priceOptions()
-    );
-
-    if (priceAtTime < 1) {
-        priceFormat = formatter.format(
-            priceAtTime, 
-            formatter.smallPriceOptions()
-        );
-    }
-
-    const date = new Date(time);
-    const hours = `${date.getHours() % 12 || 12} ${date.getHours() >= 12 ? 'PM' : 'AM'}`;
-
-    if (days === 1) {
-        return {
-            Time: hours,
-            Price: priceAtTime,
-            Formated_price: priceFormat,
-        };
-    }
-    else if (days === 365) {
-        return {
-            Time: date.toLocaleString('default', { month: 'short' }),
-            Price: priceAtTime,
-            Formated_price: priceFormat,
-        };
-    }
-    else {
-        return {
-            Time: `${date.getMonth() + 1}/${date.getDate()}`,
-            Price: priceAtTime,
-            Formated_price: priceFormat,
-        };
-    }   
-};
-
 const getTicks = (days) => {
     const isSmallScreen = window.innerWidth <= 768;
 
@@ -79,9 +38,51 @@ const CustomTooltip = ({ active, payload, days }) => {
 };
 
 
-function LineChart({ chart, days }) {
-    const chartData = chart.map(([time, priceAtTime]) => mapChartData(time, priceAtTime, days));
+function LineChart({ currency, chart, days }) {
+    const formatter = new NumberFormatter(currency);
 
+    const mapChartData = (time, priceAtTime, days) => {
+        let priceFormat = formatter.format(
+            priceAtTime, 
+            formatter.priceOptions()
+        );
+
+        if (priceAtTime < 1) {
+            priceFormat = formatter.format(
+                priceAtTime, 
+                formatter.smallPriceOptions()
+            );
+        }
+
+        const date = new Date(time);
+        const hours = `${date.getHours() % 12 || 12} ${date.getHours() >= 12 ? 'PM' : 'AM'}`;
+
+        if (days === 1) {
+            return {
+                Time: hours,
+                Price: priceAtTime,
+                Formated_price: priceFormat,
+            };
+        }
+        else if (days === 365) {
+            return {
+                Time: date.toLocaleString('default', { month: 'short' }),
+                Price: priceAtTime,
+                Formated_price: priceFormat,
+            };
+        }
+        else {
+            return {
+                Time: `${date.getMonth() + 1}/${date.getDate()}`,
+                Price: priceAtTime,
+                Formated_price: priceFormat,
+            };
+        }   
+    };
+
+    const chartData = chart.map(([time, priceAtTime]) => mapChartData(time, priceAtTime));
+
+    
     const minPrice = Math.min(...chart.map((data) => data.Price));
     const maxPrice = Math.max(...chart.map((data) => data.Price));
     const yDomain = [Math.floor(minPrice), Math.ceil(maxPrice)];
@@ -89,7 +90,7 @@ function LineChart({ chart, days }) {
     const numberOfTicks = getTicks(days)
     const tickInterval = Math.ceil(chartData.length / numberOfTicks);
 
-    const formatYAxisLabel = (price) => formatter.format(price, formatter.bigPriceOptions());
+    const formatYAxisLabel = (price) => formatter.format(price, formatter.bigNumberOptions());
 
     return (
         <div style={{ width: '100%', height: 380 }}>

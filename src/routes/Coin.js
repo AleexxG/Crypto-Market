@@ -5,7 +5,7 @@ import CoinInfo from '../components/coin/CoinInfo';
 import Chart from '../components/coin/Chart';
 import MarketStatus from '../components/coin/MarketStatus';
 
-function Coin() {
+function Coin({ currency }) {
   const [coin, setCoin] = useState([]);
   const { coinId } = useParams();
   const navigate = useNavigate();
@@ -44,14 +44,17 @@ function Coin() {
       {loading ? <Loading /> :
         <>
           <CoinInfo 
+            currency = {currency}
             coin = {coin}
           />
           
           <Chart 
+            currency = {currency}
             coinId = {coinId}
           />
 
           <MarketStatus 
+            currency = {currency}
             coin = {coin}
           />
         </>

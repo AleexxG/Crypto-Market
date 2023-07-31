@@ -1,20 +1,20 @@
 import NumberFormatter from '../../helpers/NumberFormatter.js';
 
-function CoinInfo({ coin }) {
-    const formatter = new NumberFormatter('usd');
+function CoinInfo({ currency, coin }) {
+    const formatter = new NumberFormatter(currency);
 
     const priceFormat = formatter.format(
-        coin.market_data?.current_price.usd,
+        coin.market_data?.current_price[currency],
         formatter.priceOptions()
     );
 
     const marketCapFormat = formatter.format(
-        coin.market_data?.market_cap.usd,
+        coin.market_data?.market_cap[currency],
         formatter.bigPriceOptions()
     );
 
     const volumeFormat = formatter.format(
-        coin.market_data?.total_volume.usd, 
+        coin.market_data?.total_volume[currency], 
         formatter.bigPriceOptions()
     );
 

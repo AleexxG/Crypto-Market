@@ -4,7 +4,7 @@ import SelectDay from './chart/SelectDay';
 import Loading from '../Loading';
 import Error from '../Error';
 
-function Chart({ coinId }) {
+function Chart({ currency, coinId }) {
     const [chart, setChart] = useState([]);
     const [days, setDays] = useState(1);
     const [status, setStatus] = useState({
@@ -18,7 +18,7 @@ function Chart({ coinId }) {
                 setStatus({ loading: true });
 
                 const response = await fetch(
-                    `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${days}`
+                    `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}`
                 );
 
                 if (!response.ok) {
@@ -36,7 +36,7 @@ function Chart({ coinId }) {
         };
 
         fetchChart();
-    }, [coinId, days]);
+    }, [coinId, days, currency]);
 
     return (
         <section className='container'>
@@ -50,6 +50,7 @@ function Chart({ coinId }) {
                 {!status.loading && !status.error && (
                     <>
                         <LineChart 
+                            currency = {currency}
                             chart = {chart}
                             days = {days}
                         />

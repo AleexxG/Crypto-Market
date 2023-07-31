@@ -20,7 +20,7 @@ function Pagination({currentPage, totalPages, pageClick}) {
                     {page}
                 </a>
             </li>
-        ))
+        ));
 
         return map;
     };
