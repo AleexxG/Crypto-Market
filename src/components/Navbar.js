@@ -1,8 +1,8 @@
 import coinpulseLogo from '../assets/coinpulse_logo.png';
-import Currency from './navbar/Currency';
-import Search from './navbar/Search';
+import CurrencySelect from './navbar/CurrencySelect';
+import SearchBar from './navbar/SearchBar';
 
-function Navbar({ currency, setCurrency }) {
+function Navbar() {
     return (
         <header>
             <nav className="navbar navbar-expand-lg container">
@@ -30,12 +30,9 @@ function Navbar({ currency, setCurrency }) {
                          id="navbarSupportedContent">
                         <div className='d-flex flex-lg-row flex-column col-lg-8 gap-lg-5 gap-3 my-lg-0 my-4'>
                             
-                            <Currency 
-                                currency = {currency}
-                                setCurrency = {setCurrency}
-                            />
+                            <CurrencySelect />
 
-                            <Search />
+                            <SearchBar />
 
                         </div>
                     </div>

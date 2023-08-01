@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useCurrency } from '../currency/CurrencyContext';
 import LineChart from './chart/LineChart';
 import SelectDay from './chart/SelectDay';
 import Loading from '../Loading';
 import Error from '../Error';
 
-function Chart({ currency, coinId }) {
+function Chart({ coinId }) {
+    const { currency } = useCurrency();
     const [chart, setChart] = useState([]);
     const [days, setDays] = useState(1);
     const [status, setStatus] = useState({
@@ -50,7 +52,6 @@ function Chart({ currency, coinId }) {
                 {!status.loading && !status.error && (
                     <>
                         <LineChart 
-                            currency = {currency}
                             chart = {chart}
                             days = {days}
                         />

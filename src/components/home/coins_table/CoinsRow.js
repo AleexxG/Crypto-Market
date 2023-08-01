@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom';
+import { useCurrency } from '../../currency/CurrencyContext';
 import NumberFormatter from '../../../helpers/NumberFormatter';
 import ColorChange from '../../../helpers/ColorChange';
 
-function CoinsRow({ currency, coin }) {
+function CoinsRow({ coin }) {
     const {
         id,
         symbol,
@@ -16,6 +17,7 @@ function CoinsRow({ currency, coin }) {
         circulating_supply: supply,
     } = coin;
 
+    const { currency } = useCurrency();
     const navigate = useNavigate();
     const textColor = new ColorChange();
 

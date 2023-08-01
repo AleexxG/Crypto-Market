@@ -8,6 +8,7 @@ import {
     ResponsiveContainer 
 } from 'recharts';
 
+import { useCurrency } from '../../currency/CurrencyContext.js';
 import NumberFormatter from '../../../helpers/NumberFormatter.js';
 
 
@@ -38,7 +39,8 @@ const CustomTooltip = ({ active, payload, days }) => {
 };
 
 
-function LineChart({ currency, chart, days }) {
+function LineChart({ chart, days }) {
+    const { currency } = useCurrency();
     const formatter = new NumberFormatter(currency);
 
     const mapChartData = (time, priceAtTime, days) => {

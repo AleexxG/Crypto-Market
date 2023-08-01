@@ -5,7 +5,6 @@ import CoinsRow from "./coins_table/CoinsRow";
 import Pagination from "./coins_table/Pagination";
 
 function CoinsTable({
-    currency,
     coins,
     currentPage,
     setCurrentPage,
@@ -37,18 +36,19 @@ function CoinsTable({
                         </tr>
                     </thead>
 
-                    <tbody>
-                        {coins.map(coin => 
-                        {
-                            return (
-                            <CoinsRow
-                                key = {coin.id}
-                                currency = {currency}
-                                coin = {coin}
-                            />
-                            )
-                        })}
-                    </tbody>
+                    {!status.loading && !status.error && (
+                        <tbody>
+                            {coins.map(coin => {
+                                return (
+                                <CoinsRow
+                                    key = {coin.id}
+                                    coin = {coin}
+                                />
+                                )
+                            })}
+                        </tbody>
+                    )}
+
                 </table>
 
                 {status.loading && <Loading />}

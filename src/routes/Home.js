@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useCurrency } from '../components/currency/CurrencyContext';
 import Market from '../components/home/Market';
 import CoinsTable from '../components/home/CoinsTable';
 
-function Home({ currency }) {
+function Home() {
+    const { currency } = useCurrency();
 	const [coins, setCoins] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const totalPages = 92;
@@ -55,7 +57,6 @@ function Home({ currency }) {
 			<Market />
 
 			<CoinsTable
-                currency = {currency}
 				coins = {coins}
 				currentPage = {currentPage}
 				setCurrentPage = {setCurrentPage}

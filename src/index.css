@@ -40,14 +40,21 @@ p {
     margin: 0;
 }
 
-input:placeholder-shown {
-    font-size: 0.85rem;
-    font-weight: bold;
+
+/*================FIX================*/
+
+.search_input::placeholder {
+    color: #606483;
+}
+.search_input:focus {
+    box-shadow: none;
 }
 
-option {
-    background: #1e1f2f;
+.link:hover, 
+.link:focus {
+    background: var(--color-input);
 }
+
 
 /*================CLASSES================*/
 
@@ -64,6 +71,8 @@ option {
 :root {
     --color-bg: #1e1f2f;
     --color-primary: #ef2d3a;
+    --color-accent: #45b0a9;
+    --color-input: #313449;
 
     --transition: all 500ms ease;
 

@@ -1,6 +1,8 @@
+import { useCurrency } from '../currency/CurrencyContext.js';
 import NumberFormatter from '../../helpers/NumberFormatter.js';
 
-function CoinInfo({ currency, coin }) {
+function CoinInfo({ coin }) {
+    const { currency } = useCurrency();
     const formatter = new NumberFormatter(currency);
 
     const priceFormat = formatter.format(

@@ -1,7 +1,10 @@
-import { AllCurrencies } from '../../helpers/AllCurrencies';
+import { AllCurrencies } from '../currency/AllCurrencies';
+import { useCurrency } from '../currency/CurrencyContext';
 import Select from 'react-select';
 
-function Currency({ currency, setCurrency }) {
+function CurrencySelect() {
+    const { currency, setCurrency } = useCurrency();
+
     const mapCurrencies = () => {
         const options = AllCurrencies.map(currencyOption => ({
             value: currencyOption, 
@@ -29,7 +32,7 @@ function Currency({ currency, setCurrency }) {
         control: (provided) => ({
             ...provided,
             cursor: 'pointer',
-            backgroundColor: '#313449',
+            backgroundColor: 'var(--color-input)',
             border: 'none',
             boxShadow: 'none',
             '&:active': {
@@ -38,10 +41,10 @@ function Currency({ currency, setCurrency }) {
         }),
         option: (provided, state) => ({
             ...provided,
-            backgroundColor: state.isSelected ? '#313449' : '#212336',
+            backgroundColor: state.isSelected ? 'var(--color-input)' : 'var(--color-bg)',
             color: state.isSelected ? 'white' : '#6c757d',
             '&:active': {
-                backgroundColor: '#dc3545',
+                backgroundColor: 'var(--color-input)',
                 color: 'white',
             },
         }),
@@ -58,7 +61,7 @@ function Currency({ currency, setCurrency }) {
         }),
         menu: (provided) => ({
             ...provided,
-            backgroundColor: '#212336',
+            backgroundColor: 'var(--color-bg)',
         }),
     };
 
@@ -74,4 +77,4 @@ function Currency({ currency, setCurrency }) {
 )
 }
 
-export default Currency;
+export default CurrencySelect;

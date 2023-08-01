@@ -5,23 +5,19 @@ import {
   RouterProvider, 
 } from 'react-router-dom';
 
-import { useState } from 'react';
 import RootLayout from './components/RootLayout';
-import Navbar from './components/Navbar';
 import Home from './routes/Home';
 import Coin from './routes/Coin';
 import NotFound from './routes/NotFound';
 
 function App() {
-  const [currency, setCurrency] = useState('rub');
-  
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
         <Route path='/' element={<RootLayout />}>
-          <Route index element={<Home currency = {currency} />} />
-          <Route path='page/:pageNumber' element={<Home currency = {currency} />} />
-          <Route path='coins/:coinId' element={<Coin currency = {currency} />} />
+          <Route index element={<Home />} />
+          <Route path='page/:pageNumber' element={<Home />} />
+          <Route path='coins/:coinId' element={<Coin />} />
         </Route>
   
         <Route path='*' element={<NotFound />} />
@@ -29,13 +25,7 @@ function App() {
   ));
 
   return (
-    <>
-      <Navbar 
-        currency = {currency}
-        setCurrency = {setCurrency}
-      />
       <RouterProvider router={router} />
-    </>
   );
 }
 
