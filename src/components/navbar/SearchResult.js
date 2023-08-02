@@ -3,8 +3,7 @@ import Loading from "../Loading";
 import Error from "../Error";
 import { Link } from "react-router-dom";
 
-function SearchResult({ input }) {
-    const [coins, setCoins] = useState([]);
+function SearchResult({ input, searchResults, setSearchResults }) {
     const [status, setStatus] = useState({
         loading: false,
         error: null,
@@ -24,22 +23,22 @@ function SearchResult({ input }) {
                 }
 
                 const data = await response.json();
-                setCoins(data.coins);
+                setSearchResults(data.coins);
                 setStatus({ loading: false, error: null });
             }
             catch (error) {
                 setStatus({ loading: false, error: error });
-                setCoins([]);
+                setSearchResults([]);
             }
         };
 
         fetchData();
-    }, [input]);
+    }, [input, setSearchResults]);
 
-    const mapCoins = () => {
-        const map = coins.map(coin => (
+    const mapSearch = () => {
+        const map = searchResults.map(coin => (
             <Link to={`/coins/${coin.id}`} key={coin.id}>
-                <div className="link my-3 p-2 rounded-1 d-flex justify-content-between align-items-center" tabIndex={0} >
+                <div className="link my-3 p-2 rounded-1 d-flex justify-content-between align-items-center">
                     <div className="d-flex align-items-center">
                         <img src={coin.thumb} alt={`${coin.name} logo`}></img>
                         <h6 className="ms-2 text-white">
@@ -53,7 +52,16 @@ function SearchResult({ input }) {
             </Link>
         ));
 
-        return map;
+        if (input && searchResults.length === 0) {
+            return (
+                <div className="text-center py-5 px-2">
+                    <i className="fa-solid fa-magnifying-glass fs-2 mb-4 text-secondary"></i>
+                    <h5>No results for '{input}'</h5>
+                    <p>We couldn't find anything matching your search. Try again with a different term.</p>
+                </div>
+            )
+        }
+        else return map;
     };
 
     return (
@@ -63,7 +71,7 @@ function SearchResult({ input }) {
             {status.loading && <Loading />}
             {status.error && <Error error = {status.error} />}
 
-            {!status.loading && !status.error && mapCoins()}
+            {!status.loading && !status.error && mapSearch()}
 
         </div>
     )

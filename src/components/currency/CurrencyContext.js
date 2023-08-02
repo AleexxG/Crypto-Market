@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from 'react';
 const CurrencyContext = createContext();
 
 export function CurrencyProvider({ children }) {
-    const [currency, setCurrency] = useState('rub');
+    const [currency, setCurrency] = useState('eur');
 
     return (
         <CurrencyContext.Provider value={{ currency, setCurrency }}>
