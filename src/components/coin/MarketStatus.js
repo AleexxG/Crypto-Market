@@ -1,4 +1,4 @@
-import { useCurrency } from '../currency/CurrencyContext.js';
+import { useCurrency } from '../../currency/CurrencyContext.js';
 import NumberFormatter from '../../helpers/NumberFormatter.js';
 import ColorChange from '../../helpers/ColorChange.js';
 

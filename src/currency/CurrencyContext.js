@@ -3,7 +3,12 @@ import { createContext, useContext, useState } from 'react';
 const CurrencyContext = createContext();
 
 export function CurrencyProvider({ children }) {
-    const [currency, setCurrency] = useState('eur');
+    const currencyValue = () => {
+        const storedCurrency = localStorage.getItem('currency');
+        return storedCurrency || 'eur';
+    };
+
+    const [currency, setCurrency] = useState(currencyValue);
 
     return (
         <CurrencyContext.Provider value={{ currency, setCurrency }}>

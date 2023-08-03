@@ -1,27 +1,31 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useCurrency } from '../components/currency/CurrencyContext';
+import { useCurrency } from '../currency/CurrencyContext';
 import Market from '../components/home/Market';
 import CoinsTable from '../components/home/CoinsTable';
 
 function Home() {
-    const { currency } = useCurrency();
 	const [coins, setCoins] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const totalPages = 92;
-    const navigate = useNavigate();
-    const { pageNumber } = useParams();
-    const parsedPageNumber = parseInt(pageNumber, 10);
     const [status, setStatus] = useState({
         loading: false,
         error: null,
     });
 
+    const { currency } = useCurrency();
+    const navigate = useNavigate();
+    const { pageNumber } = useParams();
+    const parsedPageNumber = parseInt(pageNumber, 10);
+    
+    const totalPages = 92;
+
+    
     useEffect(() => {
-        if (!isNaN(parsedPageNumber)) {
-            parsedPageNumber > totalPages ? 
-            navigate('/') :
+        if (!isNaN(parsedPageNumber) && parsedPageNumber < totalPages) {
             setCurrentPage(parsedPageNumber);
+        }
+        else if (parsedPageNumber > totalPages) {
+            navigate('/');
         }
         else {
             setCurrentPage(1);

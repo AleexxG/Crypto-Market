@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useCurrency } from '../currency/CurrencyContext';
+import { useCurrency } from '../../currency/CurrencyContext';
 import LineChart from './chart/LineChart';
 import SelectDay from './chart/SelectDay';
 import Loading from '../Loading';

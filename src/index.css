@@ -34,6 +34,7 @@ body {
 
 a {
     text-decoration: none;
+    color: white;
 }
 
 p {
@@ -70,9 +71,10 @@ p {
 /*================VAR================*/
 :root {
     --color-bg: #1e1f2f;
-    --color-primary: #ef2d3a;
-    --color-accent: #45b0a9;
+    --color-table : #212336;
     --color-input: #313449;
+    --color-primary: #dc3545;
+    --color-accent: #45b0a9;
 
     --transition: all 500ms ease;
 
@@ -85,24 +87,23 @@ p {
 /*================COLORS================*/
 
 .color_bg {
-    background: #212336;
+    background: var(--color-bg);
+}
+
+.color_table {
+    background: var(--color-table);
+}
+
+.color_input {
+    background: var(--color-input);
 }
 
 .color_accent {
-    background: #45b0a9;
-}
-
-.color_primary {
-    background: #dc3545;
-}
-
-.btn_primary:hover {
-    background: #ac1e27;
-    transition: var(--transition);
+    background: var(--color-accent);
 }
 
 .gradient {
-    background: linear-gradient(90deg, #ef2d3a, #4585b0, #45b0a9);
+    background: linear-gradient(90deg, var(--color-primary), #4585b0, var(--color-accent));
 }
 
 .text-success {

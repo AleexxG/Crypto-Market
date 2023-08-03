@@ -8,7 +8,7 @@ import {
     ResponsiveContainer 
 } from 'recharts';
 
-import { useCurrency } from '../../currency/CurrencyContext.js';
+import { useCurrency } from '../../../currency/CurrencyContext.js';
 import NumberFormatter from '../../../helpers/NumberFormatter.js';
 
 

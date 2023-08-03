@@ -1,5 +1,5 @@
-import { AllCurrencies } from '../currency/AllCurrencies';
-import { useCurrency } from '../currency/CurrencyContext';
+import { AllCurrencies } from '../../currency/AllCurrencies';
+import { useCurrency } from '../../currency/CurrencyContext';
 import Select from 'react-select';
 
 function CurrencySelect() {
@@ -25,6 +25,7 @@ function CurrencySelect() {
     const defaultOption = mapCurrencies().find(option => option.value === currency);
 
     const handleCurrencyChange = (selectedOption) => {
+        localStorage.setItem('currency', selectedOption.value);
         setCurrency(selectedOption.value);
     };
 
