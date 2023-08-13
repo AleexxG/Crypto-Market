@@ -1,4 +1,4 @@
-function Pagination({currentPage, totalPages, pageClick}) {
+function Pagination({currentPage, totalPages, handlePageClick}) {
     let pages = [];
 
     const markCurrentPage = (currentPage, page) => {
@@ -11,9 +11,9 @@ function Pagination({currentPage, totalPages, pageClick}) {
     };
 
     const mapPages = (currentPage) => {
-        const map = pages.map(page => (
+        const mappedPages = pages.map(page => (
             <li key={page}>
-                <a onClick={(e) => pageClick(e, page)} 
+                <a onClick={(e) => handlePageClick(e, page)} 
                     className={`page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white shadow-none
                     ${markCurrentPage(currentPage, page)}`} 
                     href="/">
@@ -22,7 +22,7 @@ function Pagination({currentPage, totalPages, pageClick}) {
             </li>
         ));
 
-        return map;
+        return mappedPages;
     };
 
     const displayPagination = (currentPage) => {
@@ -36,7 +36,7 @@ function Pagination({currentPage, totalPages, pageClick}) {
                         <p className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent">...</p>
                     </li>
                     <li>
-                        <a onClick={(e) => pageClick(e, totalPages)} 
+                        <a onClick={(e) => handlePageClick(e, totalPages)} 
                            className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent" 
                            href="/">
                             {totalPages}
@@ -51,7 +51,7 @@ function Pagination({currentPage, totalPages, pageClick}) {
             return (
                 <div className='d-flex gap-2'>
                     <li>
-                        <a onClick={(e) => pageClick(e, 1)} 
+                        <a onClick={(e) => handlePageClick(e, 1)} 
                            className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent" 
                            href="/">
                             1
@@ -67,7 +67,7 @@ function Pagination({currentPage, totalPages, pageClick}) {
                         <p className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent">...</p>
                     </li>
                     <li>
-                        <a onClick={(e) => pageClick(e, totalPages)} 
+                        <a onClick={(e) => handlePageClick(e, totalPages)} 
                            className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent" 
                            href="/">
                             {totalPages}
@@ -82,7 +82,7 @@ function Pagination({currentPage, totalPages, pageClick}) {
             return (
                 <div className='d-flex gap-2'>
                     <li>
-                        <a onClick={(e) => pageClick(e, 1)} 
+                        <a onClick={(e) => handlePageClick(e, 1)} 
                            className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent" 
                            href="/">
                             1
@@ -102,7 +102,7 @@ function Pagination({currentPage, totalPages, pageClick}) {
         <div className='d-flex justify-content-center mb-5'>
             <ul className="pagination mb-0">
                 <li>
-                    <a onClick={(e) => pageClick(e, currentPage - 1)} 
+                    <a onClick={(e) => handlePageClick(e, currentPage - 1)} 
                         className={`page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white shadow-none bg-transparent
                         ${currentPage === 1 ? `disabled` : ``}`} 
                         href="/">
@@ -113,7 +113,7 @@ function Pagination({currentPage, totalPages, pageClick}) {
                 {displayPagination(currentPage)}
 
                 <li>
-                    <a onClick={(e) => pageClick(e, currentPage + 1)} 
+                    <a onClick={(e) => handlePageClick(e, currentPage + 1)} 
                         className={`page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white shadow-none bg-transparent
                         ${currentPage === totalPages ? `disabled` : ``}`} 
                         href="/">

@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
-import Loading from "../Loading";
-import Error from "../Error";
+import DisplayContent from '../../helpers/DisplayContent';
 import { Link } from "react-router-dom";
 
-function SearchResult({ input, searchResults, setSearchResults }) {
+function SearchResult({ searchInput, searchResults, setSearchResults }) {
     const [status, setStatus] = useState({
         loading: false,
         error: null,
     });
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchSearch = async () => {
             try {
                 setStatus({ loading: true });
 
                 const response = await fetch(
-                    `https://api.coingecko.com/api/v3/search?query=${input}`
+                    `https://api.coingecko.com/api/v3/search?query=${searchInput}`
                 );
 
                 if (!response.ok) {
@@ -24,7 +23,7 @@ function SearchResult({ input, searchResults, setSearchResults }) {
 
                 const data = await response.json();
                 setSearchResults(data.coins);
-                setStatus({ loading: false, error: null });
+                setStatus({ loading: false });
             }
             catch (error) {
                 setStatus({ loading: false, error: error });
@@ -32,11 +31,11 @@ function SearchResult({ input, searchResults, setSearchResults }) {
             }
         };
 
-        fetchData();
-    }, [input, setSearchResults]);
+        fetchSearch();
+    }, [searchInput, setSearchResults]);
 
     const mapSearch = () => {
-        const map = searchResults.map(coin => (
+        const mappedSearch = searchResults.map(coin => (
             <Link to={`/coins/${coin.id}`} key={coin.id}>
                 <div className="link my-3 p-2 rounded-1 d-flex justify-content-between align-items-center">
                     <div className="d-flex align-items-center">
@@ -52,26 +51,25 @@ function SearchResult({ input, searchResults, setSearchResults }) {
             </Link>
         ));
 
-        if (input && searchResults.length === 0) {
+        if (searchInput && searchResults.length === 0) {
             return (
                 <div className="text-center py-5 px-2">
                     <i className="fa-solid fa-magnifying-glass fs-2 mb-4 text-secondary"></i>
-                    <h5>No results for '{input}'</h5>
+                    <h5>No results for '{searchInput}'</h5>
                     <p>We couldn't find anything matching your search. Try again with a different term.</p>
                 </div>
             )
         }
-        else return map;
+        else return mappedSearch;
     };
 
     return (
         <div className="position-absolute color_bg w-100 rounded-2 px-2 py-2 mt-2 shadow"
              style={{maxHeight: 300, overflowY: 'auto', zIndex: 100}}>
-            
-            {status.loading && <Loading />}
-            {status.error && <Error error = {status.error} />}
 
-            {!status.loading && !status.error && mapSearch()}
+            {DisplayContent(status.loading, status.error,
+                mapSearch()
+            )}
 
         </div>
     )

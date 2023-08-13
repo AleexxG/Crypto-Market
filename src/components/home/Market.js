@@ -25,7 +25,7 @@ function Market() {
 
                 const data = await response.json();
                 setMarketData(data[0]);
-                setStatus({ loading: false, error: null });
+                setStatus({ loading: false });
             }
             catch (error) {
                 setStatus({ loading: false, error: error });

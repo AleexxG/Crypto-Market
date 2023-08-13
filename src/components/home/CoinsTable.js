@@ -13,7 +13,7 @@ function CoinsTable({
     status
 }) {
 
-    const pageClick = (e, page) => {
+    const handlePageClick = (e, page) => {
         e.preventDefault();
         setCurrentPage(page);
         navigate(`/page/${page}`);
@@ -22,8 +22,8 @@ function CoinsTable({
 
     return (
         <section className='table_section container'>
-            <div className="table-responsive shadow p-3 mb-5 rounded color_bg">
-                <table className="coinsTable">
+            <div className="table-responsive shadow p-3 mb-5 rounded color_table">
+                <table className="coins_table">
                     <thead>
                         <tr>
                             <td>#</td>
@@ -60,7 +60,7 @@ function CoinsTable({
             <Pagination 
                 currentPage = {currentPage}
                 totalPages = {totalPages}
-                pageClick = {pageClick}
+                handlePageClick = {handlePageClick}
             />
             
         </section>

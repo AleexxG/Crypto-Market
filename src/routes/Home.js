@@ -18,7 +18,6 @@ function Home() {
     const parsedPageNumber = parseInt(pageNumber, 10);
     
     const totalPages = 92;
-
     
     useEffect(() => {
         if (!isNaN(parsedPageNumber) && parsedPageNumber < totalPages) {
@@ -45,7 +44,7 @@ function Home() {
 
                 const data = await response.json();
                 setCoins(data);
-                setStatus({ loading: false, error: null });
+                setStatus({ loading: false });
             }
             catch (error) {
                 setStatus({ loading: false, error: error });

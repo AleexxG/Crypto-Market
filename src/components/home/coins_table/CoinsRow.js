@@ -19,10 +19,10 @@ function CoinsRow({ coin }) {
 
     const { currency } = useCurrency();
     const navigate = useNavigate();
+
+    const formatter = new NumberFormatter(currency);
     const textColor = new ColorChange();
 
-// === Formating data ===
-    const formatter = new NumberFormatter(currency);
 
     const priceFormat = formatter.format(
         price, 
@@ -49,13 +49,13 @@ function CoinsRow({ coin }) {
         { maximumFractionDigits: 2 }
     );
 
-    const coinClick = () => {
+    const handleCoinClick = () => {
         navigate(`/coins/${id}`);
         window.scrollTo(0, 0);
     };
 
     return (
-        <tr onClick={() => coinClick()}>
+        <tr onClick={() => handleCoinClick()}>
             <td>{marketCapRank}</td>
 
             <td className='d-flex align-items-center gap-3'>

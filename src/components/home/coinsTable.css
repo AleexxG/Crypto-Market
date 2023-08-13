@@ -3,26 +3,26 @@
 }
 
 
-.coinsTable {
+.coins_table {
     width: 100%;
     max-width: 100%;
 }
 
-.coinsTable td {
+.coins_table td {
     padding: 0.75rem;
     border-top: 1px solid #ffffff0c;
     vertical-align: middle;
 }
   
-.coinsTable thead td {
+.coins_table thead td {
     border-top: none;
 }
   
-.coinsTable tbody tr td {
+.coins_table tbody tr td {
     cursor: pointer;
 }
 
-.coinsTable tbody tr:hover {
-    background-color: #ffffff04;
+.coins_table tbody tr:hover {
+    background-color: #00000018;
     transition: var(--transition);
   }

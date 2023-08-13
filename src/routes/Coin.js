@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Loading from '../components/Loading';
+import DisplayContetn from '../helpers/DisplayContent';
 import CoinInfo from '../components/coin/CoinInfo';
 import Chart from '../components/coin/Chart';
 import MarketStatus from '../components/coin/MarketStatus';
 
 function Coin() {
   const [coin, setCoin] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const { coinId } = useParams();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchCoin = async () => {
@@ -40,8 +41,7 @@ function Coin() {
 
   return (
     <>
-
-      {loading ? <Loading /> :
+      {DisplayContetn(loading, null, 
         <>
           <CoinInfo 
             coin = {coin}
@@ -55,8 +55,7 @@ function Coin() {
             coin = {coin}
           />
         </>
-      }
-
+      )}
     </>
   )
 }

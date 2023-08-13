@@ -1,5 +1,4 @@
-import Error from '../../Error';
-import Loading from '../../Loading';
+import DisplayContetn from '../../../helpers/DisplayContent';
 import ColorChange from '../../../helpers/ColorChange';
 
 function MarketData({ marketData, status }) {
@@ -9,11 +8,7 @@ function MarketData({ marketData, status }) {
         <article className='bg-black bg-opacity-25 w-100 rounded-2 px-4 py-3'>
             <h5 className='border-bottom pb-3'>📊 Today's Market</h5>
 
-            {status.loading && <Loading />}
-
-            {status.error && <Error error = {status.error}/>}
-
-            {!status.loading && !status.error && (
+            {DisplayContetn(status.loading, status.error,
                 <ul className='list-unstyled'>
                     <li className='mt-4 py-1 d-flex justify-content-between align-items-center'>
                         <div className='d-flex align-items-center'>
@@ -44,6 +39,7 @@ function MarketData({ marketData, status }) {
                     </li>
                 </ul>
             )}
+            
         </article>
     )
 }

@@ -44,12 +44,23 @@ p {
 
 /*================FIX================*/
 
-.search_input::placeholder {
+.search_input::placeholder,
+.email_input::placeholder {
     color: #606483;
 }
 .search_input:focus {
     box-shadow: none;
 }
+
+.email_input:focus {
+    box-shadow: 0px 0px 3px var(--color-accent);
+    background: var(--color-input);
+}
+.email_input:-webkit-autofill,
+.email_input:-webkit-autofill:focus {
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
+  }
 
 .link:hover, 
 .link:focus {
@@ -75,6 +86,7 @@ p {
     --color-input: #313449;
     --color-primary: #dc3545;
     --color-accent: #45b0a9;
+    --color-chart: #96fff810;
 
     --transition: all 500ms ease;
 

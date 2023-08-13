@@ -11,7 +11,6 @@ import {
 import { useCurrency } from '../../../currency/CurrencyContext.js';
 import NumberFormatter from '../../../helpers/NumberFormatter.js';
 
-
 const getTicks = (days) => {
     const isSmallScreen = window.innerWidth <= 768;
 
@@ -29,7 +28,7 @@ const CustomTooltip = ({ active, payload, days }) => {
     if (active && payload && payload.length) {
         const data = payload[0].payload;
         return (
-            <div className="p-3 rounded-2 shadow" style={{background: '#161723'}}>
+            <div className="p-3 rounded-2 shadow color_input">
                 <p className='mb-2'>{days === 1 ? '🕛 Time' : '📅 Date'}: {data.Time}</p>
                 <p>{`💵 Price: ${data.Formated_price}`}</p>
             </div>
@@ -84,7 +83,6 @@ function LineChart({ chart, days }) {
 
     const chartData = chart.map(([time, priceAtTime]) => mapChartData(time, priceAtTime));
 
-    
     const minPrice = Math.min(...chart.map((data) => data.Price));
     const maxPrice = Math.max(...chart.map((data) => data.Price));
     const yDomain = [Math.floor(minPrice), Math.ceil(maxPrice)];
@@ -110,7 +108,7 @@ function LineChart({ chart, days }) {
                     <XAxis dataKey="Time" interval={tickInterval} />
                     <YAxis domain={yDomain} tickFormatter={formatYAxisLabel} orientation="right" />
                     <Tooltip content={<CustomTooltip days = {days} />} />
-                    <Area type="monotone" dataKey="Price" stroke="#45b0a9" fill="#96fff810" />
+                    <Area type="monotone" dataKey="Price" stroke="var(--color-accent)" fill="var(--color-chart)" />
                 </AreaChart>
             </ResponsiveContainer>
         </div>

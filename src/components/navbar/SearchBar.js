@@ -3,23 +3,23 @@ import { useNavigate } from "react-router-dom";
 import SearchResult from "./SearchResult";
 
 function SearchBar() {
-    const [input, setInput] = useState('');
+    const [searchInput, setSearchInput] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [showResults, setShowResults] = useState(false);
     const navigate = useNavigate();
 
-    const formSubmit = (e) => {
+    const handleSearchSubmit = (e) => {
         e.preventDefault();
 
         if (searchResults.length > 0) {
             navigate(`/coins/${searchResults[0].id}`);
-            setInput('');
+            setSearchInput('');
         }
     }
 
     return (
         <div className="w-100 position-relative">
-            <form onSubmit={formSubmit}>
+            <form onSubmit={handleSearchSubmit}>
                 <div className="rounded-2" style={{background: 'var(--color-input)'}}>
                     <div className="input-group d-flex align-items-center">
                         <input className="search_input form-control border-0 text-white" 
@@ -29,8 +29,8 @@ function SearchBar() {
                                 aria-label="Search"
                                 aria-describedby="search"
                                 
-                                value={input}
-                                onChange={(e) => setInput(e.target.value)}
+                                value={searchInput}
+                                onChange={(e) => setSearchInput(e.target.value)}
                                 onFocus={() => setShowResults(true)}
                                 onBlur={() => setShowResults(false)}>
                         </input>
@@ -44,9 +44,9 @@ function SearchBar() {
                 </div>
             </form>
 
-            {input && showResults &&
+            {searchInput && showResults &&
                 <SearchResult 
-                    input = {input} 
+                    searchInput = {searchInput} 
                     searchResults = {searchResults} 
                     setSearchResults = {setSearchResults} 
                 />
