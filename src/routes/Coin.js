@@ -26,6 +26,7 @@ function Coin() {
         }
 
         const data = await response.json();
+        document.title = `${data.name} price today | CoinPulse`;
         setCoin(data);
         setLoading(false);
       }
