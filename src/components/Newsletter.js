@@ -53,12 +53,12 @@ function Newsletter() {
 
             <div className='container d-flex flex-md-row flex-column justify-content-md-between align-items-center gap-5'>
                 <div className='col-md-6 py-sm-5 py-4'>
-                    <article>
+                    <div>
                         <h2 className='fw-normal'>
                             Stay updated with daily <span className='fw-bold fs-2'>cryptocurrency news.</span>
                         </h2>
                         <p className='col-lg-9 fs-6'>Receive in-depth cryptocurrency analysis, stay informed with the latest news, and ensure you never skip a newsletter by subscribing here!</p>
-                    </article>
+                    </div>
 
                     <form className='mt-4' onSubmit={handleEmailSubmit}>
                         <label for='email' className='form-label mb-1'>Subscribe now</label>

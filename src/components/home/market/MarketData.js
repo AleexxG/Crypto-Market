@@ -5,8 +5,8 @@ function MarketData({ marketData, status }) {
     const textColor = new ColorChange();
 
     return (
-        <article className='bg-black bg-opacity-25 w-100 rounded-2 px-4 py-3'>
-            <h5 className='border-bottom pb-3'>📊 Today's Market</h5>
+        <div className='bg-black bg-opacity-25 w-100 rounded-2 px-4 py-3'>
+            <h1 className='border-bottom pb-3 fs-5'>📊 Today's Market</h1>
 
             {DisplayContetn(status.loading, status.error,
                 <ul className='list-unstyled'>
@@ -40,7 +40,7 @@ function MarketData({ marketData, status }) {
                 </ul>
             )}
             
-        </article>
+        </div>
     )
 }
 

@@ -13,7 +13,7 @@ function Navbar() {
                              alt='CoinPulse logo'   
                              style={{width: '15%'}}>
                         </img>
-                        <h3 className='ms-3 text-white'>CoinPulse</h3>
+                        <p className='ms-3 text-white fs-3 fw-bold'>CoinPulse</p>
                     </a>
 
                     <button className="navbar-toggler p-0 border-0 shadow-none" 

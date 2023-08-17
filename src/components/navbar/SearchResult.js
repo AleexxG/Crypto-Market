@@ -40,10 +40,10 @@ function SearchResult({ searchInput, searchResults, setSearchResults }) {
                 <div className="link my-3 p-2 rounded-1 d-flex justify-content-between align-items-center">
                     <div className="d-flex align-items-center">
                         <img src={coin.thumb} alt={`${coin.name} logo`}></img>
-                        <h6 className="ms-2 text-white">
+                        <p className="ms-2 text-white">
                             {coin.name} 
                             <span className="ms-2 fw-normal text-secondary">{coin.symbol}</span>
-                        </h6>
+                        </p>
                     </div>
 
                     <p className="text-secondary">#{coin.market_cap_rank}</p>
@@ -55,7 +55,7 @@ function SearchResult({ searchInput, searchResults, setSearchResults }) {
             return (
                 <div className="text-center py-5 px-2">
                     <i className="fa-solid fa-magnifying-glass fs-2 mb-4 text-secondary"></i>
-                    <h5>No results for '{searchInput}'</h5>
+                    <h3 className="fs-5">No results for '{searchInput}'</h3>
                     <p>We couldn't find anything matching your search. Try again with a different term.</p>
                 </div>
             )

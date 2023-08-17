@@ -23,26 +23,26 @@ function CoinInfo({ coin }) {
     return (
         <section className='gradient'>
             <div className='container py-5 d-flex justify-content-between align-items-center'>
-                <article className='d-flex align-items-center'>
+                <div className='d-flex align-items-center'>
                     <img src={coin.image?.small} 
                          alt={`${coin.name} logo`}>
                     </img>
                     <div className='ms-sm-5 ms-3'>
-                        <p className='fs-3'>
+                        <h1 className='fs-3 fw-normal'>
                             {coin.name} <span className='fw-light fs-5 ms-2'>{coin.symbol?.toUpperCase()}</span>
-                        </p>
+                        </h1>
                         <p className='fw-bold fs-2'>{priceFormat}</p>
                     </div>
-                </article>
+                </div>
 
                 <aside className='d-sm-flex d-none'>
                     <div className='ms-sm-5 ms-3'>
-                        <p className='fs-5'>Market Cap</p>
+                        <h1 className='fs-5 fw-normal'>Market Cap</h1>
                         <p className='fw-bold fs-2'>{marketCapFormat}</p>
                     </div>
 
                     <div className='ms-sm-5 ms-3 d-md-block d-none'>
-                        <p className='fs-5'>Total Volume</p>
+                        <h1 className='fs-5 fw-normal'>Total Volume</h1>
                         <p className='fw-bold fs-2'>{volumeFormat}</p>
                     </div>
                 </aside>

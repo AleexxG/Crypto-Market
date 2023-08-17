@@ -30,36 +30,36 @@ function MarketStatus({ coin }) {
     return (
         <section className='my-5'>
             <div className='container'>
-                <h3 className='fw-normal border-bottom border-secondary pb-3'>Market Status</h3>
+                <h1 className='fw-normal fs-3 border-bottom border-secondary pb-3'>Market Status</h1>
                 
                 <div className='row row-cols-md-4 row-cols-sm-3 row-cols-2 g-5 mt-1'>
-                    <article>
-                        <p className='text-uppercase text-secondary'>market cap</p>
+                    <div>
+                        <h1 className='fs-6 fw-normal text-uppercase text-secondary'>market cap</h1>
                         <p className='fs-5'>{marketCapFormat}</p>
-                    </article>
+                    </div>
 
-                    <article>
-                        <p className='text-uppercase text-secondary'>volume</p>
+                    <div>
+                        <h1 className='fs-6 fw-normal text-uppercase text-secondary'>volume</h1>
                         <p className='fs-5'>{volumeFormat}</p>
-                    </article>
+                    </div>
 
-                    <article>
-                        <p className='text-uppercase text-secondary'>supply</p>
+                    <div>
+                        <h1 className='fs-6 fw-normal text-uppercase text-secondary'>supply</h1>
                         <p className='fs-5'>{supplyFormat}</p>
-                    </article>
+                    </div>
 
-                    <article>
-                        <p className='text-uppercase text-secondary'>popularity</p>
+                    <div>
+                        <h1 className='fs-6 fw-normal text-uppercase text-secondary'>popularity</h1>
                         <p className='fs-5'>#{coin.coingecko_rank}</p>
-                    </article>
+                    </div>
 
-                    <article>
-                        <p className='text-uppercase text-secondary'>all time high</p>
+                    <div>
+                        <h1 className='fs-6 fw-normal text-uppercase text-secondary'>all time high</h1>
                         <p className='fs-5'>{athPriceFormat}</p>
-                    </article>
+                    </div>
 
-                    <article>
-                        <p className='text-uppercase text-secondary'>price change (24H)</p>
+                    <div>
+                        <h1 className='fs-6 fw-normal text-uppercase text-secondary'>price change (24H)</h1>
                         <p className={`${textColor.colorChange(coin.market_data?.price_change_percentage_24h)} fs-5`}>{
                             formatter.format(
                                     coin.market_data?.price_change_percentage_24h, 
@@ -67,10 +67,10 @@ function MarketStatus({ coin }) {
                                 )
                             }%
                         </p>
-                    </article>
+                    </div>
 
-                    <article>
-                        <p className='text-uppercase text-secondary'>price change (7D)</p>
+                    <div>
+                        <h1 className='fs-6 fw-normal text-uppercase text-secondary'>price change (7D)</h1>
                         <p className={`${textColor.colorChange(coin.market_data?.price_change_percentage_7d)} fs-5`}>{
                             formatter.format(
                                     coin.market_data?.price_change_percentage_7d, 
@@ -78,10 +78,10 @@ function MarketStatus({ coin }) {
                                 )
                             }%
                         </p>
-                    </article>
+                    </div>
 
-                    <article>
-                        <p className='text-uppercase text-secondary'>price change (30D)</p>
+                    <div>
+                        <h1 className='fs-6 fw-normal text-uppercase text-secondary'>price change (30D)</h1>
                         <p className={`${textColor.colorChange(coin.market_data?.price_change_percentage_30d)} fs-5`}>{
                             formatter.format(
                                     coin.market_data?.price_change_percentage_30d, 
@@ -89,7 +89,7 @@ function MarketStatus({ coin }) {
                                 )
                             }%
                         </p>
-                    </article>
+                    </div>
                 </div>
             </div>
         </section>
