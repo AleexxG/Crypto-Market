@@ -17,6 +17,12 @@ function SearchBar() {
         }
     }
 
+    const handleBlur = () => {
+        setTimeout(() => {
+          setShowResults(false);
+        }, 200);
+    }
+
     return (
         <div className="w-100 position-relative">
             <form onSubmit={handleSearchSubmit}>
@@ -32,7 +38,7 @@ function SearchBar() {
                                 value={searchInput}
                                 onChange={(e) => setSearchInput(e.target.value)}
                                 onFocus={() => setShowResults(true)}
-                                onBlur={() => setShowResults(false)}>
+                                onBlur={handleBlur}>
                         </input>
                         <div className="input-group-append px-3 py-2">
                             <span className="text-secondary"

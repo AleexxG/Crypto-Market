@@ -1,5 +1,5 @@
 import { 
-  createBrowserRouter, 
+  createHashRouter, 
   createRoutesFromElements,
   Route,
   RouterProvider, 
@@ -11,7 +11,7 @@ import Coin from './routes/Coin';
 import NotFound from './routes/NotFound';
 
 function App() {
-  const router = createBrowserRouter(
+  const router = createHashRouter(
     createRoutesFromElements(
       <>
         <Route path='/' element={<RootLayout />}>
