@@ -1,7 +1,7 @@
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 
-const DisplayContetn = (loading, error, data) => {
+function DisplayContetn(loading, error, data) {
     if (!loading && !error) {
         return data;
     }
@@ -11,6 +11,6 @@ const DisplayContetn = (loading, error, data) => {
     else {
         return <Error error = {error}/>
     }
-};
+}
 
 export default DisplayContetn;

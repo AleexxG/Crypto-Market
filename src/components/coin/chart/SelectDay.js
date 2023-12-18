@@ -1,18 +1,18 @@
 function SelectDay({ days, setDays }) {
-    const handleDayClick = (e) => {
+    function handleDayClick(e) {
         e.preventDefault();
         const selectedDay = parseInt(e.target.value);
         setDays(selectedDay);
-    };
+    }
 
-    const markCurrentDay = (value) => {
+    function markCurrentDay(value) {
         if (days === value) {
             return 'color_bg text-secondary fw-bold';
         }
         else {
             return 'bg-transparent text-secondary';
         }
-    };
+    }
 
     return (
         <aside className="d-flex justify-content-end my-4">

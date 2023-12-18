@@ -49,10 +49,10 @@ function CoinsRow({ coin }) {
         { maximumFractionDigits: 2 }
     );
 
-    const handleCoinClick = () => {
+    function handleCoinClick() {
         navigate(`/coins/${id}`);
         window.scrollTo(0, 0);
-    };
+    }
 
     return (
         <tr onClick={() => handleCoinClick()}>

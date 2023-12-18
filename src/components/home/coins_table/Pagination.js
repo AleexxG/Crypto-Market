@@ -1,16 +1,16 @@
 function Pagination({currentPage, totalPages, handlePageClick}) {
     let pages = [];
 
-    const markCurrentPage = (currentPage, page) => {
+    function markCurrentPage(currentPage, page) {
         if (currentPage === page) {
             return 'bg-danger';
         }
         else {
             return 'bg-transparent';
         }
-    };
+    }
 
-    const mapPages = (currentPage) => {
+    function mapPages(currentPage) {
         const mappedPages = pages.map(page => (
             <li key={page}>
                 <a onClick={(e) => handlePageClick(e, page)} 
@@ -23,9 +23,9 @@ function Pagination({currentPage, totalPages, handlePageClick}) {
         ));
 
         return mappedPages;
-    };
+    }
 
-    const displayPagination = (currentPage) => {
+    function displayPagination(currentPage) {
         if (currentPage < 5) {
             pages = [1,2,3,4,5];
             return (

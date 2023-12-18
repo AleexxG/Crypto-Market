@@ -7,7 +7,7 @@ function Newsletter() {
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
-    const validation = () => {
+    function validation() {
         const input = emailInput.trim();
         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -20,17 +20,17 @@ function Newsletter() {
             return false;
         }
         else return true;
-    };
+    }
 
-    const displaySuccessMessage = (message) => {
+    function displaySuccessMessage(message) {
         setSuccessMessage(message);
 
         setTimeout(() => {
             setSuccessMessage('');
         }, 4000);
-    };
+    }
 
-    const handleEmailSubmit = (e) => {
+    function handleEmailSubmit(e) {
         e.preventDefault();
 
         if (validation()) {
@@ -39,7 +39,7 @@ function Newsletter() {
             setError('');
         }
         else return null
-    };
+    }
 
     return (
         <section className='bg-black bg-opacity-25 py-5'>

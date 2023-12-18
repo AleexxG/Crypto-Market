@@ -5,7 +5,7 @@ import Select from 'react-select';
 function CurrencySelect() {
     const { currency, setCurrency } = useCurrency();
 
-    const mapCurrencies = () => {
+    function mapCurrencies() {
         const options = AllCurrencies.map(currencyOption => ({
             value: currencyOption, 
             label: (
@@ -21,14 +21,14 @@ function CurrencySelect() {
         }));
 
         return options;
-    };
+    }
 
     const defaultOption = mapCurrencies().find(option => option.value === currency);
 
-    const handleCurrencyChange = (selectedOption) => {
+    function handleCurrencyChange(selectedOption) {
         localStorage.setItem('currency', selectedOption.value);
         setCurrency(selectedOption.value);
-    };
+    }
 
     const customStyles = {
         control: (provided) => ({

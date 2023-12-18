@@ -13,12 +13,12 @@ function CoinsTable({
     status
 }) {
 
-    const handlePageClick = (e, page) => {
+    function handlePageClick(e, page) {
         e.preventDefault();
         setCurrentPage(page);
         navigate(`/page/${page}`);
         window.scrollTo(0, 0);
-    };
+    }
 
     return (
         <section className='table_section container'>

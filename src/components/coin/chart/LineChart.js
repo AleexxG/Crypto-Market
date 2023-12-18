@@ -11,7 +11,7 @@ import {
 import { useCurrency } from '../../../currency/CurrencyContext.js';
 import NumberFormatter from '../../../helpers/NumberFormatter.js';
 
-const getTicks = (days) => {
+function getTicks (days) {
     const isSmallScreen = window.innerWidth <= 768;
 
     switch (days) {
@@ -22,9 +22,9 @@ const getTicks = (days) => {
         default:
             return isSmallScreen ? 4 : 13;
     }
-};
+}
 
-const CustomTooltip = ({ active, payload, days }) => {
+function CustomTooltip ({ active, payload, days }) {
     if (active && payload && payload.length) {
         const data = payload[0].payload;
         return (
@@ -35,14 +35,14 @@ const CustomTooltip = ({ active, payload, days }) => {
         );
     }
     return null;
-};
+}
 
 
 function LineChart({ chart, days }) {
     const { currency } = useCurrency();
     const formatter = new NumberFormatter(currency);
 
-    const mapChartData = (time, priceAtTime, days) => {
+    function mapChartData(time, priceAtTime, days) {
         let priceFormat = formatter.format(
             priceAtTime, 
             formatter.priceOptions()
@@ -79,7 +79,7 @@ function LineChart({ chart, days }) {
                 Formated_price: priceFormat,
             };
         }   
-    };
+    }
 
     const chartData = chart.map(([time, priceAtTime]) => mapChartData(time, priceAtTime));
 

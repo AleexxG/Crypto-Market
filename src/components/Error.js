@@ -1,7 +1,7 @@
 function Error({ error }) {
     let corsError = '';
 
-    const errorMessage = () => {
+    function errorMessage() {
         if (error.message === 'Failed to fetch') {
             corsError = 'API rate limit exceeded';
             return corsError;

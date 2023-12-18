@@ -34,7 +34,7 @@ function SearchResult({ searchInput, searchResults, setSearchResults }) {
         fetchSearch();
     }, [searchInput, setSearchResults]);
 
-    const mapSearch = () => {
+    function mapSearch() {
         const mappedSearch = searchResults.map(coin => (
             <Link to={`/coins/${coin.id}`} key={coin.id}>
                 <div className="link my-3 p-2 rounded-1 d-flex justify-content-between align-items-center">
@@ -61,7 +61,7 @@ function SearchResult({ searchInput, searchResults, setSearchResults }) {
             )
         }
         else return mappedSearch;
-    };
+    }
 
     return (
         <div className="position-absolute color_bg w-100 rounded-2 px-2 py-2 mt-2 shadow"

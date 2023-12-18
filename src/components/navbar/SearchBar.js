@@ -8,7 +8,7 @@ function SearchBar() {
     const [showResults, setShowResults] = useState(false);
     const navigate = useNavigate();
 
-    const handleSearchSubmit = (e) => {
+    function handleSearchSubmit(e) {
         e.preventDefault();
 
         if (searchResults.length > 0) {
@@ -17,7 +17,7 @@ function SearchBar() {
         }
     }
 
-    const handleBlur = () => {
+    function handleBlur() {
         setTimeout(() => {
           setShowResults(false);
         }, 200);
