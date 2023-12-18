@@ -7,6 +7,8 @@ function SearchBar() {
     const [searchResults, setSearchResults] = useState([]);
     const [showResults, setShowResults] = useState(false);
     const navigate = useNavigate();
+    const waitTime = 1800;
+    let timer;
 
     function handleSearchSubmit(e) {
         e.preventDefault();
@@ -17,9 +19,19 @@ function SearchBar() {
         }
     }
 
+    function delaySearch(value) {
+        setSearchInput(value.trim());
+        setShowResults(false);
+        clearTimeout(timer);
+
+        timer = setTimeout(() => {
+            setShowResults(true);
+        }, waitTime);
+    }
+
     function handleBlur() {
         setTimeout(() => {
-          setShowResults(false);
+            setShowResults(false);
         }, 200);
     }
 
@@ -36,8 +48,7 @@ function SearchBar() {
                                 aria-describedby="search"
                                 
                                 value={searchInput}
-                                onChange={(e) => setSearchInput(e.target.value)}
-                                onFocus={() => setShowResults(true)}
+                                onChange={(e) => delaySearch(e.target.value)}
                                 onBlur={handleBlur}>
                         </input>
                         <div className="input-group-append px-3 py-2">
