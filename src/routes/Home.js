@@ -20,10 +20,10 @@ function Home() {
     const totalPages = 92;
     
     useEffect(() => {
-        if (!isNaN(parsedPageNumber) && parsedPageNumber < totalPages) {
+        if (!isNaN(parsedPageNumber) && parsedPageNumber <= totalPages) {
             setCurrentPage(parsedPageNumber);
         }
-        else if (parsedPageNumber > totalPages) {
+        else if (parsedPageNumber > totalPages || parsedPageNumber < 1) {
             navigate('/');
         }
         else {

@@ -9,7 +9,8 @@ function CurrencySelect() {
         const options = AllCurrencies.map(currencyOption => ({
             value: currencyOption, 
             label: (
-                <div className='d-flex align-items-center gap-3'>
+                <div className='d-flex align-items-center gap-3'
+                     style={{cursor: 'pointer'}}>
                     <img src={`https://flagcdn.com/${currencyOption.slice(0, -1)}.svg`}
                          alt='Country flag'
                          style={{width: 20}}>
