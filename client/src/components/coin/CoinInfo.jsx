@@ -1,5 +1,5 @@
-import { useCurrency } from '../../currency/CurrencyContext.js';
-import NumberFormatter from '../../helpers/NumberFormatter.js';
+import { useCurrency } from '../../currency/CurrencyContext.jsx';
+import NumberFormatter from '../../helpers/NumberFormatter.jsx';
 
 function CoinInfo({ coin }) {
     const { currency } = useCurrency();
