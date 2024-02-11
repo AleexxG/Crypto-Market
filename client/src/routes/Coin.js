@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import DisplayContetn from '../helpers/DisplayContent';
+import DisplayContent from '../helpers/DisplayContent';
 import CoinInfo from '../components/coin/CoinInfo';
 import Chart from '../components/coin/Chart';
 import MarketStatus from '../components/coin/MarketStatus';
@@ -42,7 +42,7 @@ function Coin() {
 
   return (
     <>
-      {DisplayContetn(loading, null, 
+      {DisplayContent(loading, null, 
         <>
           <CoinInfo 
             coin = {coin}
