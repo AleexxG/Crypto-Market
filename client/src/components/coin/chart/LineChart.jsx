@@ -9,7 +9,7 @@ import {
 } from 'recharts';
 
 import { useCurrency } from '../../../currency/CurrencyContext.jsx';
-import NumberFormatter from '../../../helpers/NumberFormatter.jsx';
+import NumberFormatter from '../../../helpers/NumberFormatter.js';
 
 function getTicks (days) {
     const isSmallScreen = window.innerWidth <= 768;

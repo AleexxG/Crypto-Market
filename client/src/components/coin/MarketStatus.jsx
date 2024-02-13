@@ -1,6 +1,6 @@
 import { useCurrency } from '../../currency/CurrencyContext.jsx';
-import NumberFormatter from '../../helpers/NumberFormatter.jsx';
-import ColorChange from '../../helpers/ColorChange.jsx';
+import NumberFormatter from '../../helpers/NumberFormatter.js';
+import ColorChange from '../../helpers/ColorChange.js';
 
 function MarketStatus({ coin }) {
     const { currency } = useCurrency();

@@ -1,4 +1,4 @@
-import DisplayContetn from '../../../helpers/DisplayContent';
+import DisplayContent from '../../../helpers/DisplayContent';
 import ColorChange from '../../../helpers/ColorChange';
 
 function MarketData({ marketData, status }) {
@@ -8,7 +8,7 @@ function MarketData({ marketData, status }) {
         <div className='bg-black bg-opacity-25 w-100 rounded-2 px-4 py-3'>
             <h1 className='border-bottom pb-3 fs-5'>📊 Today's Market</h1>
 
-            {DisplayContetn(status.loading, status.error,
+            {DisplayContent(status.loading, status.error,
                 <ul className='list-unstyled'>
                     <li className='mt-4 py-1 d-flex justify-content-between align-items-center'>
                         <div className='d-flex align-items-center'>

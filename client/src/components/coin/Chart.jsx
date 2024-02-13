@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useCurrency } from '../../currency/CurrencyContext';
-import DisplayContetn from '../../helpers/DisplayContent';
+import DisplayContent from '../../helpers/DisplayContent';
 import LineChart from './chart/LineChart';
 import SelectDay from './chart/SelectDay';
 
@@ -47,7 +47,7 @@ function Chart({ coinId }) {
             <div className='d-flex justify-content-center align-items-center' 
                  style={{height: 380}}>
 
-                {DisplayContetn(status.loading, status.error,
+                {DisplayContent(status.loading, status.error,
                     <LineChart 
                         chart = {chart}
                         days = {days}
