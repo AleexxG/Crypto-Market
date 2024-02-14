@@ -1,7 +1,9 @@
 <?php
 
+use Database\Seeders\ExchangeRateSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,10 +15,14 @@ return new class extends Migration
     {
         Schema::create('exchange_rates', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 3);
-            $table->decimal('rate', 30, 20);
+            $table->string('code', 10);
+            $table->decimal('rate', 25, 15);
             $table->timestamps();
         });
+
+        Artisan::call('db:seed', [
+            '--class' => 'ExchangeRateSeeder',
+        ]);
     }
 
     /**
