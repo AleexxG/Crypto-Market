@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('code', 10);
             $table->decimal('rate', 25, 15);
+            $table->string('country', 10);
+            $table->string('flag');
             $table->timestamps();
         });
 
