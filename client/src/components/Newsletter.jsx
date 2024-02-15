@@ -46,7 +46,7 @@ function Newsletter() {
 
             {successMessage && (
                 <div className='position-fixed top-0 start-50 translate-middle-x bg-success bg-opacity-75 d-flex align-items-center gap-3 px-5 py-3 mt-3 rounded-2'>
-                    <i class="fa-solid fa-circle-check"></i>
+                    <i className="fa-solid fa-circle-check"></i>
                     <p className='fw-bold'>{successMessage}</p>
                 </div>
             )}
@@ -61,7 +61,7 @@ function Newsletter() {
                     </div>
 
                     <form className='mt-4' onSubmit={handleEmailSubmit}>
-                        <label for='email' className='form-label mb-1'>Subscribe now</label>
+                        <label htmlFor='email' className='form-label mb-1'>Subscribe now</label>
                         <input className={`email_input text-white form-control py-3 color_input
                                ${error ? 'border-1 border-danger' : 'border-0'}`} 
                                placeholder='Enter your e-mail address' 

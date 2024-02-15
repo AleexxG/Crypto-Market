@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useCurrency } from '../../currency/CurrencyContext';
-import DisplayContent from '../../helpers/DisplayContent';
+import DisplayContent from '../../helpers/DisplayContent.jsx';
 import LineChart from './chart/LineChart';
 import SelectDay from './chart/SelectDay';
 

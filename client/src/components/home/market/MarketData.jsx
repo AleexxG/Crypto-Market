@@ -1,4 +1,4 @@
-import DisplayContent from '../../../helpers/DisplayContent';
+import DisplayContent from '../../../helpers/DisplayContent.jsx';
 import ColorChange from '../../../helpers/ColorChange';
 
 function MarketData({ marketData, status }) {

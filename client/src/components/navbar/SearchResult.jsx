@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import DisplayContent from '../../helpers/DisplayContent';
+import DisplayContent from '../../helpers/DisplayContent.jsx';
 import { Link } from "react-router-dom";
 
 function SearchResult({ searchInput, searchResults, setSearchResults }) {
