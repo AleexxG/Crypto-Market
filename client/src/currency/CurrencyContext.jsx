@@ -5,7 +5,7 @@ const CurrencyContext = createContext();
 export function CurrencyProvider({ children }) {
     function currencyValue() {
         const storedCurrency = localStorage.getItem('currency');
-        return storedCurrency || 'usd';
+        return storedCurrency || 'USD';
     }
 
     const [currency, setCurrency] = useState(currencyValue);
