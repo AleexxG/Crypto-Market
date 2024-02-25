@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Coin;
+use App\Repository\CoinRepo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
@@ -16,6 +16,8 @@ class CoinSeeder extends Seeder
      */
     public function run(): void
     {
+        $coinRepo = new CoinRepo();
+
         $output = new ConsoleOutput();
         $progressBar = new ProgressBar($output, 8);
         $progressBar->start();
@@ -32,21 +34,12 @@ class CoinSeeder extends Seeder
             ]);
 
             $coins = json_decode($response->body(), true);
-
-            foreach($coins as $coin) {
-                Coin::create([
-                    'crypto_name' => $coin['id'],
-                    'name' => $coin['name'],
-                    'symbol' => $coin['symbol'],
-                    'image' => $coin['image'],
-                    'market_cap_rank' => $coin['market_cap_rank'],
-                    'circulating_supply' => $coin['circulating_supply'],
-                ]);
-            }
+            $coinRepo->createCoins($coins);
 
             $progressBar->advance();
             sleep(6);   // It needs to be delayed due to the API rate limit
         }
+
         $progressBar->finish();
         $output->writeln('');
     }

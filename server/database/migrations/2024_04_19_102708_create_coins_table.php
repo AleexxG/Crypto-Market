@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('coins', function (Blueprint $table) {
             $table->id();
-            $table->string('crypto_name');
+            $table->string('slug');
             $table->string('name');
             $table->string('symbol');
             $table->string('image', 500);
