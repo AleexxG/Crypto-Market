@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('image', 500);
             $table->unsignedBigInteger('market_cap_rank')->nullable();
             $table->unsignedBigInteger('circulating_supply')->nullable();
-            //3.6046884142572E+14
             $table->timestamps();
         });
 

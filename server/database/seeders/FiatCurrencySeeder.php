@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\FiatCurrency;
+use App\Repository\FiatCurrencyRepo;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
 
@@ -21,15 +22,7 @@ class FiatCurrencySeeder extends Seeder
         $jsonResponse = $response->body();
         $currencies = json_decode($jsonResponse, true);
 
-        foreach($currencies['data'] as $currency) {
-            $country = substr($currency['code'], 0, -1);
-
-            FiatCurrency::create([
-                'code' => $currency['code'],
-                'rate' => $currency['value'],
-                'country' => $country,
-                'flag' => 'https://flagcdn.com/'. strtolower($country) .'.svg',
-            ]);
-        }
+        $fiatCurrencyRepo = new FiatCurrencyRepo();
+        $fiatCurrencyRepo->createFiatCurrencies($currencies['data']);
     }
 }
