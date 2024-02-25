@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,13 +14,19 @@ return new class extends Migration
     {
         Schema::create('coins', function (Blueprint $table) {
             $table->id();
+            $table->string('crypto_name');
             $table->string('name');
             $table->string('symbol');
-            $table->string('image');
-            $table->unsignedBigInteger('market_cap_rank');
-            $table->decimal('circulating_supply', 18, 8);
+            $table->string('image', 500);
+            $table->unsignedBigInteger('market_cap_rank')->nullable();
+            $table->unsignedBigInteger('circulating_supply')->nullable();
+            //3.6046884142572E+14
             $table->timestamps();
         });
+
+        Artisan::call('db:seed', [
+            '--class' => 'CoinSeeder',
+        ]);
     }
 
     /**

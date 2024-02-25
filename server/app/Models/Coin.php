@@ -10,6 +10,7 @@ class Coin extends Model
     protected $table = 'coins';
 
     protected $fillable = [
+        'crypto_name',
         'name',
         'symbol',
         'image',
