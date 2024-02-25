@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\FiatCurrency;
+use App\Repository\FiatCurrencyRepo;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -32,14 +33,9 @@ class UpdateExchangeRate extends Command
             'currencies' => FiatCurrency::SUPPORTED_CURRENCIES,
         ]);
 
-        $jsonResponse = $response->body();
-        $currencies = json_decode($jsonResponse, true);
+        $currencies = json_decode($response->body(), true);
 
-        foreach($currencies['data'] as $currency) {
-            $currencyToUpdate = FiatCurrency::where(['code' => $currency['code']])->first();
-
-            $currencyToUpdate->rate = $currency['value'];
-            $currencyToUpdate->save();
-        }
+        $fiatCurrencyRepo = new FiatCurrencyRepo();
+        $fiatCurrencyRepo->updateExchangeRates($currencies['data']);
     }
 }

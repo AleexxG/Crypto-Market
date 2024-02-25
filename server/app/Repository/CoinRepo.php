@@ -6,7 +6,7 @@ use App\Models\Coin;
 
 class CoinRepo
 {
-    private $coinModel;
+    private Coin $coinModel;
 
     public function __construct()
     {

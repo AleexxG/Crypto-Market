@@ -26,4 +26,14 @@ class FiatCurrencyRepo
             ]);
         }
     }
+
+    public function updateExchangeRates(array $currencies): void
+    {
+        foreach($currencies as $currency) {
+            $currencyToUpdate = $this->fiatCurrencyModel->where(['code' => $currency['code']])->first();
+
+            $currencyToUpdate->rate = $currency['value'];
+            $currencyToUpdate->save();
+        }
+    }
 }

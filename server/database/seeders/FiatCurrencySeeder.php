@@ -19,8 +19,7 @@ class FiatCurrencySeeder extends Seeder
             'currencies' => FiatCurrency::SUPPORTED_CURRENCIES,
         ]);
 
-        $jsonResponse = $response->body();
-        $currencies = json_decode($jsonResponse, true);
+        $currencies = json_decode($response->body(), true);
 
         $fiatCurrencyRepo = new FiatCurrencyRepo();
         $fiatCurrencyRepo->createFiatCurrencies($currencies['data']);
