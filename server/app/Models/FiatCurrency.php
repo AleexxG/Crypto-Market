@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ExchangeRate extends Model
+class FiatCurrency extends Model
 {
-    protected $table = 'exchange_rates';
+    protected $table = 'fiat_currencies';
 
     protected $fillable = [
         'code',

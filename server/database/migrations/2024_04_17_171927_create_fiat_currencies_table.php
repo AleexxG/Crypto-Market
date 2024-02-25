@@ -1,6 +1,5 @@
 <?php
 
-use Database\Seeders\ExchangeRateSeeder;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Artisan;
@@ -13,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exchange_rates', function (Blueprint $table) {
+        Schema::create('fiat_currencies', function (Blueprint $table) {
             $table->id();
             $table->string('code', 10);
             $table->decimal('rate', 25, 15);
@@ -23,7 +22,7 @@ return new class extends Migration
         });
 
         Artisan::call('db:seed', [
-            '--class' => 'ExchangeRateSeeder',
+            '--class' => 'FiatCurrencySeeder',
         ]);
     }
 
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exchange_rates');
+        Schema::dropIfExists('fiat_currencies');
     }
 };

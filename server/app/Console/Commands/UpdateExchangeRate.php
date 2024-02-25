@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\ExchangeRate;
+use App\Models\FiatCurrency;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -29,17 +29,17 @@ class UpdateExchangeRate extends Command
     {
         $response = Http::get(env('EXCHANGE_RATES_API_URL').'v3/latest', [
             'apikey' => env('EXCHANGE_RATES_API_KEY'),
-            'currencies' => ExchangeRate::SUPPORTED_CURRENCIES,
+            'currencies' => FiatCurrency::SUPPORTED_CURRENCIES,
         ]);
 
         $jsonResponse = $response->body();
-        $exchangeRates = json_decode($jsonResponse, true);
+        $currencies = json_decode($jsonResponse, true);
 
-        foreach($exchangeRates['data'] as $exchangeRate) {
-            $currency = ExchangeRate::where(['code' => $exchangeRate['code']])->first();
+        foreach($currencies['data'] as $currency) {
+            $currencyToUpdate = FiatCurrency::where(['code' => $currency['code']])->first();
 
-            $currency->rate = $exchangeRate['value'];
-            $currency->save();
+            $currencyToUpdate->rate = $currency['value'];
+            $currencyToUpdate->save();
         }
     }
 }

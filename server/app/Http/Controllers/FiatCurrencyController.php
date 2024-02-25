@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ExchangeRate;
+use App\Models\FiatCurrency;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class ExchangeRateController extends Controller
+class FiatCurrencyController extends Controller
 {
     public function getSupportedCurrencies(): JsonResponse
     {
-        $supportedCurrencies = ExchangeRate::select('flag', 'code')->get();
+        $supportedCurrencies = FiatCurrency::select('flag', 'code')->get();
         return response()->json($supportedCurrencies);
     }
 }
