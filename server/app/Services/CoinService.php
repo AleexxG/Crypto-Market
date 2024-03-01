@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Http;
 
 class CoinService
 {
-    public static function getCoinList(int $page): array
+    public static function fetchCoinList(int $page): array
     {
         $response = Http::get(env('COIN_GECKO_API_URL') . 'coins/markets', [
             'vs_currency' => 'usd',

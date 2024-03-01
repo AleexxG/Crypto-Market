@@ -2,10 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Models\FiatCurrency;
 use App\Repository\FiatCurrencyRepo;
+use App\Services\FiatCurrencyService;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Http;
 
 class UpdateExchangeRate extends Command
 {
@@ -21,20 +20,14 @@ class UpdateExchangeRate extends Command
      *
      * @var string
      */
-    protected $description = 'Gets data from API to update exchange rates in database';
+    protected $description = 'Updates exchange rates';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        $response = Http::get(env('EXCHANGE_RATES_API_URL').'v3/latest', [
-            'apikey' => env('EXCHANGE_RATES_API_KEY'),
-            'currencies' => FiatCurrency::SUPPORTED_CURRENCIES,
-        ]);
-
-        $currencies = json_decode($response->body(), true);
-
+        $currencies = FiatCurrencyService::fetchFiatCurrencies();
         $fiatCurrencyRepo = new FiatCurrencyRepo();
         $fiatCurrencyRepo->updateExchangeRates($currencies['data']);
     }
