@@ -26,7 +26,7 @@ class CoinSeeder extends Seeder
             $coinRepo->createCoins($coins);
 
             $progressBar->advance();
-            sleep(30);   // It needs to be delayed due to the API rate limit
+            if ($i < 8) sleep(30);   // It needs to be delayed due to the API rate limit
         }
 
         $progressBar->finish();
