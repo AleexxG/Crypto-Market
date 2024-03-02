@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\FiatCurrency;
+use App\Repository\CoinFiatMetricsRepo;
 use App\Repository\CoinRepo;
 use App\Services\CoinService;
 use Illuminate\Database\Seeder;
@@ -15,15 +17,22 @@ class CoinSeeder extends Seeder
      */
     public function run(): void
     {
-        $coinRepo = new CoinRepo();
         $output = new ConsoleOutput();
         $progressBar = new ProgressBar($output, 8);
-
         $progressBar->start();
+
+        $coinRepo = new CoinRepo();
+        $coinFiatMetricsRepo = new CoinFiatMetricsRepo();
+
+        $fiatCurrencies = FiatCurrency::select('id', 'rate')->get();
 
         for ($i = 1; $i <= 8; $i++) {
             $coins = CoinService::fetchCoinList($i);
-            $coinRepo->createCoins($coins);
+
+            foreach($coins as $coin) {
+                $createdCoinId = $coinRepo->createCoinReturnId($coin);
+                $coinFiatMetricsRepo->createCoinFiatMetrics($fiatCurrencies, $createdCoinId, $coin);
+            }
 
             $progressBar->advance();
             if ($i < 8) sleep(30);   // It needs to be delayed due to the API rate limit

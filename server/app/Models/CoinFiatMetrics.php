@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CoinMetrics extends Model
+class CoinFiatMetrics extends Model
 {
-    protected $table = 'coin_metrics';
+    protected $table = 'coin_fiat_metrics';
 
     protected $fillable = [
         'coin_id',
         'fiat_currency_id',
+        'current_price',
         'market_cap',
         'total_volume',
         'ath',
