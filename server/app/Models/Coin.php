@@ -17,4 +17,6 @@ class Coin extends Model
         'market_cap_rank',
         'circulating_supply',
     ];
+
+    const COINS_PER_PAGE = 20;
 }
