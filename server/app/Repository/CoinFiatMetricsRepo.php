@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Models\CoinFiatMetrics;
-use App\Services\CoinFiatMetricsService;
+use App\Services\CoinService;
 use Illuminate\Database\Eloquent\Collection;
 
 class CoinFiatMetricsRepo
@@ -17,12 +17,12 @@ class CoinFiatMetricsRepo
 
     public function createCoinFiatMetrics(Collection $fiatCurrencies, int $createdCoinId, array $coin): void
     {
-        $coinFiatMetricsService = new CoinFiatMetricsService();
+        $coinService = new CoinService();
 
         foreach($fiatCurrencies as $fiatCurrency) {
-            $priceChange24h = $coinFiatMetricsService->priceChangeForFiatCurrency($coin['current_price'], $fiatCurrency['rate'], $coin['price_change_percentage_24h_in_currency']);
-            $priceChange7d = $coinFiatMetricsService->priceChangeForFiatCurrency($coin['current_price'], $fiatCurrency['rate'], $coin['price_change_percentage_7d_in_currency']);
-            $priceChange30d = $coinFiatMetricsService->priceChangeForFiatCurrency($coin['current_price'], $fiatCurrency['rate'], $coin['price_change_percentage_30d_in_currency']);
+            $priceChange24h = $coinService->priceChangeForFiatCurrency($coin['current_price'], $fiatCurrency['rate'], $coin['price_change_percentage_24h_in_currency']);
+            $priceChange7d = $coinService->priceChangeForFiatCurrency($coin['current_price'], $fiatCurrency['rate'], $coin['price_change_percentage_7d_in_currency']);
+            $priceChange30d = $coinService->priceChangeForFiatCurrency($coin['current_price'], $fiatCurrency['rate'], $coin['price_change_percentage_30d_in_currency']);
 
             $this->coinFiatMetricsModel->create([
                 'coin_id' => $createdCoinId,
