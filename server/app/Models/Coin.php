@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Coin extends Model
 {
@@ -19,4 +20,9 @@ class Coin extends Model
     ];
 
     const COINS_PER_PAGE = 20;
+
+    public function coinFiatMetrics(): HasMany
+    {
+        return $this->hasMany(CoinFiatMetrics::class, 'coin_id', 'id');
+    }
 }
