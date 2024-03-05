@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\FiatCurrency;
 use Illuminate\Support\Facades\Http;
 
 class FiatCurrencyService
@@ -11,7 +10,7 @@ class FiatCurrencyService
     {
         $response = Http::get(env('EXCHANGE_RATES_API_URL').'v3/latest', [
             'apikey' => env('EXCHANGE_RATES_API_KEY'),
-            'currencies' => FiatCurrency::SUPPORTED_CURRENCIES,
+            'currencies' => implode(',', config('supportedCurrencies')),
         ]);
 
         return json_decode($response->body(), true);

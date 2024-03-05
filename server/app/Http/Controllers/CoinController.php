@@ -25,5 +25,8 @@ class CoinController extends Controller
         ->get();
 
         return response()->json($coins);
+        // coin per page remove var
+        // coin fiat metrics rename to coins market data
+        // maybe move circ supply to market data
     }
 }

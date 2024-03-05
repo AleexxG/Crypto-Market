@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\FiatCurrency;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GetCoinListRequest extends FormRequest
@@ -23,7 +22,7 @@ class GetCoinListRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'currency' => 'required|in:' . strtolower(FiatCurrency::SUPPORTED_CURRENCIES),
+            'currency' => 'required|in:' . strtolower(implode(',', config('supportedCurrencies'))),
             'page' => 'required|in:' . implode(',', range(1, 100)),
         ];
     }
