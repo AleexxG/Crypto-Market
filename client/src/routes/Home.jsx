@@ -17,7 +17,7 @@ function Home() {
     const { pageNumber } = useParams();
     const parsedPageNumber = parseInt(pageNumber, 10);
     
-    const totalPages = 92;
+    const totalPages = 100;
     
     useEffect(() => {
         if (!isNaN(parsedPageNumber) && parsedPageNumber <= totalPages) {
@@ -25,6 +25,7 @@ function Home() {
         }
         else if (parsedPageNumber > totalPages || parsedPageNumber < 1) {
             navigate('/');
+            setCurrentPage(1);
         }
         else {
             setCurrentPage(1);
@@ -35,7 +36,7 @@ function Home() {
                 setStatus({ loading: true });
 
                 const response = await fetch (
-                    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=20&page=${currentPage}&sparkline=false`
+                    `http://127.0.0.1:8000/api/coins/list?currency=${currency.toLowerCase()}&page=${currentPage}`
                 );
 
                 if (!response.ok) {

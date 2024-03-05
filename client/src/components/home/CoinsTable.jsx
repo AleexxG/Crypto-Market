@@ -41,7 +41,7 @@ function CoinsTable({
                             {coins.map(coin => {
                                 return (
                                 <CoinsRow
-                                    key = {coin.id}
+                                    key = {coin.slug}
                                     coin = {coin}
                                 />
                                 )

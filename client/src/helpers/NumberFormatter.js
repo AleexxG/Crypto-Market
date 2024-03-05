@@ -21,7 +21,7 @@ class NumberFormatter {
         return {
             currency: this.currency,
             style: 'currency',
-            maximumFractionDigits: 5,
+            maximumFractionDigits: 7,
         };
     }
 

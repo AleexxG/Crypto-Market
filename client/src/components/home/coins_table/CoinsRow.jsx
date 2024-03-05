@@ -5,32 +5,34 @@ import ColorChange from '../../../helpers/ColorChange';
 
 function CoinsRow({ coin }) {
     const {
-        id,
+        slug: id,
         symbol,
         name,
         image,
-        current_price: price,
-        market_cap: marketCap,
         market_cap_rank: marketCapRank,
-        total_volume: volume,
-        price_change_percentage_24h: priceChange,
         circulating_supply: supply,
+        coin_market_data: marketDataArray,
     } = coin;
 
     const { currency } = useCurrency();
     const navigate = useNavigate();
-
+    
+    const marketData = marketDataArray[0];
     const formatter = new NumberFormatter(currency);
     const textColor = new ColorChange();
 
+    function getPriceFormat() {
+        const priceOption = marketData.current_price.startsWith('0') ?
+        formatter.smallPriceOptions() :
+        formatter.priceOptions();
 
-    const priceFormat = formatter.format(
-        price, 
-        formatter.priceOptions()
-    );
+        return formatter.format(marketData.current_price, priceOption);
+    }
+
+    const priceFormat = getPriceFormat();
 
     const marketCapFormat = formatter.format(
-        marketCap, 
+        marketData.market_cap, 
         formatter.bigPriceOptions()
     );
 
@@ -40,12 +42,12 @@ function CoinsRow({ coin }) {
     );
 
     const volumeFormat = formatter.format(
-        volume, 
+        marketData.total_volume, 
         formatter.bigPriceOptions()
     );
 
     const priceChangeFormat = formatter.format(
-        priceChange, 
+        marketData.price_change_percentage_24h, 
         { maximumFractionDigits: 2 }
     );
 
