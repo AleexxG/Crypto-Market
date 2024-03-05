@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\FiatCurrency;
-use App\Repository\CoinFiatMetricsRepo;
+use App\Repository\CoinMarketDataRepo;
 use App\Repository\CoinRepo;
 use App\Services\CoinService;
 use Illuminate\Database\Seeder;
@@ -22,7 +22,7 @@ class CoinSeeder extends Seeder
         $progressBar->start();
 
         $coinRepo = new CoinRepo();
-        $coinFiatMetricsRepo = new CoinFiatMetricsRepo();
+        $coinMarketDataRepo = new CoinMarketDataRepo();
 
         $fiatCurrencies = FiatCurrency::select('id', 'rate')->get();
 
@@ -31,7 +31,7 @@ class CoinSeeder extends Seeder
 
             foreach($coins as $coin) {
                 $createdCoinId = $coinRepo->createCoinReturnId($coin);
-                $coinFiatMetricsRepo->createCoinFiatMetrics($fiatCurrencies, $createdCoinId, $coin);
+                $coinMarketDataRepo->createCoinMarketData($fiatCurrencies, $createdCoinId, $coin);
             }
 
             $progressBar->advance();

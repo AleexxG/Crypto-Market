@@ -2,20 +2,20 @@
 
 namespace App\Repository;
 
-use App\Models\CoinFiatMetrics;
+use App\Models\CoinMarketData;
 use App\Services\CoinService;
 use Illuminate\Database\Eloquent\Collection;
 
-class CoinFiatMetricsRepo
+class CoinMarketDataRepo
 {
-    private CoinFiatMetrics $coinFiatMetricsModel;
+    private CoinMarketData $coinMarketDataModel;
 
     public function __construct()
     {
-        $this->coinFiatMetricsModel = new CoinFiatMetrics();
+        $this->coinMarketDataModel = new CoinMarketData();
     }
 
-    public function createCoinFiatMetrics(Collection $fiatCurrencies, int $createdCoinId, array $coin): void
+    public function createCoinMarketData(Collection $fiatCurrencies, int $createdCoinId, array $coin): void
     {
         $coinService = new CoinService();
 
@@ -24,7 +24,7 @@ class CoinFiatMetricsRepo
             $priceChange7d = $coinService->priceChangeForFiatCurrency($coin['current_price'], $fiatCurrency['rate'], $coin['price_change_percentage_7d_in_currency']);
             $priceChange30d = $coinService->priceChangeForFiatCurrency($coin['current_price'], $fiatCurrency['rate'], $coin['price_change_percentage_30d_in_currency']);
 
-            $this->coinFiatMetricsModel->create([
+            $this->coinMarketDataModel->create([
                 'coin_id' => $createdCoinId,
                 'fiat_currency_id' => $fiatCurrency['id'],
                 'current_price' => $coin['current_price'] * $fiatCurrency['rate'],

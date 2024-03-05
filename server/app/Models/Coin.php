@@ -19,10 +19,8 @@ class Coin extends Model
         'circulating_supply',
     ];
 
-    const COINS_PER_PAGE = 20;
-
-    public function coinFiatMetrics(): HasMany
+    public function coinMarketData(): HasMany
     {
-        return $this->hasMany(CoinFiatMetrics::class, 'coin_id', 'id');
+        return $this->hasMany(CoinMarketData::class, 'coin_id', 'id');
     }
 }

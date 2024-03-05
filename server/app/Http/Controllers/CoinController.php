@@ -15,18 +15,17 @@ class CoinController extends Controller
         $currencyCode = strtoupper($request->get('currency'));
         $currency = FiatCurrency::where('code', $currencyCode)->first();
 
-        $offset = ($request->get('page') - 1) * Coin::COINS_PER_PAGE;
+        $coinsPerPage = 20;
+        $offset = ($request->get('page') - 1) * $coinsPerPage;
 
-        $coins = Coin::with(['coinFiatMetrics' => function ($query) use ($currency) {
+        $coins = Coin::with(['coinMarketData' => function ($query) use ($currency) {
             $query->where('fiat_currency_id', $currency->id);
         }])
         ->skip($offset)
-        ->take(Coin::COINS_PER_PAGE)
+        ->take($coinsPerPage)
+        ->orderBy('market_cap_rank', 'ASC')
         ->get();
 
         return response()->json($coins);
-        // coin per page remove var
-        // coin fiat metrics rename to coins market data
-        // maybe move circ supply to market data
     }
 }

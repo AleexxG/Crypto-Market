@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('coin_fiat_metrics', function (Blueprint $table) {
+        Schema::create('coin_market_data', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('coin_id');
             $table->unsignedBigInteger('fiat_currency_id');
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('coin_fiat_metrics');
+        Schema::dropIfExists('coin_market_data');
     }
 };
