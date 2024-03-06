@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Models\Coin;
+use Illuminate\Database\Eloquent\Collection;
 
 class CoinRepo
 {
@@ -25,5 +26,18 @@ class CoinRepo
         ]);
 
         return $createdCoin->id;
+    }
+
+    public function getCoinList(int $currencyId, int $page, int $coinsPerPage): Collection
+    {
+        $offset = ($page - 1) * $coinsPerPage;
+
+        return $this->coinModel->with(['coinMarketData' => function ($query) use ($currencyId) {
+            $query->where('fiat_currency_id', $currencyId);
+        }])
+        ->skip($offset)
+        ->take($coinsPerPage)
+        ->orderBy('market_cap_rank', 'ASC')
+        ->get();
     }
 }
