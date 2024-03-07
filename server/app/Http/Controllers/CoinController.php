@@ -22,7 +22,7 @@ class CoinController extends Controller
         $currencyCode = strtoupper($request->get('currency'));
         $currency = FiatCurrency::where('code', $currencyCode)->first();
 
-        $coins = $this->coinRepo->getCoinList($currency->id, $request->get('page'), 20);
+        $coins = $this->coinRepo->getCoinList($currency->id, $request->get('page'), config('apiPagination.coin_pulse.coins_per_page'));
         return response()->json($coins);
     }
 }
