@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CoinMarketData extends Model
 {
@@ -20,4 +21,9 @@ class CoinMarketData extends Model
         'price_change_percentage_7d',
         'price_change_percentage_30d',
     ];
+
+    public function fiatCurrency(): BelongsTo
+    {
+        return $this->belongsTo(FiatCurrency::class);
+    }
 }

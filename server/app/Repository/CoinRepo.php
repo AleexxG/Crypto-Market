@@ -28,6 +28,18 @@ class CoinRepo
         return $createdCoin->id;
     }
 
+    public function updateCoin(array $coinNewData): void
+    {
+        $this->coinModel->update([
+            'slug' => $coinNewData['id'],
+            'name' => $coinNewData['name'],
+            'symbol' => $coinNewData['symbol'],
+            'image' => $coinNewData['image'],
+            'market_cap_rank' => $coinNewData['market_cap_rank'],
+            'circulating_supply' => $coinNewData['circulating_supply'],
+        ]);
+    }
+
     public function getCoinList(int $currencyId, int $page, int $coinsPerPage): Collection
     {
         $offset = ($page - 1) * $coinsPerPage;
