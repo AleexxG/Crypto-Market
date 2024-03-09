@@ -29,17 +29,19 @@ class UpdateTopCoins extends Command
      */
     public function handle()
     {
-        $coinRepo = new CoinRepo();
-        $coinMarketDataRepo = new CoinMarketDataRepo();
-
-        $currency = FiatCurrency::firstWhere('code', 'USD');
-        $coins = $coinRepo->getCoinList($currency->id, 1, config('apiPagination.coin_gecko.coins_per_page'));
-
         $updatedCoins = CoinService::fetchCoinList(1);
 
-        foreach($updatedCoins as $updatedCoin) {
-            $coinRepo->updateCoin($updatedCoin);
-            $coinMarketDataRepo->updateCoinMarketData($coins, $updatedCoin);
+        if (count($updatedCoins) > 1) {
+            $coinRepo = new CoinRepo();
+            $coinMarketDataRepo = new CoinMarketDataRepo();
+
+            $currency = FiatCurrency::firstWhere('code', 'USD'); // Using USD because exchange rates are based on USD
+            $coins = $coinRepo->getCoinList($currency->id, 1, config('apiPagination.coin_gecko.coins_per_page'));
+
+            foreach($updatedCoins as $updatedCoin) {
+                $coinRepo->updateCoin($updatedCoin);
+                $coinMarketDataRepo->updateCoinMarketData($coins, $updatedCoin);
+            }
         }
     }
 }
