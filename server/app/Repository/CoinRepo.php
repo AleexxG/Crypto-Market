@@ -30,7 +30,8 @@ class CoinRepo
 
     public function updateCoin(array $coinNewData): void
     {
-        $this->coinModel->update([
+        $this->coinModel->where('market_cap_rank', $coinNewData['market_cap_rank'])
+        ->update([
             'slug' => $coinNewData['id'],
             'name' => $coinNewData['name'],
             'symbol' => $coinNewData['symbol'],
