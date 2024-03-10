@@ -15,14 +15,14 @@ class UpdateTopCoins extends Command
      *
      * @var string
      */
-    protected $signature = 'top-coins:update';
+    protected $signature = 'top-coins:update {currency}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Updates top coins and their data in USD';
+    protected $description = 'Updates top coins and their data';
 
     /**
      * Execute the console command.
@@ -35,7 +35,7 @@ class UpdateTopCoins extends Command
             $coinRepo = new CoinRepo();
             $coinMarketDataRepo = new CoinMarketDataRepo();
 
-            $currency = FiatCurrency::firstWhere('code', 'USD'); // Using USD because exchange rates are based on USD
+            $currency = FiatCurrency::firstWhere('code', $this->argument('currency'));
             $coins = $coinRepo->getCoinList($currency->id, 1, config('apiPagination.coin_gecko.coins_per_page'));
 
             foreach($updatedCoins as $updatedCoin) {
