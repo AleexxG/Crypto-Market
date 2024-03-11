@@ -7,41 +7,37 @@ import CoinsTable from '../components/home/CoinsTable';
 function Home() {
 	const [coins, setCoins] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [status, setStatus] = useState({
-        loading: false,
-        error: null,
-    });
-
-    const { currency } = useCurrency();
+    const [status, setStatus] = useState({loading: false, error: null});
     const navigate = useNavigate();
+    const { currency } = useCurrency();
     const { pageNumber } = useParams();
-    const parsedPageNumber = parseInt(pageNumber, 10);
     
     const totalPages = 100;
-    
+    const parsedPageNumber = parseInt(pageNumber, 10);
+
     useEffect(() => {
         if (!isNaN(parsedPageNumber) && parsedPageNumber <= totalPages) {
             setCurrentPage(parsedPageNumber);
-        }
-        else if (parsedPageNumber > totalPages || parsedPageNumber < 1) {
+        } else {
             navigate('/');
             setCurrentPage(1);
         }
-        else {
-            setCurrentPage(1);
-        }
-
+    }, [parsedPageNumber, navigate, totalPages]);
+    
+    useEffect(() => {
         const fetchCoins = async () => {
             try {
                 setStatus({ loading: true });
 
+                const pageToFetch = !isNaN(parsedPageNumber) && parsedPageNumber <= totalPages
+                ? parsedPageNumber
+                : currentPage;
+
                 const response = await fetch (
-                    `http://127.0.0.1:8000/api/coins/list?currency=${currency.toLowerCase()}&page=${currentPage}`
+                    `http://127.0.0.1:8000/api/coins/list?currency=${currency.toLowerCase()}&page=${pageToFetch}`
                 );
 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
+                if (!response.ok) throw new Error('Network response was not ok');
 
                 const data = await response.json();
                 setCoins(data);
@@ -54,7 +50,7 @@ function Home() {
         };
 
         fetchCoins();
-    }, [currentPage, parsedPageNumber, navigate, currency]);
+    }, [currentPage, parsedPageNumber, totalPages, currency]);
 
 	return (
 		<>
