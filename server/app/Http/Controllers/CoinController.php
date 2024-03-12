@@ -27,7 +27,7 @@ class CoinController extends Controller
         $currency = FiatCurrency::firstWhere('code', $currencyCode);
 
         if ($currencyCode !== 'USD' || ($currencyCode === 'USD' && $page >= $firstPageNoUpdated)) {
-            Artisan::call('coin-list:update', ['page' => $page, 'currency' => $currency->id]);
+            Artisan::call('coin-list:update', ['page' => $page, 'currencyId' => $currency->id]);
         }
 
         $coins = $this->coinRepo->getCoinList($currency->id, $page, config('apiPagination.coin_pulse.coins_per_page'));
