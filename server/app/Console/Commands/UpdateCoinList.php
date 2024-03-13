@@ -38,7 +38,7 @@ class UpdateCoinList extends Command
 
         $coinRepo = new CoinRepo();
         $coins = $coinRepo->getCoinList($currencyId, $coinsAPIPage, $coinsPerPageFromAPI);
-        $isDataUpdated = $coins->first()->updated_at->gt(Carbon::now()->subMinutes(5));
+        $isDataUpdated = $coins->first()->coinMarketData->first()->updated_at->gt(Carbon::now()->subMinutes(5));
 
         if (!$isDataUpdated) {
             $updatedCoins = CoinService::fetchCoinList($coinsAPIPage);
