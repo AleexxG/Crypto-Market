@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GetCoinListRequest;
+use App\Models\Coin;
 use App\Models\FiatCurrency;
 use App\Repository\CoinRepo;
 use Illuminate\Http\JsonResponse;
@@ -32,5 +33,10 @@ class CoinController extends Controller
 
         $coins = $this->coinRepo->getCoinList($currency->id, $page, config('apiPagination.coin_pulse.coins_per_page'));
         return response()->json($coins);
+    }
+
+    public function singleCoinPage(Coin $coin): JsonResponse
+    {
+        dd($coin->slug);
     }
 }
