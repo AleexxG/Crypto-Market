@@ -28,10 +28,9 @@ class CoinRepo
         return $createdCoin->id;
     }
 
-    public function updateCoin(array $coinNewData): void
+    public function updateCoin(Coin $coin, array $coinNewData): void
     {
-        $this->coinModel->where('market_cap_rank', $coinNewData['market_cap_rank'])
-        ->update([
+        $coin->update([
             'slug' => $coinNewData['id'],
             'name' => $coinNewData['name'],
             'symbol' => $coinNewData['symbol'],

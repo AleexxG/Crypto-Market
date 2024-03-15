@@ -47,8 +47,10 @@ class UpdateCoinList extends Command
                 $coinMarketDataRepo = new CoinMarketDataRepo();
 
                 foreach($updatedCoins as $updatedCoin) {
-                    $coinRepo->updateCoin($updatedCoin);
-                    $coinMarketDataRepo->updateCoinMarketData($coins, $updatedCoin);
+                    $coin = $coins->firstWhere('market_cap_rank', $updatedCoin['market_cap_rank']);
+
+                    $coinRepo->updateCoin($coin, $updatedCoin);
+                    $coinMarketDataRepo->updateCoinMarketData($coin, $updatedCoin);
                 }
             }
         }
