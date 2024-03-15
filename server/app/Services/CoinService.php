@@ -23,6 +23,7 @@ class CoinService
 
     public static function fetchSingleCoin(string $coinName): array
     {
+        dd(env('COIN_GECKO_API_URL') . 'coins/' . $coinName);
         $response = Http::get(env('COIN_GECKO_API') . 'coins/' . $coinName);
         return json_decode($response->body(), true);
     }
