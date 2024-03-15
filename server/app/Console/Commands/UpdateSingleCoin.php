@@ -3,6 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Models\Coin;
+use App\Repository\CoinMarketDataRepo;
+use App\Repository\CoinRepo;
+use App\Services\CoinService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -27,10 +30,6 @@ class UpdateSingleCoin extends Command
      */
     public function handle()
     {
-        // check if all coin data is updated in last 5 min
-        // is USD coin data update in last 5 min -> if no call API
-        // update data in all curr
-
         $coinId = $this->argument('coinId');
         $coin = Coin::firstWhere('id', $coinId);
 
@@ -41,15 +40,21 @@ class UpdateSingleCoin extends Command
         $isAllDataUpdated = $coinData->where('updated_at', '<', Carbon::now()->subMinutes(5))->isEmpty();
 
         if (!$isAllDataUpdated) {
-            $isUsdDataUpdated = $coinData->firstWhere('fiat_currency_id', 42) // 42 is currency ID for USD
-            ->updated_at
+            $coinMarketDataRepo = new CoinMarketDataRepo();
+            $coinRepo = new CoinRepo();
+
+            $coinDataInUsd = $coinData->firstWhere('fiat_currency_id', 42); // 42 is currency ID for USD
+            $isUsdDataUpdated = $coinDataInUsd->updated_at
             ->gt(Carbon::now()->subMinutes(5));
 
             if (!$isUsdDataUpdated) {
-                // fetch data for single coin
-            }
+                $updatedCoin = CoinService::fetchSingleCoin($coin->slug);
+                $coinRepo->updateCoin($coin, $updatedCoin);
+                $coinMarketDataRepo->updateCoinMarketData($coin, $updatedCoin);
 
-            // update data in all curr
+            } else {
+                $coinMarketDataRepo->updateCoinMarketData($coin, $coinDataInUsd->toArray());
+            }
         }
     }
 }

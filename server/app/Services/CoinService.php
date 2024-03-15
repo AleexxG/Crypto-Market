@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Helpers\CoinHelper;
 use Illuminate\Support\Facades\Http;
 
 class CoinService
@@ -23,8 +24,8 @@ class CoinService
 
     public static function fetchSingleCoin(string $coinName): array
     {
-        dd(env('COIN_GECKO_API_URL') . 'coins/' . $coinName);
-        $response = Http::get(env('COIN_GECKO_API') . 'coins/' . $coinName);
-        return json_decode($response->body(), true);
+        $response = Http::get(env('COIN_GECKO_API_URL') . 'coins/' . $coinName);
+        $responseArray = json_decode($response->body(), true);
+        return CoinHelper::reformatSingleCoinArray($responseArray);
     }
 }
