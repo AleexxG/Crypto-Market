@@ -40,7 +40,7 @@ class CoinRepo
         ]);
     }
 
-    public function getCoinList(int $currencyId, int $page, int $coinsPerPage): Collection
+    public function getCoinListInCurrency(int $currencyId, int $page, int $coinsPerPage): Collection
     {
         $offset = ($page - 1) * $coinsPerPage;
 

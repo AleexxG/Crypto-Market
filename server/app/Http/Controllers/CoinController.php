@@ -31,7 +31,7 @@ class CoinController extends Controller
             Artisan::call('coin-list:update', ['page' => $page, 'currencyId' => $currency->id]);
         }
 
-        $coins = $this->coinRepo->getCoinList($currency->id, $page, config('apiPagination.coin_pulse.coins_per_page'));
+        $coins = $this->coinRepo->getCoinListInCurrency($currency->id, $page, config('apiPagination.coin_pulse.coins_per_page'));
         return response()->json($coins);
     }
 
