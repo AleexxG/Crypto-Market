@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Helpers;
+use App\Models\Coin;
 
 class CoinHelper
 {
-    public static function reformatSingleCoinArray(array $coinArray): array
+    public static function reformatSingleCoinApiArray(array $coinArray): array
     {
         return [
             "id" => $coinArray['id'],
@@ -21,5 +22,33 @@ class CoinHelper
             "price_change_percentage_7d_in_currency" => $coinArray['market_data']['price_change_percentage_7d_in_currency']['usd'],
             "price_change_percentage_30d_in_currency" => $coinArray['market_data']['price_change_percentage_30d_in_currency']['usd'],
         ];
+    }
+
+    public static function reformatSingleCoinInstanceModel(Coin $coin): array
+    {
+        $coinDataArray = [
+            "slug" => $coin->slug,
+            "name" => $coin->name,
+            "symbol" => $coin->symbol,
+            "image" => $coin->image,
+            "market_cap_rank" => $coin->market_cap_rank,
+            "circulating_supply" => $coin->circulating_supply,
+            "coin_market_data" => [],
+        ];
+
+        foreach($coin->coinMarketData as $marketData) {
+            $coinDataArray['coin_market_data'][$marketData->FiatCurrency->code] = [
+                "current_price" => $marketData->current_price,
+                "market_cap" => $marketData->market_cap,
+                "total_volume" => $marketData->total_volume,
+                "ath" => $marketData->ath,
+                "price_change_percentage_24h" => $marketData->price_change_percentage_24h,
+                "price_change_percentage_7d" => $marketData->price_change_percentage_7d,
+                "price_change_percentage_30d" => $marketData->price_change_percentage_30d,
+                "updated_at" => $marketData->updated_at,
+            ];
+        }
+
+        return $coinDataArray;
     }
 }

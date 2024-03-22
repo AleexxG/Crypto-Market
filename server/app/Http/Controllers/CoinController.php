@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Helpers\CoinHelper;
 use App\Http\Requests\GetCoinListRequest;
 use App\Models\Coin;
 use App\Models\FiatCurrency;
@@ -37,6 +38,9 @@ class CoinController extends Controller
 
     public function singleCoinPage(Coin $coin): JsonResponse
     {
-        dd($coin->slug);
+        Artisan::call('single-coin:update', ['coinId' => $coin->id]);
+        $coinData = $coin->with('coinMarketData')->first();
+        $coinDataReformated = CoinHelper::reformatSingleCoinInstanceModel($coinData);
+        return response()->json($coinDataReformated);
     }
 }

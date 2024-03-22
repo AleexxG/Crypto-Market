@@ -26,6 +26,6 @@ class CoinService
     {
         $response = Http::get(env('COIN_GECKO_API_URL') . 'coins/' . $coinName);
         $responseArray = json_decode($response->body(), true);
-        return CoinHelper::reformatSingleCoinArray($responseArray);
+        return CoinHelper::reformatSingleCoinApiArray($responseArray);
     }
 }
