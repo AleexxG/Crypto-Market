@@ -39,7 +39,7 @@ class CoinController extends Controller
     public function singleCoinPage(Coin $coin): JsonResponse
     {
         Artisan::call('single-coin:update', ['coinId' => $coin->id]);
-        $coinData = $coin->with('coinMarketData')->first();
+        $coinData = $coin->with('coinMarketData')->firstWhere('id', $coin->id);
         $coinDataReformated = CoinHelper::reformatSingleCoinInstanceModel($coinData);
         return response()->json($coinDataReformated);
     }
