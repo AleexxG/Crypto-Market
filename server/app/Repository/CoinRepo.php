@@ -28,16 +28,18 @@ class CoinRepo
         return $createdCoin->id;
     }
 
-    public function updateCoin(Coin $coin, array $coinNewData): void
+    public function updateCoin(?Coin $coin, array $coinNewData): void
     {
-        $coin->update([
-            'slug' => $coinNewData['id'],
-            'name' => $coinNewData['name'],
-            'symbol' => $coinNewData['symbol'],
-            'image' => $coinNewData['image'],
-            'market_cap_rank' => $coinNewData['market_cap_rank'],
-            'circulating_supply' => $coinNewData['circulating_supply'],
-        ]);
+        if ($coin && count($coinNewData) > 1) {
+            $coin->update([
+                'slug' => $coinNewData['id'],
+                'name' => $coinNewData['name'],
+                'symbol' => $coinNewData['symbol'],
+                'image' => $coinNewData['image'],
+                'market_cap_rank' => $coinNewData['market_cap_rank'],
+                'circulating_supply' => $coinNewData['circulating_supply'],
+            ]);
+        }
     }
 
     public function getCoinListInCurrency(int $currencyId, int $page, int $coinsPerPage): Collection

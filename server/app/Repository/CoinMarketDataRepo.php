@@ -32,18 +32,20 @@ class CoinMarketDataRepo
         }
     }
 
-    public function updateCoinMarketData(Coin $coin, array $coinNewData): void
+    public function updateCoinMarketData(?Coin $coin, array $coinNewData): void
     {
-        foreach($coin->coinMarketData as $data) {
-            $data->update([
-                'current_price' => $coinNewData['current_price'] * $data->fiatCurrency->rate,
-                'market_cap' => $coinNewData['market_cap'] * $data->fiatCurrency->rate,
-                'total_volume' => $coinNewData['total_volume'] * $data->fiatCurrency->rate,
-                'ath' => $coinNewData['ath'] * $data->fiatCurrency->rate,
-                'price_change_percentage_24h' => $coinNewData['price_change_percentage_24h_in_currency'] ?? 0,
-                'price_change_percentage_7d' => $coinNewData['price_change_percentage_7d_in_currency'] ?? 0,
-                'price_change_percentage_30d' => $coinNewData['price_change_percentage_30d_in_currency'] ?? 0,
-            ]);
+        if ($coin && count($coinNewData) > 1) {
+            foreach($coin->coinMarketData as $data) {
+                $data->update([
+                    'current_price' => $coinNewData['current_price'] * $data->fiatCurrency->rate,
+                    'market_cap' => $coinNewData['market_cap'] * $data->fiatCurrency->rate,
+                    'total_volume' => $coinNewData['total_volume'] * $data->fiatCurrency->rate,
+                    'ath' => $coinNewData['ath'] * $data->fiatCurrency->rate,
+                    'price_change_percentage_24h' => $coinNewData['price_change_percentage_24h_in_currency'] ?? $coinNewData['price_change_percentage_24h'] ?? 0,
+                    'price_change_percentage_7d' => $coinNewData['price_change_percentage_7d_in_currency'] ?? $coinNewData['price_change_percentage_7d'] ?? 0,
+                    'price_change_percentage_30d' => $coinNewData['price_change_percentage_30d_in_currency'] ?? $coinNewData['price_change_percentage_30d'] ?? 0,
+                ]);
+            }
         }
     }
 

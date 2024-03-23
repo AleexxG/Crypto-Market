@@ -34,7 +34,7 @@ class UpdateSingleCoin extends Command
         $coin = Coin::firstWhere('id', $coinId);
 
         $coinData = $coin->with('coinMarketData', 'coinMarketData.fiatCurrency')
-        ->first()
+        ->firstWhere('id', $coinId)
         ->coinMarketData;
 
         $isAllDataUpdated = $coinData->where('updated_at', '<', Carbon::now()->subMinutes(5))->isEmpty();
