@@ -6,17 +6,17 @@ function CoinInfo({ coin }) {
     const formatter = new NumberFormatter(currency);
 
     const priceFormat = formatter.format(
-        coin.market_data?.current_price[currency],
+        coin.coin_market_data?.[currency]?.current_price,
         formatter.priceOptions()
     );
 
     const marketCapFormat = formatter.format(
-        coin.market_data?.market_cap[currency],
+        coin.coin_market_data?.[currency]?.market_cap,
         formatter.bigPriceOptions()
     );
 
     const volumeFormat = formatter.format(
-        coin.market_data?.total_volume[currency], 
+        coin.coin_market_data?.[currency]?.total_volume, 
         formatter.bigPriceOptions()
     );
 
@@ -24,8 +24,9 @@ function CoinInfo({ coin }) {
         <section className='gradient'>
             <div className='container py-5 d-flex justify-content-between align-items-center'>
                 <div className='d-flex align-items-center'>
-                    <img src={coin.image?.small} 
-                         alt={`${coin.name} logo`}>
+                    <img src={coin.image} 
+                         alt={`${coin.name} logo`}
+                         style={{maxWidth: '60px'}}>
                     </img>
                     <div className='ms-sm-5 ms-3'>
                         <h1 className='fs-3 fw-normal'>

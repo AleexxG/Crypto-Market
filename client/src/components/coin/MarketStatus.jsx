@@ -8,22 +8,22 @@ function MarketStatus({ coin }) {
     const textColor = new ColorChange();
 
     const athPriceFormat = formatter.format(
-        coin.market_data?.ath[currency], 
+        coin.coin_market_data?.[currency].ath, 
         formatter.priceOptions()
     );
 
     const marketCapFormat = formatter.format(
-        coin.market_data?.market_cap[currency],
+        coin.coin_market_data?.[currency].market_cap,
         formatter.bigPriceOptions()
     );
 
     const volumeFormat = formatter.format(
-        coin.market_data?.total_volume[currency], 
+        coin.coin_market_data?.[currency].total_volume, 
         formatter.bigPriceOptions()
     );
 
     const supplyFormat = formatter.format(
-        coin.market_data?.total_supply, 
+        coin.circulating_supply, 
         formatter.bigNumberOptions()
     );
 
@@ -49,8 +49,8 @@ function MarketStatus({ coin }) {
                     </div>
 
                     <div>
-                        <h1 className='fs-6 fw-normal text-uppercase text-secondary'>popularity</h1>
-                        <p className='fs-5'>#{coin.coingecko_rank}</p>
+                        <h1 className='fs-6 fw-normal text-uppercase text-secondary'>market cap rank</h1>
+                        <p className='fs-5'>#{coin.market_cap_rank}</p>
                     </div>
 
                     <div>
@@ -60,9 +60,9 @@ function MarketStatus({ coin }) {
 
                     <div>
                         <h1 className='fs-6 fw-normal text-uppercase text-secondary'>price change (24H)</h1>
-                        <p className={`${textColor.colorChange(coin.market_data?.price_change_percentage_24h)} fs-5`}>{
+                        <p className={`${textColor.colorChange(coin.coin_market_data?.[currency].price_change_percentage_24h)} fs-5`}>{
                             formatter.format(
-                                    coin.market_data?.price_change_percentage_24h, 
+                                    coin.coin_market_data?.[currency].price_change_percentage_24h, 
                                     { maximumFractionDigits: 2 }
                                 )
                             }%
@@ -71,9 +71,9 @@ function MarketStatus({ coin }) {
 
                     <div>
                         <h1 className='fs-6 fw-normal text-uppercase text-secondary'>price change (7D)</h1>
-                        <p className={`${textColor.colorChange(coin.market_data?.price_change_percentage_7d)} fs-5`}>{
+                        <p className={`${textColor.colorChange(coin.coin_market_data?.[currency].price_change_percentage_7d)} fs-5`}>{
                             formatter.format(
-                                    coin.market_data?.price_change_percentage_7d, 
+                                    coin.coin_market_data?.[currency].price_change_percentage_7d, 
                                     { maximumFractionDigits: 2 }
                                 )
                             }%
@@ -82,9 +82,9 @@ function MarketStatus({ coin }) {
 
                     <div>
                         <h1 className='fs-6 fw-normal text-uppercase text-secondary'>price change (30D)</h1>
-                        <p className={`${textColor.colorChange(coin.market_data?.price_change_percentage_30d)} fs-5`}>{
+                        <p className={`${textColor.colorChange(coin.coin_market_data?.[currency].price_change_percentage_30d)} fs-5`}>{
                             formatter.format(
-                                    coin.market_data?.price_change_percentage_30d, 
+                                    coin.coin_market_data?.[currency].price_change_percentage_30d, 
                                     { maximumFractionDigits: 2 }
                                 )
                             }%

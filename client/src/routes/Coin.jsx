@@ -18,7 +18,7 @@ function Coin() {
         setLoading(true);
 
         const response = await fetch(
-          `https://api.coingecko.com/api/v3/coins/${coinId}`
+          `http://127.0.0.1:8000/api/coins/${coinId}`
         );
 
         if (!response.ok) {
