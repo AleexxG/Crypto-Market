@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Models\Coin;
 use App\Models\CoinMarketData;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class CoinMarketDataRepo
@@ -49,4 +50,22 @@ class CoinMarketDataRepo
         }
     }
 
+    public function getCoinDataInCurrency(int $coinId, string $currencyCode): ?CoinMarketData
+    {
+        return $this->coinMarketDataModel
+        ->where('coin_id', $coinId)
+        ->whereHas('fiatCurrency', function($query) use ($currencyCode) {
+            $query->where('code', $currencyCode);
+        })
+        ->first();
+    }
+
+    public function isCoinUpdatedInAllCurrencies(int $coinId): bool
+    {
+        $coinData = $this->coinMarketDataModel
+        ->where('coin_id', $coinId)
+        ->get();
+
+        return $coinData->where('updated_at', '<', Carbon::now()->subMinutes(5))->isEmpty();
+    }
 }

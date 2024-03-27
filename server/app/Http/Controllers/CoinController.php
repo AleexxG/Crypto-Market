@@ -6,6 +6,7 @@ use App\Http\Helpers\CoinHelper;
 use App\Http\Requests\GetCoinListRequest;
 use App\Models\Coin;
 use App\Models\FiatCurrency;
+use App\Repository\CoinMarketDataRepo;
 use App\Repository\CoinRepo;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -14,10 +15,12 @@ use Illuminate\Support\Facades\Artisan;
 class CoinController extends Controller
 {
     private CoinRepo $coinRepo;
+    private CoinMarketDataRepo $coinMarketDataRepo;
 
     public function __construct()
     {
         $this->coinRepo = new CoinRepo();
+        $this->coinMarketDataRepo = new CoinMarketDataRepo();
     }
 
     public function coinList(GetCoinListRequest $request): JsonResponse
@@ -38,7 +41,9 @@ class CoinController extends Controller
 
     public function singleCoinPage(Coin $coin): JsonResponse
     {
-        Artisan::call('single-coin:update', ['coinId' => $coin->id]);
+        $isCoinUpdated = $this->coinMarketDataRepo->isCoinUpdatedInAllCurrencies($coin->id);
+        if (!$isCoinUpdated) Artisan::call('single-coin:update', ['coinId' => $coin->id]);
+
         $coinData = $coin->with('coinMarketData')->firstWhere('id', $coin->id);
         $coinDataReformated = CoinHelper::reformatSingleCoinInstanceModel($coinData);
         return response()->json($coinDataReformated);
