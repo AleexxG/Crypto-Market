@@ -51,4 +51,11 @@ class CoinHelper
 
         return $coinDataArray;
     }
+
+    public static function convertRequestPageToApiPage(int $requestedPage): int
+    {
+        $coinsPerPage = config('apiPagination.coin_pulse.coins_per_page');
+        $coinsPerPageForApi = config('apiPagination.coin_gecko.coins_per_page');
+        return ceil(($requestedPage * $coinsPerPage) / $coinsPerPageForApi);
+    }
 }

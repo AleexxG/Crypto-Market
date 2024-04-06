@@ -26,12 +26,15 @@ class CoinController extends Controller
     public function coinList(GetCoinListRequest $request): JsonResponse
     {
         $page = $request->get('page');
-        $firstPageNoUpdated = ceil(config('apiPagination.coin_gecko.coins_per_page') / config('apiPagination.coin_pulse.coins_per_page'));
 
         $currencyCode = strtoupper($request->get('currency'));
         $currency = FiatCurrency::firstWhere('code', $currencyCode);
 
-        if ($currencyCode !== 'USD' || ($currencyCode === 'USD' && $page >= $firstPageNoUpdated)) {
+        $apiPage = CoinHelper::convertRequestPageToApiPage($page);
+        $coinsFromApiPage = $this->coinRepo->getCoinListInCurrency($currency->id, $apiPage, config('apiPagination.coin_gecko.coins_per_page'));
+        $isCoinListUpdated = $this->coinMarketDataRepo->isCoinListUpdated($coinsFromApiPage);
+
+        if (!$isCoinListUpdated) {
             Artisan::call('coin-list:update', ['page' => $page, 'currencyId' => $currency->id]);
         }
 

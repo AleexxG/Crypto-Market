@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Helpers\CoinHelper;
 use App\Repository\CoinMarketDataRepo;
 use App\Repository\CoinRepo;
 use App\Services\CoinService;
@@ -29,33 +30,24 @@ class UpdateCoinList extends Command
      */
     public function handle()
     {
+        $coinRepo = new CoinRepo();
+        $coinMarketDataRepo = new CoinMarketDataRepo();
+
         $currencyId = $this->argument('currencyId');
         $page = $this->argument('page');
+        $apiPage = CoinHelper::convertRequestPageToApiPage($page);
 
-        $coinsPerPage = config('apiPagination.coin_pulse.coins_per_page');
-        $coinsPerPageFromAPI = config('apiPagination.coin_gecko.coins_per_page');
-        $coinsAPIPage = ceil(($page * $coinsPerPage) / $coinsPerPageFromAPI);
+        $coins = $coinRepo->getCoinListInCurrency($currencyId, $apiPage, config('apiPagination.coin_gecko.coins_per_page'));
 
-        $coinRepo = new CoinRepo();
-        $coins = $coinRepo->getCoinListInCurrency($currencyId, $coinsAPIPage, $coinsPerPageFromAPI);
+        $updatedCoinsData = CoinService::fetchCoinList($apiPage);
+        if (!isset($updatedCoinsData)) return;
 
-        $outdatedData = $coins->filter(function ($coin) {
-            return $coin->coinMarketData->first()->updated_at->lt(Carbon::now()->subMinutes(5));
-        });
+        foreach($updatedCoinsData as $updatedCoin) {
+            $coin = $coins->firstWhere('market_cap_rank', $updatedCoin['market_cap_rank']);
 
-        if (!$outdatedData->isEmpty()) {
-            $updatedCoins = CoinService::fetchCoinList($coinsAPIPage);
-
-            if (count($updatedCoins) > 1) {
-                $coinMarketDataRepo = new CoinMarketDataRepo();
-
-                foreach($updatedCoins as $updatedCoin) {
-                    $coin = $coins->firstWhere('market_cap_rank', $updatedCoin['market_cap_rank']);
-
-                    $coinRepo->updateCoin($coin, $updatedCoin);
-                    $coinMarketDataRepo->updateCoinMarketData($coin, $updatedCoin);
-                }
-            }
+            if (!isset($coin)) continue;
+            $coinRepo->updateCoin($coin, $updatedCoin);
+            $coinMarketDataRepo->updateCoinMarketData($coin, $updatedCoin);
         }
     }
 }
