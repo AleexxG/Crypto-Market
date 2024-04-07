@@ -63,7 +63,10 @@ class CoinMarketDataRepo
     public function isCoinListDataUpdated(Collection $coinList): bool
     {
         $outdatedCoins = $coinList->filter(function ($coin) {
-            return $coin->coinMarketData->first()->updated_at->lt(Carbon::now()->subMinutes(5));
+            return $coin->coinMarketData
+            ->first()
+            ->updated_at
+            ->lt(Carbon::now()->subMinutes(config('api.coin_pulse.update_frequency')));
         });
 
         return $outdatedCoins->isEmpty();
@@ -75,6 +78,7 @@ class CoinMarketDataRepo
         ->where('coin_id', $coinId)
         ->get();
 
-        return $coinData->where('updated_at', '<', Carbon::now()->subMinutes(5))->isEmpty();
+        return $coinData->where('updated_at', '<', Carbon::now()->subMinutes(config('api.coin_pulse.update_frequency')))
+        ->isEmpty();
     }
 }

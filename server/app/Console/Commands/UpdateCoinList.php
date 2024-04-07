@@ -37,7 +37,7 @@ class UpdateCoinList extends Command
         $page = $this->argument('page');
         $apiPage = CoinHelper::convertRequestPageToApiPage($page);
 
-        $coins = $coinRepo->getCoinListInCurrency($currencyCode, $apiPage, config('apiPagination.coin_gecko.coins_per_page'));
+        $coins = $coinRepo->getCoinListInCurrency($currencyCode, $apiPage, config('api.coin_gecko.coins_per_page'));
 
         $updatedCoinsData = CoinService::fetchCoinList($apiPage);
         if (!isset($updatedCoinsData)) return;

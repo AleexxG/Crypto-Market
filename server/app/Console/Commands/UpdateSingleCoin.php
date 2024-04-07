@@ -36,7 +36,8 @@ class UpdateSingleCoin extends Command
         $coin = Coin::firstWhere('id', $coinId);
 
         $coinDataInUsd = $coinMarketDataRepo->getCoinDataInCurrency($coinId, 'usd');
-        $isCoinUpdatedInUsd = $coinDataInUsd->updated_at->gt(Carbon::now()->subMinutes(5));
+        $isCoinUpdatedInUsd = $coinDataInUsd->updated_at
+        ->gt(Carbon::now()->subMinutes(config('api.coin_pulse.update_frequency')));
 
         if ($isCoinUpdatedInUsd) {
             $coinMarketDataRepo->updateCoinData($coin, $coinDataInUsd->toArray());

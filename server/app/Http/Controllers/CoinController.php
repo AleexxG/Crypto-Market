@@ -28,14 +28,14 @@ class CoinController extends Controller
         $currencyCode = $request->get('currency');
 
         $apiPage = CoinHelper::convertRequestPageToApiPage($page);
-        $coinsFromApiPage = $this->coinRepo->getCoinListInCurrency($currencyCode, $apiPage, config('apiPagination.coin_gecko.coins_per_page'));
+        $coinsFromApiPage = $this->coinRepo->getCoinListInCurrency($currencyCode, $apiPage, config('api.coin_gecko.coins_per_page'));
         $isCoinListUpdated = $this->coinMarketDataRepo->isCoinListDataUpdated($coinsFromApiPage);
 
         if (!$isCoinListUpdated) {
             Artisan::call('coin-list:update', ['page' => $page, 'currencyCode' => $currencyCode]);
         }
 
-        $coins = $this->coinRepo->getCoinListInCurrency($currencyCode, $page, config('apiPagination.coin_pulse.coins_per_page'));
+        $coins = $this->coinRepo->getCoinListInCurrency($currencyCode, $page, config('api.coin_pulse.coins_per_page'));
         return response()->json($coins);
     }
 
