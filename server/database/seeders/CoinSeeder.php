@@ -31,7 +31,7 @@ class CoinSeeder extends Seeder
 
             foreach($coins as $coin) {
                 $createdCoinId = $coinRepo->createCoinReturnId($coin);
-                $coinMarketDataRepo->createCoinMarketData($fiatCurrencies, $createdCoinId, $coin);
+                $coinMarketDataRepo->createCoinData($fiatCurrencies, $createdCoinId, $coin);
             }
 
             $progressBar->advance();

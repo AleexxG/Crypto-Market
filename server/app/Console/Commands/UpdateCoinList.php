@@ -16,7 +16,7 @@ class UpdateCoinList extends Command
      *
      * @var string
      */
-    protected $signature = 'coin-list:update {page} {currencyId}';
+    protected $signature = 'coin-list:update {page} {currencyCode}';
 
     /**
      * The console command description.
@@ -33,11 +33,11 @@ class UpdateCoinList extends Command
         $coinRepo = new CoinRepo();
         $coinMarketDataRepo = new CoinMarketDataRepo();
 
-        $currencyId = $this->argument('currencyId');
+        $currencyCode = $this->argument('currencyCode');
         $page = $this->argument('page');
         $apiPage = CoinHelper::convertRequestPageToApiPage($page);
 
-        $coins = $coinRepo->getCoinListInCurrency($currencyId, $apiPage, config('apiPagination.coin_gecko.coins_per_page'));
+        $coins = $coinRepo->getCoinListInCurrency($currencyCode, $apiPage, config('apiPagination.coin_gecko.coins_per_page'));
 
         $updatedCoinsData = CoinService::fetchCoinList($apiPage);
         if (!isset($updatedCoinsData)) return;
@@ -47,7 +47,7 @@ class UpdateCoinList extends Command
 
             if (!isset($coin)) continue;
             $coinRepo->updateCoin($coin, $updatedCoin);
-            $coinMarketDataRepo->updateCoinMarketData($coin, $updatedCoin);
+            $coinMarketDataRepo->updateCoinData($coin, $updatedCoin);
         }
     }
 }

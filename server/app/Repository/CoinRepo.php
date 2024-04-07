@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Models\Coin;
+use App\Models\FiatCurrency;
 use Illuminate\Database\Eloquent\Collection;
 
 class CoinRepo
@@ -40,8 +41,10 @@ class CoinRepo
         ]);
     }
 
-    public function getCoinListInCurrency(int $currencyId, int $page, int $coinsPerPage): Collection
+    public function getCoinListInCurrency(string $currencyCode, int $page, int $coinsPerPage): Collection
     {
+        $currency = FiatCurrency::firstWhere('code', strtoupper($currencyCode));
+        $currencyId = $currency->id;
         $offset = ($page - 1) * $coinsPerPage;
 
         return $this->coinModel->with(['coinMarketData' => function ($query) use ($currencyId) {

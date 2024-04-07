@@ -16,7 +16,7 @@ class CoinMarketDataRepo
         $this->coinMarketDataModel = new CoinMarketData();
     }
 
-    public function createCoinMarketData(Collection $fiatCurrencies, int $createdCoinId, array $coin): void
+    public function createCoinData(Collection $fiatCurrencies, int $createdCoinId, array $coin): void
     {
         foreach($fiatCurrencies as $fiatCurrency) {
             $this->coinMarketDataModel->create([
@@ -33,7 +33,7 @@ class CoinMarketDataRepo
         }
     }
 
-    public function updateCoinMarketData(Coin $coin, array $coinNewData): void
+    public function updateCoinData(Coin $coin, array $coinNewData): void
     {
         foreach($coin->coinMarketData as $data) {
             $data->update([
@@ -50,15 +50,17 @@ class CoinMarketDataRepo
 
     public function getCoinDataInCurrency(int $coinId, string $currencyCode): ?CoinMarketData
     {
+        $currencyCodeToUpper = strtoupper($currencyCode);
+
         return $this->coinMarketDataModel
         ->where('coin_id', $coinId)
-        ->whereHas('fiatCurrency', function($query) use ($currencyCode) {
-            $query->where('code', $currencyCode);
+        ->whereHas('fiatCurrency', function($query) use ($currencyCodeToUpper) {
+            $query->where('code', $currencyCodeToUpper);
         })
         ->first();
     }
 
-    public function isCoinListUpdated(Collection $coinList): bool
+    public function isCoinListDataUpdated(Collection $coinList): bool
     {
         $outdatedCoins = $coinList->filter(function ($coin) {
             return $coin->coinMarketData->first()->updated_at->lt(Carbon::now()->subMinutes(5));

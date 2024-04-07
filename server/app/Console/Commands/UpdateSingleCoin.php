@@ -35,11 +35,11 @@ class UpdateSingleCoin extends Command
         $coinId = $this->argument('coinId');
         $coin = Coin::firstWhere('id', $coinId);
 
-        $coinDataInUsd = $coinMarketDataRepo->getCoinDataInCurrency($coinId, 'USD');
+        $coinDataInUsd = $coinMarketDataRepo->getCoinDataInCurrency($coinId, 'usd');
         $isCoinUpdatedInUsd = $coinDataInUsd->updated_at->gt(Carbon::now()->subMinutes(5));
 
         if ($isCoinUpdatedInUsd) {
-            $coinMarketDataRepo->updateCoinMarketData($coin, $coinDataInUsd->toArray());
+            $coinMarketDataRepo->updateCoinData($coin, $coinDataInUsd->toArray());
             return;
         }
 
@@ -48,6 +48,6 @@ class UpdateSingleCoin extends Command
 
         $coinRepo = new CoinRepo();
         $coinRepo->updateCoin($coin, $updatedCoinData);
-        $coinMarketDataRepo->updateCoinMarketData($coin, $updatedCoinData);
+        $coinMarketDataRepo->updateCoinData($coin, $updatedCoinData);
     }
 }

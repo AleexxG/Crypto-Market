@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Helpers\CoinHelper;
 use App\Http\Requests\GetCoinListRequest;
 use App\Models\Coin;
-use App\Models\FiatCurrency;
 use App\Repository\CoinMarketDataRepo;
 use App\Repository\CoinRepo;
 use Illuminate\Http\JsonResponse;
@@ -26,19 +25,17 @@ class CoinController extends Controller
     public function coinList(GetCoinListRequest $request): JsonResponse
     {
         $page = $request->get('page');
-
-        $currencyCode = strtoupper($request->get('currency'));
-        $currency = FiatCurrency::firstWhere('code', $currencyCode);
+        $currencyCode = $request->get('currency');
 
         $apiPage = CoinHelper::convertRequestPageToApiPage($page);
-        $coinsFromApiPage = $this->coinRepo->getCoinListInCurrency($currency->id, $apiPage, config('apiPagination.coin_gecko.coins_per_page'));
-        $isCoinListUpdated = $this->coinMarketDataRepo->isCoinListUpdated($coinsFromApiPage);
+        $coinsFromApiPage = $this->coinRepo->getCoinListInCurrency($currencyCode, $apiPage, config('apiPagination.coin_gecko.coins_per_page'));
+        $isCoinListUpdated = $this->coinMarketDataRepo->isCoinListDataUpdated($coinsFromApiPage);
 
         if (!$isCoinListUpdated) {
-            Artisan::call('coin-list:update', ['page' => $page, 'currencyId' => $currency->id]);
+            Artisan::call('coin-list:update', ['page' => $page, 'currencyCode' => $currencyCode]);
         }
 
-        $coins = $this->coinRepo->getCoinListInCurrency($currency->id, $page, config('apiPagination.coin_pulse.coins_per_page'));
+        $coins = $this->coinRepo->getCoinListInCurrency($currencyCode, $page, config('apiPagination.coin_pulse.coins_per_page'));
         return response()->json($coins);
     }
 

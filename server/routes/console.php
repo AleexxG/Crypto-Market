@@ -10,4 +10,3 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote')->hourly();
 
 Schedule::command('exchange-rate:update')->everyThreeHours();
-Schedule::command('coin-list:update', [1, 42])->everyFiveMinutes(); // 42 is currency ID for USD
