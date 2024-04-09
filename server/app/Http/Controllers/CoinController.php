@@ -7,6 +7,7 @@ use App\Http\Requests\GetCoinListRequest;
 use App\Models\Coin;
 use App\Repository\CoinMarketDataRepo;
 use App\Repository\CoinRepo;
+use App\Services\CoinService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -45,7 +46,7 @@ class CoinController extends Controller
         if (!$isCoinUpdated) Artisan::call('single-coin:update', ['coinId' => $coin->id]);
 
         $coinData = $coin->with('coinMarketData')->firstWhere('id', $coin->id);
-        $coinDataReformated = CoinHelper::reformatSingleCoinInstanceModel($coinData);
+        $coinDataReformated = CoinService::reformatSingleCoinInstanceModel($coinData);
         return response()->json($coinDataReformated);
     }
 }
