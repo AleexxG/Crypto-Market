@@ -9,7 +9,7 @@ function MarketStatus({ coin }) {
 
     const athPriceFormat = formatter.format(
         coin.coin_market_data?.[currency].ath, 
-        formatter.priceOptions()
+        formatter.priceOptions(coin.coin_market_data?.[currency].ath)
     );
 
     const marketCapFormat = formatter.format(

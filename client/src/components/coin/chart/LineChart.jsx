@@ -45,15 +45,8 @@ function LineChart({ chart, days }) {
     function mapChartData(time, priceAtTime, days) {
         let priceFormat = formatter.format(
             priceAtTime, 
-            formatter.priceOptions()
+            formatter.priceOptions(priceAtTime)
         );
-
-        if (priceAtTime < 1) {
-            priceFormat = formatter.format(
-                priceAtTime, 
-                formatter.smallPriceOptions()
-            );
-        }
 
         const date = new Date(time);
         const hours = `${date.getHours() % 12 || 12} ${date.getHours() >= 12 ? 'PM' : 'AM'}`;

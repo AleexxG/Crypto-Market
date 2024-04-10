@@ -7,7 +7,7 @@ function CoinInfo({ coin }) {
 
     const priceFormat = formatter.format(
         coin.coin_market_data?.[currency]?.current_price,
-        formatter.priceOptions()
+        formatter.priceOptions(coin.coin_market_data?.[currency]?.current_price)
     );
 
     const marketCapFormat = formatter.format(

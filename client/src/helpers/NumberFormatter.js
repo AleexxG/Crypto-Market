@@ -9,19 +9,11 @@ class NumberFormatter {
         return format.format(value);
     }
   
-    priceOptions() {
+    priceOptions(value) {
         return {
             currency: this.currency,
             style: 'currency',
-            maximumFractionDigits: 2,
-        };
-    }
-  
-    smallPriceOptions() {
-        return {
-            currency: this.currency,
-            style: 'currency',
-            maximumFractionDigits: 7,
+            maximumFractionDigits: value < 1 ? 7 : 2,
         };
     }
 

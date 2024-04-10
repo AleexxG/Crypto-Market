@@ -21,15 +21,10 @@ function CoinsRow({ coin }) {
     const formatter = new NumberFormatter(currency);
     const textColor = new ColorChange();
 
-    function getPriceFormat() {
-        const priceOption = marketData.current_price.startsWith('0') ?
-        formatter.smallPriceOptions() :
-        formatter.priceOptions();
-
-        return formatter.format(marketData.current_price, priceOption);
-    }
-
-    const priceFormat = getPriceFormat();
+    const priceFormat = formatter.format(
+        marketData.current_price,
+        formatter.priceOptions(marketData.current_price)
+    );
 
     const marketCapFormat = formatter.format(
         marketData.market_cap, 
