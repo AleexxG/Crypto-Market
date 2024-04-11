@@ -52,6 +52,7 @@ class CoinController extends Controller
 
     public function searchCoin(SearchCoinRequest $request): JsonResponse
     {
-        dd($request->get('query'));
+        $searchResult = $this->coinRepo->getSearchCoinResult($request->get('query'));
+        return response()->json($searchResult);
     }
 }

@@ -55,4 +55,14 @@ class CoinRepo
         ->orderBy('market_cap_rank', 'ASC')
         ->get();
     }
+
+    public function getSearchCoinResult(string $query): Collection
+    {
+        return $this->coinModel
+        ->where('slug', 'LIKE', '%'.$query.'%')
+        ->orWhere('name', 'LIKE', '%'.$query.'%')
+        ->orWhere('symbol', 'LIKE', '%'.$query.'%')
+        ->select('slug', 'name', 'symbol', 'market_cap_rank', 'image')
+        ->get();
+    }
 }
