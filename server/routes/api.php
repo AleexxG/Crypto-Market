@@ -12,6 +12,7 @@ Route::get('/user', function (Request $request) {
 Route::get('/supported-currencies', [FiatCurrencyController::class, 'getSupportedCurrencies']);
 
 Route::controller(CoinController::class)->group(function () {
-    Route::get('/coins/list/', 'coinList');
+    Route::get('/coins/list', 'coinList');
+    Route::get('/coins/search', 'searchCoin');
     Route::get('/coins/{coin:slug}', 'singleCoinPage');
 });

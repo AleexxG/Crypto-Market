@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Helpers\CoinHelper;
 use App\Http\Requests\GetCoinListRequest;
+use App\Http\Requests\SearchCoinRequest;
 use App\Models\Coin;
 use App\Repository\CoinMarketDataRepo;
 use App\Repository\CoinRepo;
 use App\Services\CoinService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
 class CoinController extends Controller
@@ -48,5 +48,10 @@ class CoinController extends Controller
         $coinData = $coin->with('coinMarketData')->firstWhere('id', $coin->id);
         $coinDataReformated = CoinService::reformatSingleCoinInstanceModel($coinData);
         return response()->json($coinDataReformated);
+    }
+
+    public function searchCoin(SearchCoinRequest $request): JsonResponse
+    {
+        dd($request->get('query'));
     }
 }
