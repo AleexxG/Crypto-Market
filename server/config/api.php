@@ -8,6 +8,6 @@ return [
     'coin_pulse' => [
         'max_pages' => 100,
         'coins_per_page' => 20,
-        'update_frequency' => 3, // in minutes
+        'update_frequency' => 4, // in minutes
     ],
 ];
