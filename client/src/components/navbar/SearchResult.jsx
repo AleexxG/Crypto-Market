@@ -14,7 +14,7 @@ function SearchResult({ searchInput, searchResults, setSearchResults }) {
                 setStatus({ loading: true });
 
                 const response = await fetch(
-                    `https://api.coingecko.com/api/v3/search?query=${searchInput}`
+                    `http://127.0.0.1:8000/api/coins/search?query=${searchInput}`
                 );
 
                 if (!response.ok) {
@@ -22,7 +22,7 @@ function SearchResult({ searchInput, searchResults, setSearchResults }) {
                 }
 
                 const data = await response.json();
-                setSearchResults(data.coins);
+                setSearchResults(data);
                 setStatus({ loading: false });
             }
             catch (error) {
@@ -36,10 +36,10 @@ function SearchResult({ searchInput, searchResults, setSearchResults }) {
 
     function mapSearch() {
         const mappedSearch = searchResults.map(coin => (
-            <Link to={`/coins/${coin.id}`} key={coin.id}>
+            <Link to={`/coins/${coin.slug}`} key={coin.slug}>
                 <div className="link my-3 p-2 rounded-1 d-flex justify-content-between align-items-center">
                     <div className="d-flex align-items-center">
-                        <img src={coin.thumb} alt={`${coin.name} logo`}></img>
+                        <img src={coin.image} alt={`${coin.name} logo`} style={{maxWidth: '30px'}}></img>
                         <p className="ms-2 text-white">
                             {coin.name} 
                             <span className="ms-2 fw-normal text-secondary">{coin.symbol}</span>
