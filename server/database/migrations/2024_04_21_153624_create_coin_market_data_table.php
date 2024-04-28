@@ -20,9 +20,9 @@ return new class extends Migration
             $table->unsignedBigInteger('market_cap');
             $table->decimal('total_volume', 40, 4);
             $table->decimal('ath', 40, 10);
-            $table->decimal('price_change_percentage_24h', 40, 20);
-            $table->decimal('price_change_percentage_7d', 40, 20);
-            $table->decimal('price_change_percentage_30d', 40, 20);
+            $table->decimal('price_change_percentage_24h', 40, 20)->nullable();
+            $table->decimal('price_change_percentage_7d', 40, 20)->nullable();
+            $table->decimal('price_change_percentage_30d', 40, 20)->nullable();
             $table->timestamps();
 
             $table->foreign('coin_id')->references('id')->on('coins');

@@ -65,4 +65,30 @@ class CoinRepo
         ->select('slug', 'name', 'symbol', 'market_cap_rank', 'image')
         ->get();
     }
+
+    public function getCoinsByPercentChange(int $limit, string $orderBy): array
+    {
+        $coins = $this->coinModel->take(config('api.coin_gecko.coins_per_page'))
+        ->with(['coinMarketData' => function ($query) use ($orderBy) {
+            $query->orderBy('price_change_percentage_7d', $orderBy);
+        }])
+        ->get();
+
+        $topCoins = $coins->map(function ($coin) {
+            $priceChange = $coin->coinMarketData->first()->price_change_percentage_7d;
+            if (!isset($priceChange)) return null;
+
+            return [
+                'name' => $coin->name,
+                'symbol' => $coin->symbol,
+                'image' => $coin->image,
+                'price_change_percentage_7d' => $priceChange,
+            ];
+        })->filter();
+
+        $topCoins = $orderBy === 'asc' ?
+        $topCoins->sortBy('price_change_percentage_7d')->take($limit) :
+        $topCoins->sortByDesc('price_change_percentage_7d')->take($limit);
+        return $topCoins->values()->all();
+    }
 }

@@ -40,7 +40,7 @@ class CoinController extends Controller
         return response()->json($coins);
     }
 
-    public function singleCoinPage(Coin $coin): JsonResponse
+    public function singleCoin(Coin $coin): JsonResponse
     {
         $isCoinUpdated = $this->coinMarketDataRepo->isCoinUpdatedInAllCurrencies($coin->id);
         if (!$isCoinUpdated) Artisan::call('single-coin:update', ['coinId' => $coin->id]);
@@ -54,5 +54,17 @@ class CoinController extends Controller
     {
         $searchResult = $this->coinRepo->getSearchCoinResult($request->get('query'));
         return response()->json($searchResult);
+    }
+
+    public function topCoinGainers(): JsonResponse
+    {
+        $coins = $this->coinRepo->getCoinsByPercentChange(3, 'desc');
+        return response()->json($coins);
+    }
+
+    public function topCoinLosers(): JsonResponse
+    {
+        $coins = $this->coinRepo->getCoinsByPercentChange(3, 'asc');
+        return response()->json($coins);
     }
 }

@@ -26,7 +26,7 @@ class CoinSeeder extends Seeder
 
         $fiatCurrencies = FiatCurrency::select('id', 'rate')->get();
 
-        for ($i = 1; $i <= config('api.coin_gecko.coins_per_page'); $i++) {
+        for ($i = 1; $i <= config('api.coin_gecko.max_pages'); $i++) {
             $coins = CoinService::fetchCoinList($i);
 
             foreach($coins as $coin) {
@@ -35,7 +35,7 @@ class CoinSeeder extends Seeder
             }
 
             $progressBar->advance();
-            if ($i < config('api.coin_gecko.coins_per_page')) sleep(30);   // It needs to be delayed due to the API rate limit
+            if ($i < config('api.coin_gecko.max_pages')) sleep(30);   // It needs to be delayed due to the API rate limit
         }
 
         $progressBar->finish();
