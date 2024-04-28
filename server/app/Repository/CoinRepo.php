@@ -71,10 +71,9 @@ class CoinRepo
         $coins = $this->coinModel->take(config('api.coin_gecko.coins_per_page'))
         ->with(['coinMarketData' => function ($query) use ($orderBy) {
             $query->orderBy('price_change_percentage_7d', $orderBy);
-        }])
-        ->get();
+        }])->get();
 
-        $topCoins = $coins->map(function ($coin) {
+        $mappedCoins = $coins->map(function ($coin) {
             $priceChange = $coin->coinMarketData->first()->price_change_percentage_7d;
             if (!isset($priceChange)) return null;
 
@@ -86,9 +85,7 @@ class CoinRepo
             ];
         })->filter();
 
-        $topCoins = $orderBy === 'asc' ?
-        $topCoins->sortBy('price_change_percentage_7d')->take($limit) :
-        $topCoins->sortByDesc('price_change_percentage_7d')->take($limit);
-        return $topCoins->values()->all();
+        $orderMethod = ($orderBy === 'asc') ? 'sortBy' : 'sortByDesc';
+        return $mappedCoins->$orderMethod('price_change_percentage_7d')->take($limit)->values()->all();
     }
 }
