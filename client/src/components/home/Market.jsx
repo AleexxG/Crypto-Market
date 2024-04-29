@@ -1,5 +1,5 @@
 import MarketData from './market/MarketData';
-import Exchanges from './market/Exchanges';
+import TopGainers from './market/TopGainers';
 import FollowUs from './market/FollowUs';
 
 function Market() {
@@ -10,7 +10,7 @@ function Market() {
                 
                 <MarketData />
 
-                <Exchanges />
+                <TopGainers />
                 
                 <FollowUs />
 
