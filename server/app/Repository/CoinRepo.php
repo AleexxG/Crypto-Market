@@ -78,6 +78,7 @@ class CoinRepo
             if (!isset($priceChange)) return null;
 
             return [
+                'slug' => $coin->slug,
                 'name' => $coin->name,
                 'symbol' => $coin->symbol,
                 'image' => $coin->image,
