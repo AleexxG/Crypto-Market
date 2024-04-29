@@ -1,8 +1,40 @@
+import { useState, useEffect } from 'react';
 import DisplayContent from '../../../helpers/DisplayContent.jsx';
 import ColorChange from '../../../helpers/ColorChange';
 
-function MarketData({ marketData, status }) {
+function MarketData() {
     const textColor = new ColorChange();
+    const [marketData, setMarketData] = useState([]);
+    const [status, setStatus] = useState({
+        loading: false,
+        error: null,
+    });
+
+    useEffect(() => {
+        const fetchMarketData = async () => {
+            try {
+                setStatus({ loading: true });
+
+                const response = await fetch(
+                    'https://api.coinlore.net/api/global/'
+                );
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok')
+                }
+
+                const data = await response.json();
+                setMarketData(data[0]);
+                setStatus({ loading: false });
+            }
+            catch (error) {
+                setStatus({ loading: false, error: error });
+                setMarketData([]);
+            }
+        };
+
+        fetchMarketData();
+    }, []);
 
     return (
         <div className='bg-black bg-opacity-25 w-100 rounded-2 px-4 py-3'>
