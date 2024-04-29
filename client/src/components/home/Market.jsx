@@ -1,6 +1,6 @@
 import MarketData from './market/MarketData';
 import TopGainers from './market/TopGainers';
-import FollowUs from './market/FollowUs';
+import FollowUs from './market/TopLosers';
 
 function Market() {
 
