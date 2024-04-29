@@ -67,6 +67,11 @@ p {
     background: var(--color-input);
 }
 
+.link_on_card:hover, 
+.link_on_card:focus {
+    background: rgba(0, 0, 0, 0.089);
+}
+
 
 /*================CLASSES================*/
 

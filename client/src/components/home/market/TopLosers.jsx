@@ -35,32 +35,35 @@ function TopLosers() {
     }, []);
 
     return (
-        <article className='bg-black bg-opacity-25 w-100 rounded-2 px-4 py-3'>
-            <h1 className='border-bottom pb-3 fs-5'>💥 Top Losers</h1>
-                {DisplayContent(status.loading, status.error,
-                    <ol className='list-unstyled'>
+        <article className='bg-black bg-opacity-25 w-100 rounded-2 py-3'>
+            <div className='px-4'>
+                <h1 className='border-bottom pb-3 fs-5'>💥 Top Losers</h1>
+            </div>
 
-                        {topLosers.map(coin => (
-                            <Link to={`/coins/${coin.slug}`} key={coin.slug}>
-                                <li className='mt-4 py-1 d-flex justify-content-between align-items-center'>
-                                    <div className='d-flex align-items-center'>
-                                        <img src={coin.image} alt={`${coin.name} logo`} style={{maxWidth: '20px'}}></img>
-                                        <p className='ms-3 fw-bold'>
-                                            {coin.name} 
-                                            <span className="ms-3 fw-normal">{coin.symbol.toUpperCase()}</span>
-                                        </p>
-                                    </div>
-                                    <p className={textColor.colorChange(Number(coin.price_change_percentage_7d).toFixed(2))}>
-                                        {Number(coin.price_change_percentage_7d).toFixed(2)}%
+            {DisplayContent(status.loading, status.error,
+                <ol className='list-unstyled'>
+
+                    {topLosers.map(coin => (
+                        <Link to={`/coins/${coin.slug}`} key={coin.slug}>
+                            <li className='link_on_card py-3 px-4 d-flex justify-content-between align-items-center'>
+                                <div className='d-flex align-items-center'>
+                                    <img src={coin.image} alt={`${coin.name} logo`} style={{maxWidth: '20px'}}></img>
+                                    <p className='ms-3 fw-bold'>
+                                        {coin.name} 
+                                        <span className="ms-3 fw-normal">{coin.symbol.toUpperCase()}</span>
                                     </p>
-                                </li>
-                            </Link>
-                        ))}
+                                </div>
+                                <p className={textColor.colorChange(Number(coin.price_change_percentage_7d).toFixed(2))}>
+                                    {Number(coin.price_change_percentage_7d).toFixed(2)}%
+                                </p>
+                            </li>
+                        </Link>
+                    ))}
 
-                    </ol>
-                )}
-            </article>
-        )
+                </ol>
+            )}
+        </article>
+    )
 }
 
 export default TopLosers;
