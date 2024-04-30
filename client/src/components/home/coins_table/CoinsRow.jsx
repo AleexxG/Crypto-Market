@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useCurrency } from '../../../currency/CurrencyContext';
+import { useCurrency } from '../../../contexts/CurrencyContext';
 import NumberFormatter from '../../../helpers/NumberFormatter';
 import ColorChange from '../../../helpers/ColorChange';
 

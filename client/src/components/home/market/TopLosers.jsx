@@ -13,13 +13,10 @@ function TopLosers() {
             try {
                 setStatus({ loading: true });
 
-                const response = await fetch(
-                    'http://127.0.0.1:8000/api/coins/top-losers'
-                );
+                const apiUrl = import.meta.env.VITE_REACT_APP_COINPULSE_API_URL;
+                const response = await fetch(`${apiUrl}/coins/top-losers`);
 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok')
-                }
+                if (!response.ok) throw new Error('Network response was not ok');
 
                 const data = await response.json();
                 setTopLosers(data);

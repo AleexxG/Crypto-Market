@@ -1,13 +1,11 @@
 function Pagination({currentPage, totalPages, handlePageClick}) {
     let pages = [];
 
+    const inactivePageLinkStyle = 'page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent';
+
     function markCurrentPage(currentPage, page) {
-        if (currentPage === page) {
-            return 'bg-danger';
-        }
-        else {
-            return 'bg-transparent';
-        }
+        if (currentPage === page) return 'bg-danger';
+        return 'bg-transparent';
     }
 
     function mapPages(currentPage) {
@@ -33,11 +31,11 @@ function Pagination({currentPage, totalPages, handlePageClick}) {
                     {mapPages(currentPage)}
                 
                     <li>
-                        <p className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent">...</p>
+                        <p className={inactivePageLinkStyle}>...</p>
                     </li>
                     <li>
                         <a onClick={(e) => handlePageClick(e, totalPages)} 
-                           className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent" 
+                           className={inactivePageLinkStyle} 
                            href="/">
                             {totalPages}
                         </a>
@@ -52,23 +50,23 @@ function Pagination({currentPage, totalPages, handlePageClick}) {
                 <div className='d-flex gap-2'>
                     <li>
                         <a onClick={(e) => handlePageClick(e, 1)} 
-                           className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent" 
+                           className={inactivePageLinkStyle} 
                            href="/">
                             1
                         </a>
                     </li> 
                     <li>
-                        <p className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent">...</p>
+                        <p className={inactivePageLinkStyle}>...</p>
                     </li>
 
                     {mapPages(currentPage)}
                 
                     <li>
-                        <p className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent">...</p>
+                        <p className={inactivePageLinkStyle}>...</p>
                     </li>
                     <li>
                         <a onClick={(e) => handlePageClick(e, totalPages)} 
-                           className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent" 
+                           className={inactivePageLinkStyle} 
                            href="/">
                             {totalPages}
                         </a>
@@ -83,13 +81,13 @@ function Pagination({currentPage, totalPages, handlePageClick}) {
                 <div className='d-flex gap-2'>
                     <li>
                         <a onClick={(e) => handlePageClick(e, 1)} 
-                           className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent" 
+                           className={inactivePageLinkStyle} 
                            href="/">
                             1
                         </a>
                     </li> 
                     <li>
-                        <p className="page-link px-sm-3 px-2 rounded-2 border-0 fw-bold text-white bg-transparent">...</p>
+                        <p className={inactivePageLinkStyle}>...</p>
                     </li>
 
                     {mapPages(currentPage)}

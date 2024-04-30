@@ -13,13 +13,10 @@ function TopGainers() {
             try {
                 setStatus({ loading: true });
 
-                const response = await fetch(
-                    'http://127.0.0.1:8000/api/coins/top-gainers'
-                );
+                const apiUrl = import.meta.env.VITE_REACT_APP_COINPULSE_API_URL;
+                const response = await fetch(`${apiUrl}/coins/top-gainers`);
 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok')
-                }
+                if (!response.ok) throw new Error('Network response was not ok');
 
                 const data = await response.json();
                 setTopGainers(data);

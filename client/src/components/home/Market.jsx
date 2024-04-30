@@ -4,7 +4,7 @@ import TopGainers from './market/TopGainers';
 import FollowUs from './market/TopLosers';
 
 function Market() {
-    const [isSmallScreen, setIsSmallScreen] = useState(false);
+    const [isSmallScreen, setIsSmallScreen] = useState(true);
 
     useEffect(() => {
         window.addEventListener('resize', () => setIsSmallScreen(window.innerWidth > 992));

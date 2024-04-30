@@ -1,14 +1,13 @@
+import RootLayout from './components/RootLayout';
+import Home from './routes/Home';
+import Coin from './routes/Coin';
+import NotFound from './routes/NotFound';
 import { 
   createHashRouter, 
   createRoutesFromElements,
   Route,
   RouterProvider, 
 } from 'react-router-dom';
-
-import RootLayout from './components/RootLayout';
-import Home from './routes/Home';
-import Coin from './routes/Coin';
-import NotFound from './routes/NotFound';
 
 function App() {
   const router = createHashRouter(

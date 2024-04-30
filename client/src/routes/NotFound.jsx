@@ -6,7 +6,6 @@ export default function NotFound() {
         <div className='container text-center d-flex flex-column justify-content-center align-items-center' 
              style={{height: '100vh'}}>
 
-            <a className='fs-6 text-secondary' href="https://storyset.com/web">Web illustrations by Storyset</a>
             <img src={notFoundImg} 
                  alt='Robot trying to fix the error 404 - page not found'
                  className='w-75' style={{minWidth: '200px', maxWidth: '500px'}}

@@ -1,4 +1,4 @@
-import { useCurrency } from '../../currency/CurrencyContext.jsx';
+import { useCurrency } from '../../contexts/CurrencyContext.jsx';
 import NumberFormatter from '../../helpers/NumberFormatter.js';
 
 function CoinInfo({ coin }) {

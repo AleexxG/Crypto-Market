@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import DisplayContent from '../helpers/DisplayContent.jsx';
 import CoinInfo from '../components/coin/CoinInfo';
-import Chart from '../components/coin/Chart';
+import Chart from '../components/coin/chart/ChartData.jsx';
 import MarketStatus from '../components/coin/MarketStatus';
+import NotFound from './NotFound.jsx';
 
 function Coin() {
   const [coin, setCoin] = useState([]);
@@ -17,13 +18,10 @@ function Coin() {
       try {
         setLoading(true);
 
-        const response = await fetch(
-          `http://127.0.0.1:8000/api/coins/${coinId}`
-        );
+        const apiUrl = import.meta.env.VITE_REACT_APP_COINPULSE_API_URL;
+        const response = await fetch(`${apiUrl}/coins/${coinId}`);
 
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
+        if (!response.ok) throw new Error('Network response was not ok');
 
         const data = await response.json();
         document.title = `${data.name} price today | CoinPulse`;
@@ -32,8 +30,7 @@ function Coin() {
       }
       catch (error) {
         setLoading(false);
-        setCoin([]);
-        navigate('*');
+        setCoin(false);
       }
     };
 
@@ -42,21 +39,15 @@ function Coin() {
 
   return (
     <>
-      {DisplayContent(loading, null, 
+      {coin ? DisplayContent(loading, null, 
         <>
-          <CoinInfo 
-            coin = {coin}
-          />
+          <CoinInfo coin = {coin}/>
           
-          <Chart 
-            coinId = {coinId}
-          />
+          <Chart coinId = {coinId}/>
 
-          <MarketStatus 
-            coin = {coin}
-          />
+          <MarketStatus coin = {coin}/>
         </>
-      )}
+      ) : <NotFound />}
     </>
   )
 }

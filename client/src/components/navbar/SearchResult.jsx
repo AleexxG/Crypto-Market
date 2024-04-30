@@ -3,23 +3,17 @@ import DisplayContent from '../../helpers/DisplayContent.jsx';
 import { Link } from "react-router-dom";
 
 function SearchResult({ searchInput, searchResults, setSearchResults }) {
-    const [status, setStatus] = useState({
-        loading: false,
-        error: null,
-    });
+    const [status, setStatus] = useState({loading: false, error: null});
 
     useEffect(() => {
         const fetchSearch = async () => {
             try {
                 setStatus({ loading: true });
 
-                const response = await fetch(
-                    `http://127.0.0.1:8000/api/coins/search?query=${searchInput}`
-                );
+                const apiUrl = import.meta.env.VITE_REACT_APP_COINPULSE_API_URL;
+                const response = await fetch(`${apiUrl}/coins/search?query=${searchInput}`);
 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
+                if (!response.ok) throw new Error('Network response was not ok');
 
                 const data = await response.json();
                 setSearchResults(data);

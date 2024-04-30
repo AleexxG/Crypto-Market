@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import { CurrencyProvider } from '../currency/CurrencyContext';
-import Navbar from './Navbar';
-import Newsletter from './Newsletter';
-import Footer from './Footer';
+import { CurrencyProvider } from '../contexts/CurrencyContext';
+import Navbar from './navbar/Navbar';
+import Newsletter from './newsletter/Newsletter';
+import Footer from './footer/Footer';
 
 function RootLayout() {
     return (

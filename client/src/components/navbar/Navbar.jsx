@@ -1,6 +1,6 @@
-import coinpulseLogo from '../assets/coinpulse_logo.png';
-import CurrencySelect from './navbar/CurrencySelect';
-import SearchBar from './navbar/SearchBar';
+import coinpulseLogo from '../../assets/coinpulse_logo.png';
+import CurrencySelect from '../currency_selector/CurrencySelect';
+import SearchBar from './SearchBar';
 
 function Navbar() {
     return (

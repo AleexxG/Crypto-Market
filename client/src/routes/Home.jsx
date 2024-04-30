@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useCurrency } from '../currency/CurrencyContext';
+import { useCurrency } from '../contexts/CurrencyContext';
 import Market from '../components/home/Market';
 import CoinsTable from '../components/home/CoinsTable';
 
@@ -8,6 +8,7 @@ function Home() {
 	const [coins, setCoins] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [status, setStatus] = useState({loading: false, error: null});
+    
     const navigate = useNavigate();
     const { currency } = useCurrency();
     const { pageNumber } = useParams();
@@ -33,8 +34,9 @@ function Home() {
                 ? parsedPageNumber
                 : currentPage;
 
+                const apiUrl = import.meta.env.VITE_REACT_APP_COINPULSE_API_URL;
                 const response = await fetch (
-                    `http://127.0.0.1:8000/api/coins/list?currency=${currency.toLowerCase()}&page=${pageToFetch}`
+                    `${apiUrl}/coins/list?currency=${currency.toLowerCase()}&page=${pageToFetch}`
                 );
 
                 if (!response.ok) throw new Error('Network response was not ok');

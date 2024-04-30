@@ -15,13 +15,9 @@ function MarketData() {
             try {
                 setStatus({ loading: true });
 
-                const response = await fetch(
-                    'https://api.coinlore.net/api/global/'
-                );
-
-                if (!response.ok) {
-                    throw new Error('Network response was not ok')
-                }
+                const apiUrl = import.meta.env.VITE_REACT_APP_COINLORE_API_URL;
+                const response = await fetch(`${apiUrl}/global/`);
+                if (!response.ok) throw new Error('Network response was not ok');
 
                 const data = await response.json();
                 setMarketData(data[0]);

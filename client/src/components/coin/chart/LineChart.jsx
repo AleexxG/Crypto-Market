@@ -1,3 +1,6 @@
+import { useCurrency } from '../../../contexts/CurrencyContext.jsx';
+import NumberFormatter from '../../../helpers/NumberFormatter.js';
+import TooltipStyle from './TooltipStyle.jsx';
 import { 
     AreaChart, 
     Area, 
@@ -8,8 +11,6 @@ import {
     ResponsiveContainer 
 } from 'recharts';
 
-import { useCurrency } from '../../../currency/CurrencyContext.jsx';
-import NumberFormatter from '../../../helpers/NumberFormatter.js';
 
 function getTicks (days) {
     const isSmallScreen = window.innerWidth <= 768;
@@ -24,18 +25,15 @@ function getTicks (days) {
     }
 }
 
-function CustomTooltip ({ active, payload, days }) {
-    if (active && payload && payload.length) {
-        const data = payload[0].payload;
-        return (
-            <div className="p-3 rounded-2 shadow color_input">
-                <p className='mb-2'>{days === 1 ? '🕛 Time' : '📅 Date'}: {data.Time}</p>
-                <p>{`💵 Price: ${data.Formated_price}`}</p>
-            </div>
-        );
+function formatTime (date, hours, days) {
+    if (days === 1) {
+        return hours;
+    } else if (days === 365) {
+        return date.toLocaleString('default', { month: 'short' });
+    } else {
+        return `${date.getMonth() + 1}/${date.getDate()}`;
     }
-    return null;
-}
+};
 
 
 function LineChart({ chart, days }) {
@@ -50,28 +48,12 @@ function LineChart({ chart, days }) {
 
         const date = new Date(time);
         const hours = `${date.getHours() % 12 || 12} ${date.getHours() >= 12 ? 'PM' : 'AM'}`;
-
-        if (days === 1) {
-            return {
-                Time: hours,
-                Price: priceAtTime,
-                Formated_price: priceFormat,
-            };
-        }
-        else if (days === 365) {
-            return {
-                Time: date.toLocaleString('default', { month: 'short' }),
-                Price: priceAtTime,
-                Formated_price: priceFormat,
-            };
-        }
-        else {
-            return {
-                Time: `${date.getMonth() + 1}/${date.getDate()}`,
-                Price: priceAtTime,
-                Formated_price: priceFormat,
-            };
-        }   
+        
+        return {
+            Time: formatTime(date, hours, days),
+            Price: priceAtTime,
+            Formated_price: priceFormat,
+        }; 
     }
 
     const chartData = chart.map(([time, priceAtTime]) => mapChartData(time, priceAtTime));
@@ -100,7 +82,7 @@ function LineChart({ chart, days }) {
                     <CartesianGrid stroke="#ffffff12" />
                     <XAxis dataKey="Time" interval={tickInterval} />
                     <YAxis domain={yDomain} tickFormatter={formatYAxisLabel} orientation="right" />
-                    <Tooltip content={<CustomTooltip days = {days} />} />
+                    <Tooltip content={<TooltipStyle days = {days} />} />
                     <Area type="monotone" dataKey="Price" stroke="var(--color-accent)" fill="var(--color-chart)" />
                 </AreaChart>
             </ResponsiveContainer>

@@ -1,32 +1,26 @@
 import { useState, useEffect } from 'react';
-import { useCurrency } from '../../currency/CurrencyContext';
-import DisplayContent from '../../helpers/DisplayContent.jsx';
-import LineChart from './chart/LineChart';
-import SelectDay from './chart/SelectDay';
+import { useCurrency } from '../../../contexts/CurrencyContext.jsx';
+import DisplayContent from '../../../helpers/DisplayContent.jsx';
+import LineChart from './LineChart.jsx';
+import SelectDay from './SelectDay.jsx';
 
 function Chart({ coinId }) {
+    const { currency } = useCurrency();
     const [chart, setChart] = useState([]);
     const [days, setDays] = useState(1);
-    const [status, setStatus] = useState({
-        loading: false,
-        error: null,
-    });
-
-    const { currency } = useCurrency();
-
+    const [status, setStatus] = useState({loading: false, error: null});
 
     useEffect(() => {
         const fetchChart = async () => {
             try {
                 setStatus({ loading: true });
 
+                const apiUrl = import.meta.env.VITE_REACT_APP_COINGECKO_API_URL;
                 const response = await fetch(
-                    `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}`
+                    `${apiUrl}/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}`
                 );
 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
+                if (!response.ok) throw new Error('Network response was not ok');
 
                 const data = await response.json();
                 setChart(data.prices);

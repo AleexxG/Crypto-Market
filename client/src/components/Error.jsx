@@ -3,7 +3,7 @@ function Error({ error }) {
 
     function errorMessage() {
         if (error.message === 'Failed to fetch') {
-            corsError = 'API rate limit exceeded';
+            corsError = 'Coin Gecko API rate limit exceeded';
             return corsError;
         } 
         else return error.message;
