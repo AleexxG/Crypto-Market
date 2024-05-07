@@ -47,8 +47,6 @@ class UpdateSingleCoin extends Command
         $updatedCoinData = CoinService::fetchSingleCoin($coin->slug);
         if (!isset($updatedCoinData)) return;
 
-        $coinRepo = new CoinRepo();
-        $coinRepo->updateCoin($coin, $updatedCoinData);
         $coinMarketDataRepo->updateCoinData($coin, $updatedCoinData);
     }
 }

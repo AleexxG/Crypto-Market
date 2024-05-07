@@ -10,3 +10,4 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote')->hourly();
 
 Schedule::command('exchange-rate:update')->everyThreeHours();
+Schedule::command('coin-list:update', [1, 'usd'])->everyFiveMinutes();

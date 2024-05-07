@@ -74,7 +74,8 @@ class CoinRepo
         }])->get();
 
         $mappedCoins = $coins->map(function ($coin) {
-            $priceChange = $coin->coinMarketData->first()->price_change_percentage_7d;
+            $priceChange = $coin->coinMarketData->firstWhere('fiat_currency_id', 42)->price_change_percentage_7d;
+            // 42 is ID for USD
             if (!isset($priceChange)) return null;
 
             return [

@@ -33,7 +33,7 @@ class CoinService
         return self::reformatSingleCoinApiArray($responseArray);
     }
 
-    public static function reformatSingleCoinApiArray(array $coinArray): array
+    private static function reformatSingleCoinApiArray(array $coinArray): array
     {
         return [
             "id" => $coinArray['id'],
@@ -46,9 +46,9 @@ class CoinService
             "total_volume" => $coinArray['market_data']['total_volume']['usd'],
             "circulating_supply" => $coinArray['market_data']['circulating_supply'],
             "ath" => $coinArray['market_data']['ath']['usd'],
-            "price_change_percentage_24h_in_currency" => $coinArray['market_data']['price_change_percentage_24h_in_currency']['usd'],
-            "price_change_percentage_7d_in_currency" => $coinArray['market_data']['price_change_percentage_7d_in_currency']['usd'],
-            "price_change_percentage_30d_in_currency" => $coinArray['market_data']['price_change_percentage_30d_in_currency']['usd'],
+            "price_change_percentage_24h_in_currency" => $coinArray['market_data']['price_change_percentage_24h'],
+            "price_change_percentage_7d_in_currency" => $coinArray['market_data']['price_change_percentage_7d'],
+            "price_change_percentage_30d_in_currency" => $coinArray['market_data']['price_change_percentage_30d'],
         ];
     }
 

@@ -27,10 +27,14 @@ class CoinController extends Controller
     {
         $page = $request->get('page');
         $currencyCode = $request->get('currency');
+        $isCoinListUpdated = true;
 
-        $apiPage = CoinHelper::convertRequestPageToApiPage($page);
-        $coinsFromApiPage = $this->coinRepo->getCoinListInCurrency($currencyCode, $apiPage, config('api.coin_gecko.coins_per_page'));
-        $isCoinListUpdated = $this->coinMarketDataRepo->isCoinListDataUpdated($coinsFromApiPage);
+        if ($currencyCode !== 'usd' || ($currencyCode === 'usd' && $page >= 13)) {
+            // 13 represents the first page that is not updated
+            $apiPage = CoinHelper::convertRequestPageToApiPage($page);
+            $coinsFromApiPage = $this->coinRepo->getCoinListInCurrency($currencyCode, $apiPage, config('api.coin_gecko.coins_per_page'));
+            $isCoinListUpdated = $this->coinMarketDataRepo->isCoinListDataUpdated($coinsFromApiPage);
+        }
 
         if (!$isCoinListUpdated) {
             Artisan::call('coin-list:update', ['page' => $page, 'currencyCode' => $currencyCode]);

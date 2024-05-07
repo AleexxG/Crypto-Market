@@ -45,7 +45,6 @@ class UpdateCoinList extends Command
         foreach($updatedCoinsData as $updatedCoin) {
             $coin = $coins->firstWhere('market_cap_rank', $updatedCoin['market_cap_rank']);
 
-            if (!isset($coin)) continue;
             $coinRepo->updateCoin($coin, $updatedCoin);
             $coinMarketDataRepo->updateCoinData($coin, $updatedCoin);
         }

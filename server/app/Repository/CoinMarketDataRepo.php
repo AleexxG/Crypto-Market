@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Models\Coin;
 use App\Models\CoinMarketData;
+use App\Models\FiatCurrency;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
