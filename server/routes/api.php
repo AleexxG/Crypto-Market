@@ -10,7 +10,7 @@ Route::get('/supported-currencies', [FiatCurrencyController::class, 'getSupporte
 Route::controller(CoinController::class)->group(function () {
     Route::get('/coins/list', 'coinList');
     Route::get('/coins/search', 'searchCoin');
-    Route::get('coins/top-gainers', 'topCoinGainers');
-    Route::get('coins/top-losers', 'topCoinLosers');
+    Route::get('/coins/top-gainers', 'topCoinGainers');
+    Route::get('/coins/top-losers', 'topCoinLosers');
     Route::get('/coins/{coin:slug}', 'singleCoin');
 });
