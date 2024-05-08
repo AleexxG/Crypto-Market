@@ -3,14 +3,14 @@ import Home from './routes/Home';
 import Coin from './routes/Coin';
 import NotFound from './routes/NotFound';
 import { 
-  createHashRouter, 
+  createBrowserRouter, 
   createRoutesFromElements,
   Route,
   RouterProvider, 
 } from 'react-router-dom';
 
 function App() {
-  const router = createHashRouter(
+  const router = createBrowserRouter(
     createRoutesFromElements(
       <>
         <Route path='/' element={<RootLayout />}>
