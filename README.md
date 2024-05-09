@@ -1,4 +1,4 @@
-![banner](https://github.com/Grruja/CoinPulse/assets/114862219/f7f298c8-10f8-4ae6-9fc4-c0547d6e0a8f)
+<img src="client/public/banner.jpg">
 <br />
 
 CoinPulse 🚀
