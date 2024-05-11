@@ -1,4 +1,4 @@
-<img src="client/public/banner.jpg"/>
+<img src="client/public/banner.jpg">
 <br />
 
 CoinPulse 🚀
@@ -8,4 +8,4 @@ CoinPulse 🚀
 Video demo 🔴
 <br />
 
-<video src="client/public/CoinPulse_Demo_Video.mp4" width="180"></video>
+https://github.com/Grruja/CoinPulse/assets/114862219/c353c2ca-cd4d-407b-8e72-340fbc8e65c3
